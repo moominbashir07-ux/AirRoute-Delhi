@@ -1,0 +1,129 @@
+{
+  "best_model": "Random Forest",
+  "test_metrics": {
+    "r2": 0.6675,
+    "mae": 18.42,
+    "rmse": 24.11
+  },
+  "validation_metrics": {
+    "r2": 0.4415,
+    "mae": 20.04,
+    "rmse": 25.97
+  },
+  "train_metrics": {
+    "r2": 0.9369,
+    "mae": 7.32,
+    "rmse": 9.68
+  },
+  "all_model_evaluations": [
+    {
+      "name": "Mean Predictor Baseline",
+      "train": {
+        "r2": -0.0001,
+        "mae": 31.07,
+        "rmse": 38.57
+      },
+      "validation": {
+        "r2": -0.1245,
+        "mae": 29.74,
+        "rmse": 36.85
+      },
+      "test": {
+        "r2": -0.1507,
+        "mae": 36.77,
+        "rmse": 44.85
+      }
+    },
+    {
+      "name": "Linear Regression",
+      "train": {
+        "r2": 0.5972,
+        "mae": 19.23,
+        "rmse": 24.48
+      },
+      "validation": {
+        "r2": 0.2711,
+        "mae": 23.45,
+        "rmse": 29.67
+      },
+      "test": {
+        "r2": 0.5384,
+        "mae": 22.08,
+        "rmse": 28.4
+      }
+    },
+    {
+      "name": "Decision Tree",
+      "train": {
+        "r2": 0.7912,
+        "mae": 12.83,
+        "rmse": 17.62
+      },
+      "validation": {
+        "r2": 0.2438,
+        "mae": 23.27,
+        "rmse": 30.22
+      },
+      "test": {
+        "r2": 0.5102,
+        "mae": 22.35,
+        "rmse": 29.26
+      }
+    },
+    {
+      "name": "Random Forest",
+      "train": {
+        "r2": 0.9369,
+        "mae": 7.32,
+        "rmse": 9.68
+      },
+      "validation": {
+        "r2": 0.4415,
+        "mae": 20.04,
+        "rmse": 25.97
+      },
+      "test": {
+        "r2": 0.6675,
+        "mae": 18.42,
+        "rmse": 24.11
+      }
+    },
+    {
+      "name": "HistGradientBoosting",
+      "train": {
+        "r2": 0.8204,
+        "mae": 12.4,
+        "rmse": 16.35
+      },
+      "validation": {
+        "r2": 0.4743,
+        "mae": 19.26,
+        "rmse": 25.2
+      },
+      "test": {
+        "r2": 0.6636,
+        "mae": 18.51,
+        "rmse": 24.25
+      }
+    }
+  ],
+  "feature_importance": {
+    "temperature": 0.0547,
+    "humidity": 0.0473,
+    "wind_speed": 0.0365,
+    "co2": 0.0485,
+    "pm25": 0.6509,
+    "pm10": 0.0574,
+    "no2": 0.0566,
+    "so2": 0.0482
+  },
+  "dataset_split": {
+    "train_count": 11664,
+    "val_count": 2952,
+    "test_count": 2928,
+    "train_period": "2023-01-01 00:00:00 to 2024-04-30 23:00:00",
+    "val_period": "2024-05-01 00:00:00 to 2024-08-31 23:00:00",
+    "test_period": "2024-09-01 00:00:00 to 2024-12-31 23:00:00"
+  },
+  "evaluated_at": "2026-09-24T18:42:21.042763+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "dataset_name": "Open-Meteo Atmospheric & Meteorological Archive (Copernicus CAMS & ECMWF ERA5)",
+  "source": "Open-Meteo Open Data API",
+  "retrieved_at": "2026-09-24T18:42:21.046073+00:00",
+  "geographic_coverage": "New Delhi NCR, India (28.6139\u00b0 N, 77.2090\u00b0 E)",
+  "sample_count": 17544,
+  "feature_count": 8,
+  "target": "aqi",
+  "model": "Random Forest",
+  "random_seed": 42,
+  "split_method": "Chronological holdout (train: 16 mos, val: 4 mos, test: 4 mos)",
+  "test_holdout_performance": {
+    "r2": 0.6675,
+    "mae": 18.42,
+    "rmse": 24.11
+  }
+}

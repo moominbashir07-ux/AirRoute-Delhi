@@ -1,0 +1,121 @@
+{
+  "target": {
+    "name": "aqi",
+    "type": "float",
+    "unit": "AQI index (0-500 scale)",
+    "description": "US EPA Air Quality Index derived from pollutant concentrations",
+    "standard": "EPA-454/B-18-007",
+    "expected_range": [
+      0,
+      500
+    ]
+  },
+  "feature_order": [
+    "temperature",
+    "humidity",
+    "wind_speed",
+    "co2",
+    "pm25",
+    "pm10",
+    "no2",
+    "so2"
+  ],
+  "features": {
+    "temperature": {
+      "type": "float",
+      "unit": "\u00b0C",
+      "meaning": "Ambient 2-meter dry-bulb temperature",
+      "source": "ECMWF ERA5 reanalysis",
+      "expected_range": [
+        -20,
+        60
+      ],
+      "preprocessing": "StandardScaler (z-score normalization fitted strictly on training set)",
+      "measured_or_engineered": "measured"
+    },
+    "humidity": {
+      "type": "float",
+      "unit": "%",
+      "meaning": "Relative humidity at 2 meters",
+      "source": "ECMWF ERA5 reanalysis",
+      "expected_range": [
+        0,
+        100
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "wind_speed": {
+      "type": "float",
+      "unit": "km/h",
+      "meaning": "Wind speed at 10 meters height",
+      "source": "ECMWF ERA5 reanalysis",
+      "expected_range": [
+        0,
+        100
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "co2": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "meaning": "Ambient Carbon Monoxide (CO) concentration (historical schema label co2)",
+      "source": "Copernicus CAMS atmospheric archive",
+      "expected_range": [
+        0,
+        20000
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "pm25": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "meaning": "Particulate matter <= 2.5 micrometers aerodynamic diameter",
+      "source": "Copernicus CAMS atmospheric archive",
+      "expected_range": [
+        0,
+        1000
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "pm10": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "meaning": "Particulate matter <= 10 micrometers aerodynamic diameter",
+      "source": "Copernicus CAMS atmospheric archive",
+      "expected_range": [
+        0,
+        1200
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "no2": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "meaning": "Nitrogen dioxide concentration",
+      "source": "Copernicus CAMS atmospheric archive",
+      "expected_range": [
+        0,
+        500
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    },
+    "so2": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "meaning": "Sulfur dioxide concentration",
+      "source": "Copernicus CAMS atmospheric archive",
+      "expected_range": [
+        0,
+        500
+      ],
+      "preprocessing": "StandardScaler",
+      "measured_or_engineered": "measured"
+    }
+  }
+}
