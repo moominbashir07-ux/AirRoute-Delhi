@@ -1,0 +1,418 @@
+{
+  "assessment_timestamp": "2026-09-24T18:59:26.304256Z",
+  "auth_summary": {
+    "status": "PASS",
+    "tier": "full",
+    "max_rows": null,
+    "timezone_note": "collected_at is a naive timestamp in Indian Standard Time (UTC+05:30).",
+    "total_rows": 196521834,
+    "first_month": "2009-01",
+    "last_month": "2026-03"
+  },
+  "delhi_stations_total": 42,
+  "parameters_catalog": [
+    {
+      "parameter_name": "PM2.5",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 554,
+      "n_rows": 17844093,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2026-03-27T23:30:00"
+    },
+    {
+      "parameter_name": "NOx",
+      "unit": "ppb",
+      "n_stations": 544,
+      "n_rows": 17506764,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "NO2",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 549,
+      "n_rows": 17445236,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "NO",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 543,
+      "n_rows": 17105758,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "CO",
+      "unit": "mg/m\u00b3",
+      "n_stations": 546,
+      "n_rows": 16961824,
+      "first_seen": "2009-01-03T02:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "SO2",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 529,
+      "n_rows": 16722073,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "PM10",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 545,
+      "n_rows": 16587252,
+      "first_seen": "2011-01-17T01:00:00",
+      "last_seen": "2025-09-01T23:00:00"
+    },
+    {
+      "parameter_name": "Ozone",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 530,
+      "n_rows": 16499316,
+      "first_seen": "2009-01-01T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "Benzene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 491,
+      "n_rows": 14160901,
+      "first_seen": "2009-03-02T18:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "NH3",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 490,
+      "n_rows": 14043209,
+      "first_seen": "2009-01-01T01:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "Toluene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 401,
+      "n_rows": 11247222,
+      "first_seen": "2009-03-02T18:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "MP-Xylene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 382,
+      "n_rows": 7826459,
+      "first_seen": "2009-03-02T14:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "Eth-Benzene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 389,
+      "n_rows": 7679725,
+      "first_seen": "2009-03-02T16:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "Xylene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 157,
+      "n_rows": 4395985,
+      "first_seen": "2010-09-13T00:00:00",
+      "last_seen": "2024-12-31T23:00:00"
+    },
+    {
+      "parameter_name": "O_Xylene",
+      "unit": "\u00b5g/m\u00b3",
+      "n_stations": 39,
+      "n_rows": 496017,
+      "first_seen": "2019-01-01T00:00:00",
+      "last_seen": "2021-12-31T23:00:00"
+    }
+  ],
+  "pollutant_availability": {
+    "PM2.5": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 42,
+      "delhi_station_coverage_pct": 100.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "PM10": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 41,
+      "delhi_station_coverage_pct": 97.6,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "NO2": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 41,
+      "delhi_station_coverage_pct": 97.6,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "SO2": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 34,
+      "delhi_station_coverage_pct": 81.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "CO": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 41,
+      "delhi_station_coverage_pct": 97.6,
+      "unit": "mg/m\u00b3"
+    },
+    "Ozone": {
+      "type": "pollutant",
+      "in_catalog": true,
+      "in_delhi_stations": true,
+      "delhi_stations_count": 41,
+      "delhi_station_coverage_pct": 97.6,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "Temperature": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    },
+    "Relative Humidity": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    },
+    "Wind Speed": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    },
+    "Wind Direction": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    },
+    "Pressure": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    },
+    "Rainfall": {
+      "type": "weather",
+      "in_catalog": false,
+      "in_delhi_stations": false,
+      "delhi_stations_count": 0,
+      "delhi_station_coverage_pct": 0.0,
+      "unit": null
+    }
+  },
+  "historical_coverage": {
+    "2020": {
+      "status": "available",
+      "sample_week": "2020-11-01 to 2020-11-07",
+      "row_count": 261,
+      "active_delhi_stations": 38,
+      "mean_pm25": 240.7
+    },
+    "2021": {
+      "status": "available",
+      "sample_week": "2021-11-01 to 2021-11-07",
+      "row_count": 287,
+      "active_delhi_stations": 41,
+      "mean_pm25": 250.5
+    },
+    "2022": {
+      "status": "available",
+      "sample_week": "2022-11-01 to 2022-11-07",
+      "row_count": 271,
+      "active_delhi_stations": 39,
+      "mean_pm25": 248.5
+    },
+    "2023": {
+      "status": "available",
+      "sample_week": "2023-11-01 to 2023-11-07",
+      "row_count": 271,
+      "active_delhi_stations": 39,
+      "mean_pm25": 277.3
+    },
+    "2024": {
+      "status": "available",
+      "sample_week": "2024-11-01 to 2024-11-07",
+      "row_count": 280,
+      "active_delhi_stations": 40,
+      "mean_pm25": 218.0
+    },
+    "2025": {
+      "status": "available",
+      "sample_week": "2025-11-01 to 2025-11-07",
+      "row_count": 0,
+      "active_delhi_stations": 0,
+      "mean_pm25": null
+    }
+  },
+  "data_quality_sample": {
+    "sample_period": "2024-11-01 to 2024-11-07 (Delhi, all stations, 6 criteria pollutants)",
+    "total_records": 38506,
+    "unique_stations": 41,
+    "timestamp_range": [
+      "2024-11-01T00:00:00",
+      "2024-11-07T23:00:00"
+    ],
+    "duplicates": 0,
+    "negative_values_by_pollutant": {
+      "PM2.5": 0,
+      "PM10": 0,
+      "NO2": 0,
+      "SO2": 0,
+      "CO": 0,
+      "Ozone": 0
+    },
+    "null_values_by_pollutant": {
+      "PM2.5": 0,
+      "PM10": 0,
+      "NO2": 0,
+      "SO2": 0,
+      "CO": 0,
+      "Ozone": 0
+    },
+    "parameters_returned": {
+      "PM10": 6703,
+      "NO2": 6693,
+      "PM2.5": 6577,
+      "CO": 6562,
+      "Ozone": 6424,
+      "SO2": 5547
+    }
+  },
+  "delhi_station_sample": [
+    {
+      "station_id": "site_5024",
+      "station_name": "Alipur, Delhi - DPCC",
+      "latitude": 28.815329,
+      "longitude": 77.15301,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_301",
+      "station_name": "Anand Vihar, Delhi - DPCC",
+      "latitude": 28.647622,
+      "longitude": 77.315809,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_5023",
+      "station_name": "Anand Vihar, Hapur - UPPCB",
+      "latitude": 28.647622,
+      "longitude": 77.315809,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_1420",
+      "station_name": "Ashok Vihar, Delhi - DPCC",
+      "latitude": 28.695381,
+      "longitude": 77.181665,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_108",
+      "station_name": "Aya Nagar, Delhi - IMD",
+      "latitude": 28.4706914,
+      "longitude": 77.1099364,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_1560",
+      "station_name": "Bawana, Delhi - DPCC",
+      "latitude": 28.7762,
+      "longitude": 77.051074,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_104",
+      "station_name": "Burari Crossing, Delhi - IMD",
+      "latitude": 28.7256504,
+      "longitude": 77.2011573,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_103",
+      "station_name": "CRRI Mathura Road, Delhi - IMD",
+      "latitude": 28.5512005,
+      "longitude": 77.2735737,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_5393",
+      "station_name": "Chandni Chowk, Delhi - IITM",
+      "latitude": 28.656756,
+      "longitude": 77.227234,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_118",
+      "station_name": "DTU, Delhi - CPCB",
+      "latitude": 28.7500499,
+      "longitude": 77.1112615,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_1421",
+      "station_name": "Dr. Karni Singh Shooting Range, Delhi - DPCC",
+      "latitude": 28.498571,
+      "longitude": 77.26484,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_1422",
+      "station_name": "Dwarka-Sector 8, Delhi - DPCC ",
+      "latitude": 28.5710274,
+      "longitude": 77.0719006,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_106",
+      "station_name": "IGI Airport (T3), Delhi - IMD",
+      "latitude": 28.5627763,
+      "longitude": 77.1180053,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_114",
+      "station_name": "IHBAS, Dilshad Garden, Delhi - CPCB",
+      "latitude": 28.6811736,
+      "longitude": 77.3025234,
+      "source": "cpcb_caaqm"
+    },
+    {
+      "station_id": "site_117",
+      "station_name": "ITO, Delhi - CPCB",
+      "latitude": 28.628624,
+      "longitude": 77.24106,
+      "source": "cpcb_caaqm"
+    }
+  ]
+}
