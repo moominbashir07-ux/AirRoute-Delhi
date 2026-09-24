@@ -12,6 +12,7 @@ backend/logs/
 backend/ml_model/best_model.pkl
 backend/ml_model/scaler.pkl
 backend/ml_model/metrics.pkl
+backend/datasets/*.csv
 *.db
 backend/users.db
 

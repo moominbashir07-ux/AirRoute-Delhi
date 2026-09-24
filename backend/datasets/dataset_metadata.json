@@ -1,0 +1,57 @@
+{
+  "dataset_name": "Open-Meteo Atmospheric & Meteorological Archive (Copernicus CAMS & ECMWF ERA5)",
+  "source": "Open-Meteo Open Data API",
+  "reference_url": "https://open-meteo.com/en/docs/air-quality-api",
+  "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+  "geographic_coverage": {
+    "region": "New Delhi NCR, India",
+    "latitude": 28.6139,
+    "longitude": 77.209
+  },
+  "time_period": {
+    "start": "2023-01-01 00:00:00",
+    "end": "2024-12-31 23:00:00"
+  },
+  "sample_count": 17544,
+  "sampling_frequency": "1 hour",
+  "features": {
+    "temperature": {
+      "unit": "\u00b0C",
+      "description": "Ambient dry bulb temperature at 2m"
+    },
+    "humidity": {
+      "unit": "%",
+      "description": "Relative humidity at 2m"
+    },
+    "wind_speed": {
+      "unit": "km/h",
+      "description": "Wind speed at 10m height"
+    },
+    "co2": {
+      "unit": "\u00b5g/m\u00b3",
+      "description": "Ambient Carbon Monoxide concentration"
+    },
+    "pm25": {
+      "unit": "\u00b5g/m\u00b3",
+      "description": "Particulate matter with diameter <= 2.5 \u00b5m"
+    },
+    "pm10": {
+      "unit": "\u00b5g/m\u00b3",
+      "description": "Particulate matter with diameter <= 10 \u00b5m"
+    },
+    "no2": {
+      "unit": "\u00b5g/m\u00b3",
+      "description": "Nitrogen dioxide concentration"
+    },
+    "so2": {
+      "unit": "\u00b5g/m\u00b3",
+      "description": "Sulfur dioxide concentration"
+    }
+  },
+  "target": {
+    "name": "aqi",
+    "standard": "US EPA Air Quality Index (0-500 scale)",
+    "description": "Continuous EPA AQI computed across pollutant criteria"
+  },
+  "retrieved_at": "2026-09-24T18:09:42.189194Z"
+}
