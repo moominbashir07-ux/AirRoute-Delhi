@@ -340,9 +340,9 @@ function MLModel() {
   return <>
     <CardSection title="Active Model">
       <div className={row}><div className={label}>Current Model</div><span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-green-400/10 text-green-400 border border-green-400/20">{settings.currentModel}</span></div>
-      <div className={row}><div className={label}>R² Score</div><span className="font-mono text-sm text-cyan-400 font-bold">98.78%</span></div>
-      <div className={row}><div className={label}>Last Trained</div><span className="text-xs font-mono text-slate-400">Today, 11:52 AM</span></div>
-      <div className={row}><div className={label}>Training Samples</div><span className="font-mono text-xs text-slate-400">2,000</span></div>
+      <div className={row}><div><div className={label}>R² Score</div><div className={sub}>Evaluated on synthetic test split; real-world model pipeline in Phase 2</div></div><span className="font-mono text-sm text-cyan-400 font-bold">98.78% (Synthetic)</span></div>
+      <div className={row}><div className={label}>Last Trained</div><span className="text-xs font-mono text-slate-400">Baseline Pipeline</span></div>
+      <div className={row}><div className={label}>Training Samples</div><span className="font-mono text-xs text-slate-400">2,000 (Synthetic)</span></div>
     </CardSection>
     <CardSection title="Model Selection">
       <div className={row}><div><div className={label}>Auto-select Best Model</div><div className={sub}>Pick highest R² after training</div></div>
@@ -404,10 +404,10 @@ function Profile() {
 function About() {
   return <>
     <div className={card}><div className={cardBody}>
-      <div className="grid grid-cols-4 border border-white/[0.08] rounded-xl overflow-hidden">
-        {[['1.0.0','Version'],['98.8%','Best R²'],['22','Cities'],['3','ML Models']].map(([v, l], i) => (
-          <div key={l} className={`text-center py-4 ${i < 3 ? 'border-r border-white/[0.08]' : ''}`}>
-            <div className="font-display font-bold text-3xl text-cyan-400">{v}</div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 border border-white/[0.08] rounded-xl overflow-hidden">
+        {[['1.0.0','Version'],['Synthetic','Baseline ML'],['Open-Meteo','Telemetry'],['3','Models']].map(([v, l], i) => (
+          <div key={l} className={`text-center py-4 ${i % 2 === 0 ? 'border-r border-white/[0.08]' : ''} ${i < 2 ? 'border-b sm:border-b-0' : ''} sm:border-r last:border-r-0 border-white/[0.08]`}>
+            <div className="font-display font-bold text-xl sm:text-2xl text-cyan-400">{v}</div>
             <div className="text-[11px] text-slate-500 mt-1">{l}</div>
           </div>
         ))}
@@ -459,28 +459,32 @@ export default function Settings() {
         ✓ Saved
       </div>
 
-      <div className="flex min-h-[calc(100vh-64px)]">
-        {/* Sidebar */}
-        <aside className="w-52 flex-shrink-0 border-r border-[rgba(34,211,238,0.1)] bg-[#0d1529] p-3">
-          <div className="text-[10px] uppercase tracking-widest text-slate-600 font-mono px-3 py-2 mb-1">Settings</div>
-          {SECTIONS.slice(0, 7).map(s => (
-            <button key={s.id} onClick={e => { e.stopPropagation(); setActive(s.id) }}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm mb-0.5 transition-all text-left border ${active === s.id ? 'bg-cyan-400/8 border-cyan-400/20 text-cyan-400' : 'text-slate-500 border-transparent hover:bg-white/[0.04] hover:text-slate-300'}`}>
-              <span className="text-base w-5 text-center">{s.icon}</span>{s.label}
+      <div className="flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
+        {/* Sidebar - Horizontal scroll on mobile, vertical aside on desktop */}
+        <aside className="w-full md:w-52 flex-shrink-0 border-b md:border-b-0 md:border-r border-[rgba(34,211,238,0.1)] bg-[#0d1529] p-3">
+          <div className="text-[10px] uppercase tracking-widest text-slate-600 font-mono px-3 py-1 mb-1 hidden md:block">Settings</div>
+          <div className="flex md:flex-col overflow-x-auto md:overflow-x-visible gap-1 pb-1 md:pb-0 scrollbar-none">
+            {SECTIONS.slice(0, 7).map(s => (
+              <button key={s.id} onClick={e => { e.stopPropagation(); setActive(s.id) }}
+                className={`flex-shrink-0 md:w-full flex items-center gap-2 px-3 py-2 md:py-2.5 rounded-xl text-xs md:text-sm mb-0.5 transition-all text-left border ${active === s.id ? 'bg-cyan-400/10 border-cyan-400/30 text-cyan-400 font-medium' : 'text-slate-400 border-transparent hover:bg-white/[0.04] hover:text-slate-300'}`}>
+                <span className="text-sm md:text-base w-4 md:w-5 text-center">{s.icon}</span>
+                <span>{s.label}</span>
+              </button>
+            ))}
+            <div className="hidden md:block my-2 border-t border-white/[0.06]" />
+            <button onClick={e => { e.stopPropagation(); setActive('about') }}
+              className={`flex-shrink-0 md:w-full flex items-center gap-2 px-3 py-2 md:py-2.5 rounded-xl text-xs md:text-sm mb-0.5 transition-all text-left border ${active === 'about' ? 'bg-cyan-400/10 border-cyan-400/30 text-cyan-400 font-medium' : 'text-slate-400 border-transparent hover:bg-white/[0.04] hover:text-slate-300'}`}>
+              <span className="text-sm md:text-base w-4 md:w-5 text-center">ℹ️</span>
+              <span>About</span>
             </button>
-          ))}
-          <div className="my-2 border-t border-white/[0.06]" />
-          <button onClick={e => { e.stopPropagation(); setActive('about') }}
-            className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm mb-0.5 transition-all text-left border ${active === 'about' ? 'bg-cyan-400/8 border-cyan-400/20 text-cyan-400' : 'text-slate-500 border-transparent hover:bg-white/[0.04] hover:text-slate-300'}`}>
-            <span className="text-base w-5 text-center">ℹ️</span>About
-          </button>
+          </div>
         </aside>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-8 py-7">
-          <div className="max-w-2xl">
-            <div className="mb-7">
-              <h1 className="font-display text-2xl font-bold text-white mb-1">{SECTIONS.find(s => s.id === active)?.label}</h1>
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 py-5 md:py-7">
+          <div className="max-w-2xl mx-auto md:mx-0">
+            <div className="mb-6 md:mb-7">
+              <h1 className="font-display text-xl sm:text-2xl font-bold text-white mb-1">{SECTIONS.find(s => s.id === active)?.label}</h1>
               <p className="text-xs text-slate-500">Configure your AQI Predictor preferences</p>
             </div>
             <div>
