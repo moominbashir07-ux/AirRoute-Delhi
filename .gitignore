@@ -8,9 +8,17 @@ env/
 venv/
 .venv/
 backend/logs/
+*.log
 backend/ml_model/best_model.pkl
 backend/ml_model/scaler.pkl
 backend/ml_model/metrics.pkl
+*.db
+backend/users.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
 
 # Node / React
 node_modules/
