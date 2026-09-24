@@ -176,11 +176,11 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
         if (res.dev_otp) {
           setDevOtp(res.dev_otp) // Capture backend dev_otp code for UI display
           
-          // Send real email via EmailJS if loaded in browser
-          if (window.emailjs) {
+          // Send real email via EmailJS if configured in environment
+          const emailJsKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+          if (window.emailjs && emailJsKey) {
             try {
-              // Try to initialize key in case it wasn't
-              window.emailjs.init({ publicKey: "VobA6_SPCrF-QcNt4" })
+              window.emailjs.init({ publicKey: emailJsKey })
               
               const templateParams = {
                 to_name: name,
@@ -251,10 +251,11 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
         if (res.dev_otp) {
           setDevOtp(res.dev_otp)
           
-          // Send real email via EmailJS if loaded in browser
-          if (window.emailjs) {
+          // Send real email via EmailJS if configured in environment
+          const emailJsKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+          if (window.emailjs && emailJsKey) {
             try {
-              window.emailjs.init({ publicKey: "VobA6_SPCrF-QcNt4" })
+              window.emailjs.init({ publicKey: emailJsKey })
               
               const templateParams = {
                 to_name: name,

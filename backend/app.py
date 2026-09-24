@@ -14,7 +14,7 @@ from typing import Optional
 from contextlib import asynccontextmanager
 
 import numpy as np
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
@@ -58,9 +58,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# ─── Environment Configuration ──────────────────────────────────────────────
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
+ALLOW_DEV_OTP = os.getenv("ALLOW_DEV_OTP", "false").lower() in ("true", "1")
+ENABLE_MODEL_RETRAINING = os.getenv("ENABLE_MODEL_RETRAINING", "false").lower() in ("true", "1")
+ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
+
+cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+cors_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -175,11 +184,11 @@ def send_otp_endpoint(data: SendOTPRequest):
         logger.error(f"Failed to save OTP: {e}")
         raise HTTPException(status_code=500, detail="Database error occurred.")
     
-    # Print clearly to the Python terminal log
-    logger.info("\n" + "="*60 + f"\n[OTP VERIFICATION SYSTEM] Email: {email}\nGenerated OTP Code: {otp}\n" + "="*60 + "\n")
-    
-    # We return the code so the developer can see it instantly in the UI during tests!
-    return {"status": "success", "message": "OTP sent successfully to email.", "dev_otp": otp}
+    # In development, optionally allow dev_otp bypass only if explicitly enabled via ALLOW_DEV_OTP=true
+    response = {"status": "success", "message": "OTP generated and dispatched."}
+    if ENVIRONMENT == "development" and ALLOW_DEV_OTP:
+        response["dev_otp"] = otp
+    return response
 
 @app.post("/auth/signup")
 def signup_endpoint(data: SignupRequest):
@@ -268,8 +277,15 @@ def predict(data: AQIInput):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/train", response_model=TrainResponse)
-def retrain(background_tasks: BackgroundTasks):
-    """Retrain the ML model."""
+def retrain(x_admin_key: Optional[str] = Header(None)):
+    """Retrain the ML model (admin/protected endpoint)."""
+    if not ENABLE_MODEL_RETRAINING:
+        raise HTTPException(
+            status_code=403,
+            detail="Model retraining is disabled in this environment. Set ENABLE_MODEL_RETRAINING=true to enable."
+        )
+    if ADMIN_API_KEY and x_admin_key != ADMIN_API_KEY:
+        raise HTTPException(status_code=401, detail="Invalid or missing X-Admin-Key header.")
     try:
         result = train()
         load_artifacts()
