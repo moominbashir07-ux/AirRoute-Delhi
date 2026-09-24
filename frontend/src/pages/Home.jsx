@@ -83,8 +83,8 @@ export default function Home() {
             </h1>
 
             <p className="text-sm md:text-base text-neutral-400 max-w-xl mx-auto mb-10 leading-relaxed">
-              Advanced machine learning models analyze 8 environmental parameters to predict Air Quality Index
-              with high accuracy — protecting your health before pollution strikes.
+              Machine learning models evaluate 8 key environmental parameters to estimate Air Quality Index
+              and deliver preventive environmental health guidance.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
@@ -120,12 +120,63 @@ export default function Home() {
             </div>
           }
         >
-          <img
-            src="https://assets.aceternity.com/linear-demo.webp"
-            alt="application dashboard mockup"
-            className="mx-auto rounded-2xl object-cover h-full object-left-top w-full"
-            draggable={false}
-          />
+          {/* Authentic AQI Dashboard Preview Card (replacing foreign Linear template mockup) */}
+          <div className="w-full h-full rounded-2xl bg-[#0d1529] border border-cyan-400/20 p-6 flex flex-col justify-between overflow-hidden shadow-2xl">
+            {/* Top Bar */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
+                <span className="ml-3 text-xs font-mono text-slate-400">AQI Predictor — Live Environmental Telemetry</span>
+              </div>
+              <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+                Baseline Model Active
+              </span>
+            </div>
+
+            {/* Dashboard Content Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+              <div className="rounded-xl p-4 bg-[#131e38] border border-cyan-400/15 text-center flex flex-col items-center justify-center">
+                <span className="text-xs text-slate-400 uppercase tracking-widest font-mono">Current Index</span>
+                <span className="text-5xl font-display font-bold text-yellow-400 my-2">87</span>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-yellow-400/10 text-yellow-300 border border-yellow-400/30">
+                  Moderate
+                </span>
+              </div>
+
+              <div className="rounded-xl p-4 bg-[#131e38] border border-cyan-400/15 col-span-2 flex flex-col justify-center">
+                <span className="text-xs text-slate-400 uppercase tracking-widest font-mono mb-3">Key Pollutants</span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="bg-black/30 p-2.5 rounded-lg border border-white/5">
+                    <span className="text-[10px] text-slate-400 block font-mono">PM2.5</span>
+                    <span className="text-lg font-bold text-white font-mono">29.4 <span className="text-[10px] text-slate-500">µg/m³</span></span>
+                  </div>
+                  <div className="bg-black/30 p-2.5 rounded-lg border border-white/5">
+                    <span className="text-[10px] text-slate-400 block font-mono">PM10</span>
+                    <span className="text-lg font-bold text-white font-mono">58.1 <span className="text-[10px] text-slate-500">µg/m³</span></span>
+                  </div>
+                  <div className="bg-black/30 p-2.5 rounded-lg border border-white/5">
+                    <span className="text-[10px] text-slate-400 block font-mono">NO₂</span>
+                    <span className="text-lg font-bold text-white font-mono">22.0 <span className="text-[10px] text-slate-500">µg/m³</span></span>
+                  </div>
+                  <div className="bg-black/30 p-2.5 rounded-lg border border-white/5">
+                    <span className="text-[10px] text-slate-400 block font-mono">Wind</span>
+                    <span className="text-lg font-bold text-white font-mono">12.5 <span className="text-[10px] text-slate-500">km/h</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Health Bar */}
+            <div className="bg-[#131e38]/70 border border-white/5 rounded-xl p-3 flex items-center justify-between text-xs text-slate-300">
+              <span className="flex items-center gap-2">
+                <span>🛡️</span>
+                <span>Acceptable air quality for most individuals. Unusually sensitive groups should monitor prolonged exertion.</span>
+              </span>
+              <span className="text-slate-500 font-mono hidden sm:inline">WHO / EPA Standards</span>
+            </div>
+          </div>
         </ContainerScroll>
       </section>
 
