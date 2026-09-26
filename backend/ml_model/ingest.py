@@ -161,12 +161,23 @@ def save_dataset_and_metadata(df: pd.DataFrame):
     logger.info(f"Saved provenance metadata to {METADATA_JSON}")
 
 
-def run_ingestion() -> pd.DataFrame:
-    """Execute complete ingestion pipeline."""
+def ingest_and_save_real_dataset(output_path: str = DATASET_CSV) -> pd.DataFrame:
+    """
+    Fetch, validate, and save real-world atmospheric & weather dataset to specified path.
+    Canonical API called by train.py when real-world dataset is missing.
+    """
     df = fetch_real_dataset()
     df = validate_and_clean_dataset(df)
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    df.to_csv(output_path, index=False)
+    logger.info(f"Saved real-world dataset to {output_path}")
     save_dataset_and_metadata(df)
     return df
+
+
+def run_ingestion() -> pd.DataFrame:
+    """Execute complete ingestion pipeline."""
+    return ingest_and_save_real_dataset(DATASET_CSV)
 
 
 if __name__ == "__main__":
