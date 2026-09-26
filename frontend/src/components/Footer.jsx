@@ -31,7 +31,7 @@ export default function Footer() {
 
           {/* Core Tools */}
           <div className="space-y-3">
-            <div className="text-xs font-mono uppercase tracking-wider text-slate-200">Tools</div>
+            <div className="text-xs font-mono uppercase tracking-wider text-slate-200">System</div>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/commute" className="hover:text-cyan-400 transition-colors">
@@ -39,19 +39,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/predictor" className="hover:text-cyan-400 transition-colors">
-                  AQI Predictor
-                </Link>
+                <a href="/#methodology" className="hover:text-cyan-400 transition-colors">
+                  Scientific Methodology
+                </a>
               </li>
               <li>
-                <Link to="/forecast" className="hover:text-cyan-400 transition-colors">
-                  Atmospheric Forecast
-                </Link>
-              </li>
-              <li>
-                <Link to="/analytics" className="hover:text-cyan-400 transition-colors">
-                  Model Analytics
-                </Link>
+                <a href="/#rates" className="hover:text-cyan-400 transition-colors">
+                  Physiological Assumptions
+                </a>
               </li>
             </ul>
           </div>

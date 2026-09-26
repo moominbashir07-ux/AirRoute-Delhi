@@ -1,8 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Navigation, ArrowRight, ShieldCheck, MapPin, Gauge, Wind, Clock, Activity, BarChart2 } from 'lucide-react'
 
 export default function Home() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [hash])
+
   return (
     <div className="min-h-screen pt-20 pb-20 bg-slate-950 text-slate-100">
       {/* Hero Section */}
@@ -88,7 +99,7 @@ export default function Home() {
       </section>
 
       {/* Methodology Overview */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
+      <section id="methodology" className="scroll-mt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="text-xs font-mono text-cyan-400 uppercase tracking-wider mb-2">Scientific Methodology</div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">How Corridor Exposure is Modeled</h2>
@@ -131,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* Scenario Ventilation Rates Section */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
+      <section id="rates" className="scroll-mt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8">
           <div className="max-w-2xl mb-6">
             <div className="text-xs font-mono text-cyan-400 uppercase tracking-wider mb-1">Physiological Assumptions</div>

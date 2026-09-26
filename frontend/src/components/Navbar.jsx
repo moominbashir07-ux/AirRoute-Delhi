@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Wind, Activity, BarChart3, TrendingUp, Settings, LogOut, Navigation } from 'lucide-react'
+import { Wind, Navigation, LogOut } from 'lucide-react'
 import clsx from 'clsx'
 import { getHealth } from '../utils/api'
 import AuthModal from './AuthModal'
@@ -8,10 +8,6 @@ import AuthModal from './AuthModal'
 const NAV_LINKS = [
   { to: '/', label: 'Home', icon: Wind },
   { to: '/commute', label: 'Commute', icon: Navigation },
-  { to: '/predictor', label: 'Predictor', icon: Activity },
-  { to: '/forecast', label: 'Forecast', icon: TrendingUp },
-  { to: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { to: '/settings', label: 'Settings', icon: Settings },
 ]
 
 export default function Navbar() {

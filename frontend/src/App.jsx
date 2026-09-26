@@ -1,10 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import Predictor from './pages/Predictor'
-import Forecast from './pages/Forecast'
-import Analytics from './pages/Analytics'
-import Settings from './pages/Settings'
 import Commute from './pages/Commute'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
@@ -19,10 +15,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/commute" element={<Commute />} />
-          <Route path="/predictor" element={<Predictor />} />
-          <Route path="/forecast" element={<Forecast />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<Settings />} />
+          {/* Prevent accidental judge/public access to legacy experimental routes by redirecting to /commute */}
+          <Route path="/predictor" element={<Navigate to="/commute" replace />} />
+          <Route path="/forecast" element={<Navigate to="/commute" replace />} />
+          <Route path="/analytics" element={<Navigate to="/commute" replace />} />
+          <Route path="/settings" element={<Navigate to="/commute" replace />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
