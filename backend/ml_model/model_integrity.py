@@ -67,7 +67,7 @@ def verify_artifact_integrity(manifest_path: Path = MANIFEST_PATH) -> Dict[str, 
     details = {}
 
     for name, meta in artifacts.items():
-        rel_path = meta.get("path")
+        rel_path = str(meta.get("path", "")).replace("\\", "/")
         expected_hash = meta.get("sha256")
         expected_size = meta.get("size_bytes")
 

@@ -83,15 +83,19 @@ ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
 ENABLE_MODEL_RETRAINING = os.getenv("ENABLE_MODEL_RETRAINING", "false").lower() in ("true", "1")
 ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
 
-cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173")
+cors_origins_env = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,https://air-route-delhi.vercel.app"
+)
 cors_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
-frontend_origin = os.getenv("FRONTEND_ORIGIN", "").strip()
+frontend_origin = os.getenv("FRONTEND_ORIGIN", "https://air-route-delhi.vercel.app").strip()
 if frontend_origin and frontend_origin not in cors_origins:
     cors_origins.append(frontend_origin)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=r"^https://air-route-delhi.*\.vercel\.app$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],

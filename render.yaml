@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: aqi-predictor-api
+    name: airroute-delhi
     runtime: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
@@ -13,9 +13,9 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: CORS_ORIGINS
-        sync: false
+        value: https://air-route-delhi.vercel.app,http://localhost:3000,http://127.0.0.1:3000
       - key: FRONTEND_ORIGIN
-        sync: false
+        value: https://air-route-delhi.vercel.app
       - key: EMAILJS_SERVICE_ID
         sync: false
       - key: EMAILJS_TEMPLATE_ID
@@ -24,4 +24,4 @@ services:
         sync: false
       - key: EMAILJS_PRIVATE_KEY
         sync: false
-    healthCheckPath: /api/health
+    healthCheckPath: /health
