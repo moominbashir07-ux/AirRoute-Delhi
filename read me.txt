@@ -1,10 +1,11 @@
-# AQI Predictor – Setup & Run Guide
+# AirRoute Delhi – Setup & Run Guide
 
-This project predicts **Air Quality Index (AQI)** using Machine Learning.
+**AirRoute Delhi** is a commuter PM2.5 exposure advisor that forecasts PM2.5 along Delhi/NCR commute corridors and estimates inhaled exposure across departure windows.
+
 It has two main parts:
 
-* **Backend (Python + FastAPI)** – Handles ML models and API
-* **Frontend (React + Vite)** – User interface for the website
+* **Backend (Python 3.11 + FastAPI)** – Handles multi-horizon ML models, corridor geometry, and API
+* **Frontend (React + Vite)** – Modern user interface for commuter exposure optimization
 
 Follow the steps below to run the project locally.
 
@@ -130,7 +131,7 @@ Open your browser and visit:
 http://localhost:3000
 ```
 
-You should now see the **AQI Predictor website**.
+You should now see the **AirRoute Delhi website**.
 
 ---
 
@@ -189,14 +190,14 @@ Solution:
 
 # 8. Project Workflow
 
-1. Backend loads trained ML model
-2. Frontend sends AQI data request
-3. API predicts AQI using ML
-4. Result is displayed on the website
+1. Backend loads trained multi-horizon ML models & 42-station spatial index
+2. Frontend sends commute parameters (origin, destination, departure time, transport mode)
+3. API predicts segment-level PM2.5 and estimates cumulative inhaled exposure ($M = \sum C_i \times V_E \times \Delta t_i$)
+4. Result and departure window recommendations are displayed interactively
 
 ---
 
 # 9. Author
 
-Developed as a Machine Learning project for AQI prediction.
+Developed as an environmental exposure and PM2.5 forecasting advisor for Delhi/NCR commuters.
 

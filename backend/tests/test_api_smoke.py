@@ -1,5 +1,5 @@
 """
-Foundation Smoke Tests - AQI Predictor Backend
+Foundation Smoke Tests - AirRoute Delhi Backend
 Validates core endpoints, security controls, and input validation.
 """
 

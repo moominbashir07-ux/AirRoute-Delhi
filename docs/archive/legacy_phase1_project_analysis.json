@@ -1,4 +1,10 @@
 {
+  "_archive_designation": {
+    "status": "HISTORICAL_ARCHIVE",
+    "phase": "Phase 1 Initial Prototype Audit",
+    "archived_date": "2026-09-26",
+    "notice": "This document records the initial codebase audit performed on the legacy AQI Predictor prototype prior to the Phase 2-5 real-world data and commuter exposure refactoring. It describes an obsolete version of the system and is preserved solely for historical auditability and provenance. For current production system documentation, refer to README.md, docs/FINAL_ARCHITECTURE.md, docs/MODEL_CARD.md, and docs/PHASE_5_FINAL_REPORT.md."
+  },
   "project_summary": "AQI Predictor is a full-stack machine learning web application that predicts Air Quality Index from 8 environmental parameters (temperature, humidity, wind_speed, co2, pm25, pm10, no2, so2). It trains 3 models (Linear Regression, Random Forest, Decision Tree), auto-selects the best by R² score, and exposes predictions via a FastAPI REST API consumed by a React+Vite frontend with a dark cyberpunk UI. Features include a real-time predictor form with an SVG gauge, 7-day forecast with Recharts visualizations, analytics dashboard, an admin panel for on-demand retraining, and a rich Settings page with 8 sub-sections. The project is designed for deployment with Vercel (frontend) and Render (backend).",
 
   "tech_stack": {
@@ -31,7 +37,7 @@
     { "issue": "Mobile nav causes double-height header pushing content down", "cause": "Mobile nav div below main nav adds height not accounted for in page pt-24 padding.", "fix": "Use hamburger menu or increase responsive top padding." },
     { "issue": "Forecast day cards overflow horizontally on narrow screens", "cause": "Forecast.jsx line 165: min-w-[160px] on right section.", "fix": "Stack vertically on mobile using flex-col sm:flex-row." },
     { "issue": "Settings sidebar doesn't collapse on mobile", "cause": "Fixed aside w-52 with no responsive breakpoint.", "fix": "Make sidebar horizontal on mobile or add collapsible drawer." },
-    { "issue": "'API Live' indicator always shows green regardless of actual connectivity", "cause": "Navbar.jsx lines 60-63: hardcoded green dot, no /health polling.", "fix": "Add useEffect polling /health to toggle indicator." },
+    { "issue": "API Live indicator always shows green regardless of actual connectivity", "cause": "Navbar.jsx lines 60-63: hardcoded green dot, no /health polling.", "fix": "Add useEffect polling /health to toggle indicator." },
     { "issue": "No skeleton/shimmer loading states for chart areas", "cause": "Only spinning loaders present, no skeleton placeholders.", "fix": "Add skeleton placeholders or shimmer animations." }
   ],
 

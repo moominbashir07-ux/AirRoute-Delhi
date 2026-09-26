@@ -1,6 +1,6 @@
 """
-AQI Predictor - FastAPI Backend
-Production-ready API for AQI prediction and forecasting.
+AirRoute Delhi - FastAPI Backend
+Production API for commuter PM2.5 forecasting and exposure advisory across Delhi/NCR.
 """
 
 import os
@@ -63,15 +63,15 @@ async def lifespan(app: FastAPI):
         init_db()
     except Exception as e:
         logger.error(f"Failed to initialize SQLite database: {e}")
-    logger.info("AQI Predictor API started successfully.")
+    logger.info("AirRoute Delhi API started successfully.")
     yield
-    logger.info("AQI Predictor API shutting down.")
+    logger.info("AirRoute Delhi API shutting down.")
 
 
 # ─── App ─────────────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="AQI Predictor API",
-    description="Air Quality Index prediction and commuter exposure minimization using Machine Learning",
+    title="AirRoute Delhi API",
+    description="A commuter PM2.5 exposure advisor that forecasts PM2.5 along Delhi/NCR commute corridors and estimates inhaled exposure across departure windows.",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
@@ -303,7 +303,7 @@ def load_artifacts():
 # ─── Routes ──────────────────────────────────────────────────────────────────
 @app.get("/")
 def root():
-    return {"message": "AQI Predictor API", "version": "1.0.0", "docs": "/docs"}
+    return {"message": "AirRoute Delhi API", "version": "1.0.0", "docs": "/docs"}
 
 # ─── Authentication Routes ───────────────────────────────────────────────────
 @app.post("/auth/send-otp")

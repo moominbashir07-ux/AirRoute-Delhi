@@ -1,227 +1,185 @@
-# 🌬️ AQI Predictor — Air Quality Forecasting System
+# 🚴 AirRoute Delhi
 
-An end-to-end full-stack web application for Air Quality Index (AQI) estimation and environmental health awareness. Built with React 18, FastAPI, and scikit-learn.
+> **A commuter PM2.5 exposure advisor that forecasts PM2.5 along Delhi/NCR commute corridors and estimates inhaled exposure across departure windows.**
 
-![AQI Predictor](https://img.shields.io/badge/ML-Production--Grade-22d3ee?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.10+-3776ab?style=for-the-badge&logo=python)
-![React](https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi)
-
-> **Phase 2 Status (Complete):** The synthetic generator has been replaced with a real-world, leakage-safe dataset and production ML pipeline. Trained on 17,544 continuous hourly atmospheric observations from Copernicus CAMS and ECMWF ERA5 reanalysis (New Delhi NCR, 2023–2024). Evaluated against an untouched chronological holdout test set (Autumn/Winter 2024) achieving **Test $R^2 = 0.6675$** and **Test $\text{MAE} = 18.42$**.
-
----
-
-## ✨ Features
-
-- **Interactive AQI Predictor** — Dual-mode input (manual sliders + live Open-Meteo coordinate autofill) with an animated SVG semicircle gauge.
-- **7-Day Weather & Air Telemetry** — Interactive multi-day charts powered by Open-Meteo's global weather and atmospheric data feeds.
-- **Analytics & Model Metrics** — Real-world feature importance visualizations, predicted-vs-actual scatter views, and multi-model benchmark metrics.
-- **Health Advisories** — EPA standard health advisory mappings providing preventative guidance for sensitive and general groups.
-- **Dark Cyberpunk Theme** — Responsive dark UI with CSS custom properties, Syne display typography, and smooth transitions.
+[![Production Hardened](https://img.shields.io/badge/Release-Hardened_Production-22d3ee?style=for-the-badge)](https://air-route-delhi.vercel.app)
+[![Python](https://img.shields.io/badge/Python-3.11.9-3776ab?style=for-the-badge&logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
+[![Tests](https://img.shields.io/badge/Tests-108_Passing-10b981?style=for-the-badge)](https://github.com/moominbashir07-ux/weather-final)
 
 ---
 
-## 🏗️ Project Structure
+## 🌐 Live Application & API Links
 
-```
-aqi-predictor/
-├── backend/
-│   ├── app.py                  # FastAPI application with security controls & CORS
-│   ├── database.py             # SQLite helper for user credentials and OTPs
-│   ├── requirements.txt        # Python dependencies
-│   ├── .env.example            # Backend environment template
-│   ├── ml_model/
-│   │   ├── ingest.py           # Real-world Copernicus CAMS & ERA5 ingestion pipeline
-│   │   ├── train.py            # Leakage-safe ML training & evaluation pipeline
-│   │   ├── best_model.pkl      # Production Random Forest model artifact
-│   │   ├── scaler.pkl          # StandardScaler fitted strictly on training partition
-│   │   ├── metrics.pkl         # Serialized training & holdout evaluation metrics
-│   │   ├── metrics.json        # Transparent train/val/test metrics report
-│   │   ├── feature_metadata.json # Input contract schema, units, and ranges
-│   │   └── model_provenance.json # Versioned lineage & training provenance metadata
-│   ├── datasets/
-│   │   ├── real_aqi_dataset.csv # 17,544 verified hourly observations (2023-2024)
-│   │   └── dataset_metadata.json# Ingestion lineage, licenses, and units
-│   ├── tests/
-│   │   ├── test_api_smoke.py   # Foundation security & endpoint smoke tests
-│   │   └── test_ml_pipeline.py # ML dataset, leakage, split, and model test suite
-│   └── logs/                   # Local runtime logs (git-ignored)
-│
-└── frontend/
-    ├── src/
-    │   ├── App.jsx             # React Router (5 routes)
-    │   ├── main.jsx            # Entry point (basename configured)
-    │   ├── index.css           # Global tokens & Tailwind utilities
-    │   ├── components/
-    │   │   ├── Navbar.jsx      # Navigation, dynamic health polling, auth modal toggle
-    │   │   ├── AQIGauge.jsx    # SVG semicircle gauge with animated needle
-    │   │   ├── ParamInput.jsx  # Dual slider + number input
-    │   │   ├── StatCard.jsx    # Metric KPI card
-    │   │   └── AuthModal.jsx   # Authentication popup (Canvas captcha + OTP)
-    │   ├── pages/
-    │   │   ├── Home.jsx        # Landing page with authentic dashboard preview
-    │   │   ├── Predictor.jsx   # Form with Open-Meteo geolocation
-    │   │   ├── Forecast.jsx    # 7-day weather & air telemetry dashboard
-    │   │   ├── Analytics.jsx   # Charts & model comparison metrics
-    │   │   └── Settings.jsx    # Responsive configuration panel
-    │   ├── context/
-    │   │   └── SettingsContext.jsx # LocalStorage persistence provider
-    │   └── utils/
-    │       ├── api.js          # Centralized Axios client
-    │       └── aqi.js          # EPA thresholds and helpers
-    ├── package.json
-    ├── vite.config.js
-    └── tailwind.config.js
+> 🔗 **Live Web Application:** [https://air-route-delhi.vercel.app](https://air-route-delhi.vercel.app)  
+> ⚡ **Live Backend API:** [https://airroute-delhi.onrender.com](https://airroute-delhi.onrender.com)  
+> 📖 **Interactive Swagger / OpenAPI Docs:** [https://airroute-delhi.onrender.com/docs](https://airroute-delhi.onrender.com/docs)
+
+| Service | Platform | Direct Link | Status |
+|---|---|---|:---:|
+| **AirRoute Delhi Web App** | Vercel | [https://air-route-delhi.vercel.app](https://air-route-delhi.vercel.app) | 🟢 Online |
+| **Production FastAPI Backend** | Render | [https://airroute-delhi.onrender.com](https://airroute-delhi.onrender.com) | 🟢 Online |
+| **Interactive API Documentation** | Swagger UI | [https://airroute-delhi.onrender.com/docs](https://airroute-delhi.onrender.com/docs) | 🟢 Online |
+
+---
+
+## 💡 What is AirRoute Delhi?
+
+During peak pollution episodes in Delhi/NCR, particulate matter ($\text{PM}_{2.5}$) levels routinely reach hazardous thresholds. Traditional air quality applications only provide static regional averages or warn commuters after the air has deteriorated.
+
+**AirRoute Delhi transforms passive air quality monitoring into actionable commuter protection.** Given an origin, destination, desired departure time, and mode of travel, AirRoute Delhi:
+
+1. **Calculates Corridor Geometry:** Breaks transit routes into 1 km geodesic spatial segments across Delhi/NCR.
+2. **Maps Real-Time Monitoring:** Associates each segment with the nearest of 42 official Continuous Ambient Air Quality Monitoring (CAAQM) stations.
+3. **Forecasts Multi-Horizon PM2.5:** Uses trained direct gradient boosted tree models to project $\text{PM}_{2.5}$ concentrations for lead times $t+1\text{h}$ through $t+6\text{h}$ ahead of departure.
+4. **Estimates Cumulative Inhaled Dose:** Applies physiological minute ventilation factors ($V_E$) and mode-specific transit durations:
+   $$M = \sum_{i=1}^{N} C_i \times V_E \times \Delta t_i$$
+5. **Recommends Departure Windows:** Compares the chosen departure with alternative shifts (e.g. Leave Now vs. $+30\text{m}$, $+1\text{h}$, $+2\text{h}$), identifying windows that cut inhaled exposure by up to $30\text{--}50\%$.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                                 ┌─────────────────────────────────────────┐
+                                 │           Commuter Web Client           │
+                                 │       React 18 + Vite + DM Sans/Syne    │
+                                 │   https://air-route-delhi.vercel.app    │
+                                 └────────────────────┬────────────────────┘
+                                                      │
+                                                      │ HTTPS / JSON
+                                                      ▼
+                                 ┌─────────────────────────────────────────┐
+                                 │          FastAPI Gateway API            │
+                                 │         Uvicorn / Python 3.11.9         │
+                                 │   https://airroute-delhi.onrender.com   │
+                                 └────────────────────┬────────────────────┘
+                                                      │
+                ┌─────────────────────────────────────┼─────────────────────────────────────┐
+                │                                     │                                     │
+                ▼                                     ▼                                     ▼
+ ┌─────────────────────────┐           ┌─────────────────────────┐           ┌─────────────────────────┐
+ │     Corridor Engine     │           │  Station Spatial Index  │           │   Hardened Security     │
+ │  - Geodesic 1km steps   │           │  - 42 Delhi CAAQM sites │           │  - Salted SHA-256 OTP   │
+ │  - Great-circle WGS84   │           │  - Haversine KD-Tree    │           │  - EmailJS integration  │
+ │  - Boundary validation  │           │  - Catalog fallback     │           │  - Sliding-window rate  │
+ └────────────┬────────────┘           └────────────┬────────────┘           └─────────────────────────┘
+                │                                     │
+                └──────────────────┬──────────────────┘
+                                   │ Mapped Corridor Segments
+                                   ▼
+                ┌──────────────────────────────────────────────────────────┐
+                │             Multi-Horizon Forecasting Engine             │
+                │        - HistGradientBoostingRegressor (scikit-learn)    │
+                │        - Horizons: t+1h through t+6h direct models       │
+                │        - Trained on 1.73M canonical CAAQM hourly records │
+                └──────────────────────────┬───────────────────────────────┘
+                                           │ Segment-level PM2.5
+                                           ▼
+                ┌──────────────────────────────────────────────────────────┐
+                │             Commuter Exposure Estimation                 │
+                │           - Inhaled Dose: M = Σ (C_i * V_E * Δt_i)       │
+                │           - Mode ventilation (walk, cycle, car, metro)   │
+                │           - Multi-window departure minimization          │
+                └──────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔬 Machine Learning Pipeline & Data Provenance
+## 🔬 Machine Learning & Forecasting Models
 
-### 1. Data Provenance & Ingestion
-- **Source:** Copernicus Atmosphere Monitoring Service (CAMS) & European Centre for Medium-Range Weather Forecasts (ECMWF) ERA5 reanalysis archive via Open-Meteo Open Data API.
-- **License:** Creative Commons Attribution 4.0 International (CC BY 4.0).
-- **Geographic Coverage:** New Delhi NCR, India ($28.6139^\circ\text{ N}, 77.2090^\circ\text{ E}$).
-- **Time Period:** January 1, 2023 00:00 to December 31, 2024 23:00 ($17,544$ continuous hourly samples).
-- **Target Variable:** US EPA Air Quality Index ($0\text{--}500$ scale, continuous calculation per EPA-454/B-18-007).
+AirRoute Delhi avoids recursive error compounding by utilizing **direct multi-horizon forecasting models** ($h \in \{1, 2, 3, 4, 5, 6\}$ hours ahead):
 
-### 2. Input Features & Canonical Order
+- **Algorithm:** `sklearn.ensemble.HistGradientBoostingRegressor`
+- **Training Dataset:** 1,732,402 canonical hourly records (2020–2024) across 42 Delhi CAAQM monitoring stations sourced from XKDR / Central Pollution Control Board (CPCB).
+- **Meteorological Predictors:** ECMWF ERA5 reanalysis (training) and Open-Meteo Global NWP Forecasts (live inference), including 2m temperature, relative humidity, 10m wind speed, circular wind direction vectors ($\sin/\cos$), surface pressure, and planetary boundary layer height.
+- **Station Spatial Conditioning:** Latitude and longitude coordinates incorporated directly to allow regional spatial transfer.
 
-```python
-FEATURE_ORDER = [
-    "temperature",  # Ambient 2m temperature (°C)
-    "humidity",     # Relative humidity (%)
-    "wind_speed",   # 10m wind speed (km/h)
-    "co2",          # Ambient Carbon Monoxide (µg/m³)
-    "pm25",         # Particulate matter <= 2.5 µm (µg/m³)
-    "pm10",         # Particulate matter <= 10 µm (µg/m³)
-    "no2",          # Nitrogen dioxide (µg/m³)
-    "so2",          # Sulfur dioxide (µg/m³)
-]
-```
+### Benchmark Evaluation (Holdout Test Set):
 
-### 3. Leakage Prevention & Chronological Splitting
-To avoid temporal autocorrelation and lookahead leakage, splitting is strictly chronological:
-- **Train Set:** `2023-01-01 00:00` to `2024-04-30 23:00` ($11,664$ samples, $66.5\%$)
-- **Validation Set:** `2024-05-01 00:00` to `2024-08-31 23:00` ($2,952$ samples, $16.8\%$)
-- **Holdout Test Set:** `2024-09-01 00:00` to `2024-12-31 23:00` ($2,928$ samples, $16.7\%$) — covers the critical autumn/winter smog season.
+| Forecast Horizon | Test MAE ($\mu\text{g/m}^3$) | Test RMSE ($\mu\text{g/m}^3$) | Test $R^2$ | Improvement over Persistence Baseline |
+|:---:|:---:|:---:|:---:|:---:|
+| **$t+1\text{h}$** | **12.41** | 21.08 | **0.941** | **+21.5%** |
+| **$t+2\text{h}$** | **17.89** | 29.54 | **0.884** | **+25.8%** |
+| **$t+3\text{h}$** | **22.15** | 36.20 | **0.826** | **+27.7%** |
+| **$t+4\text{h}$** | **25.72** | 41.65 | **0.770** | **+28.8%** |
+| **$t+5\text{h}$** | **28.64** | 46.18 | **0.718** | **+29.8%** |
+| **$t+6\text{h}$** | **31.12** | 49.92 | **0.672** | **+30.2%** |
 
-**Leakage Controls:**
-- `StandardScaler` is fitted strictly on `X_train`. Validation and Test partitions are transformed using training parameters.
-- No target-derived features or post-event signals are provided to the model.
-- Test partition was completely isolated during model selection.
-
-### 4. Benchmark Model Evaluation (Chronological Test Holdout)
-
-| Model | Test $R^2$ | Test MAE | Test RMSE | Status |
-|---|---|---|---|---|
-| **Mean Predictor Baseline** | $-0.1507$ | $36.77$ | $44.85$ | Reference Baseline |
-| **Linear Regression** | $0.5384$ | $22.08$ | $28.40$ | Linear Baseline |
-| **Decision Tree** ($\text{depth}=10$) | $0.5102$ | $22.35$ | $29.26$ | Tree Baseline |
-| **HistGradientBoosting** | $0.6636$ | $18.51$ | $24.25$ | Gradient Boosted |
-| **Random Forest** ($n=100$) | **$0.6675$** | **$18.42$** | **$24.11$** | **Production Model** |
-
-### 5. Feature Importance
-- $\text{PM}_{2.5}$: **$65.1\%$** (Primary driver of severe AQI events)
-- $\text{PM}_{10}$: **$5.7\%$**
-- $\text{NO}_2$: **$5.7\%$**
-- $\text{Temperature}$: **$5.5\%$**
-- $\text{CO}$: **$4.9\%$**
-- $\text{SO}_2$: **$4.8\%$**
-- $\text{Humidity}$: **$4.7\%$**
-- $\text{Wind Speed}$: **$3.7\%$**
-
-### 6. Limitations & Scientific Boundaries
-- **Geographic Generalization:** The model is trained on atmospheric data from New Delhi NCR. Atmospheric chemistry, boundary-layer dynamics, and local emission sources vary by climate zone; applying this model to coastal or temperate regions without localized fine-tuning may reduce accuracy.
-- **Sensor vs Satellite Reanalysis:** CAMS combines satellite retrievals with ECMWF integrated forecasting; local micro-climates (e.g. street canyons) may differ from regional grid cells.
-
----
-
-## 🚀 Quick Start
-
-### 1. Backend Setup
-
-```bash
-cd backend
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create local environment config
-cp .env.example .env
-
-# Ingest dataset & train ML pipeline
-python ml_model/train.py
-
-# Run verification test suite (20 automated tests)
-pytest tests/ -v
-
-# Start the API server
-python app.py
-# API runs at: http://localhost:8000
-# OpenAPI Docs: http://localhost:8000/docs
-```
-
-### 2. Frontend Setup
-
-```bash
-cd frontend
-
-# Install npm packages
-npm install
-
-# Start development server
-npm run dev
-# Frontend runs at: http://localhost:3000
-
-# Run production build
-npm run build
-```
+*For complete training methodology, data provenance, and hyperparameter specifications, see [`docs/MODEL_CARD.md`](docs/MODEL_CARD.md).*
 
 ---
 
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| `GET` | `/` | API status and root greeting | Public |
-| `GET` | `/health` | Health check & model status | Public |
-| `POST` | `/predict` | Predict AQI from 8 parameters | Public |
-| `POST` | `/auth/send-otp` | Generate OTP for email verification | Public |
-| `POST` | `/auth/signup` | Register user with verified OTP | Public |
+|---|---|---|---|
+| `GET` | `/` | API status greeting and documentation link | Public |
+| `GET` | `/health` | Liveness probe (verifies app status and model cache) | Public |
+| `GET` | `/ready` | Readiness probe (verifies integrity of all 10 model artifacts) | Public |
+| `POST` | `/api/commute` | Plan commute route, forecast segment PM2.5, and minimize exposure | Public |
+| `GET` | `/api/corridors` | Retrieve predefined popular Delhi/NCR commute corridors | Public |
+| `POST` | `/auth/send-otp` | Securely dispatch 6-digit OTP via EmailJS | Public |
+| `POST` | `/auth/signup` | Register new user with validated OTP | Public |
 | `POST` | `/auth/login` | Authenticate user credentials | Public |
-| `GET` | `/aqi-history?days=30` | Historical simulated AQI series | Public |
-| `GET` | `/forecast?days=7` | Multi-day model forecast | Public |
-| `GET` | `/metrics` | Model training metrics & feature weights | Public |
-| `POST` | `/train` | Trigger model retraining | **Protected** (Requires `ENABLE_MODEL_RETRAINING=true` and `X-Admin-Key`) |
+| `GET` | `/metrics` | Production model benchmark metrics & holdout scores | Public |
+| `GET` | `/docs` | Interactive Swagger UI API documentation | Public |
 
 ---
 
-## ⚙️ Environment Variables
+## 🚀 Local Development Setup
 
-### Backend (`backend/.env`)
+### 1. Prerequisites
+- **Python 3.11** (`python --version`)
+- **Node.js 18+** & **npm** (`node -v`, `npm -v`)
 
-```ini
-ENVIRONMENT=development
-PORT=8000
-LOG_LEVEL=info
-CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
-EMAILJS_SERVICE_ID=
-EMAILJS_TEMPLATE_ID=
-EMAILJS_PUBLIC_KEY=
-EMAILJS_PRIVATE_KEY=
-ENABLE_MODEL_RETRAINING=false
-ADMIN_API_KEY=
+### 2. Backend Setup
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run the 108 automated test suite
+python -m pytest tests/ -v
+
+# Start the development server
+python app.py
+# Backend runs at http://localhost:8000
+# OpenAPI Docs at http://localhost:8000/docs
 ```
 
-### Frontend (`frontend/.env`)
+### 3. Frontend Setup
 
-```ini
-VITE_API_URL=/api
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start Vite development server
+npm run dev
+# Frontend runs at http://localhost:3000
+
+# Validate production build
+npm run build
 ```
 
 ---
 
-## 🏥 Health & Safety Disclaimer
+## 🛡️ Limitations & Scientific Boundaries
 
-AQI predictions and advisory recommendations are for educational and situational awareness only. Always consult official municipal monitoring agencies and medical professionals for critical health decisions.
+1. **NWP Weather Forecast Uncertainty:** In live production, forward predictions consume Numerical Weather Prediction (NWP) forecast models. Forecast errors in predicted boundary layer height or wind speed introduce additional variance not present in retrospective benchmarks.
+2. **Station Placement vs. Micro-Environments:** Official CAAQM stations sample regional urban background concentrations at elevated monitoring locations. They do not capture micro-scale vehicle tailpipe plumes or street-canyon turbulence.
+3. **Extreme Episodic Spikes:** Tree-based ensemble regressors tend to regress toward intermediate conditional means and may underestimate sudden, extreme pollution spikes (e.g. episodic post-harvest stubble burning or fireworks).
+4. **Horizon Ceiling:** Model accuracy degrades past lead times of 6 hours; forecast requests beyond 6 hours are intentionally rejected by the system.
+
+---
+
+## 📜 License
+
+Open Academic & Non-Commercial Research License. Developed for Delhi/NCR commuter exposure mitigation.

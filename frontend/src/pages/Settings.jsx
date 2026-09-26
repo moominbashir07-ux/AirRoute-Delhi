@@ -208,7 +208,7 @@ function Notifications() {
         <div>
           <div className="text-sm font-semibold text-white mb-1">AQI Alert — New Delhi</div>
           <div className="text-xs text-slate-400">Air quality has reached <span className="text-orange-400 font-semibold">Unhealthy (185)</span>. Limit outdoor activity.</div>
-          <div className="text-[10px] text-slate-500 mt-1.5 font-mono">Just now · AQI Predictor</div>
+          <div className="text-[10px] text-slate-500 mt-1.5 font-mono">Just now · AirRoute Delhi</div>
         </div>
       </div>
     </CardSection>
@@ -428,7 +428,7 @@ function About() {
     </CardSection>
     <div className={card}><div className={`${cardBody} text-center`}>
       <p className="text-xs text-slate-500 leading-loose">Built with React · FastAPI · scikit-learn<br />
-        <span className="text-cyan-400">AQI Predictor</span> · Open Source · MIT License</p>
+        <span className="text-cyan-400">AirRoute Delhi</span> · Open Source · MIT License</p>
     </div></div>
   </>
 }
@@ -485,7 +485,7 @@ export default function Settings() {
           <div className="max-w-2xl mx-auto md:mx-0">
             <div className="mb-6 md:mb-7">
               <h1 className="font-display text-xl sm:text-2xl font-bold text-white mb-1">{SECTIONS.find(s => s.id === active)?.label}</h1>
-              <p className="text-xs text-slate-500">Configure your AQI Predictor preferences</p>
+              <p className="text-xs text-slate-500">Configure your AirRoute Delhi preferences</p>
             </div>
             <div>
               <Panel />

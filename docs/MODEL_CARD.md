@@ -3,6 +3,8 @@
 ## 1. Model Details
 
 - **Model Name:** Delhi Multi-Horizon PM2.5 Direct Estimator (`phase3d_model_h1` through `h6`)
+- **System:** AirRoute Delhi
+- **Product Description:** A commuter PM2.5 exposure advisor that forecasts PM2.5 along Delhi/NCR commute corridors and estimates inhaled exposure across departure windows.
 - **Architecture:** Direct Multi-Horizon Gradient Boosted Trees (`sklearn.ensemble.HistGradientBoostingRegressor`)
 - **Version:** 1.0.0 (Phase 3D Production Release)
 - **Primary Developer:** Environmental Systems Engineering Team
