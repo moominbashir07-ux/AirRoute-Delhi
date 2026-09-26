@@ -1,0 +1,2748 @@
+{
+  "audit_description": "Dual-denominator missingness audit separating active operational span from the 5-year global window.",
+  "global_window": {
+    "start_ist": "2020-01-01 00:00:00+05:30",
+    "end_ist": "2024-12-31 23:00:00+05:30",
+    "total_hours": 43848,
+    "total_stations": 42
+  },
+  "aggregate_coverage": {
+    "total_observed_station_hours": 1732402,
+    "active_period_coverage_pct": 95.69,
+    "global_window_coverage_pct": 94.07
+  },
+  "pollutant_aggregate_coverage": {
+    "pm25": {
+      "observed_total": 1681736,
+      "active_period_coverage_pct": 92.89,
+      "active_period_missing_pct": 7.11,
+      "global_window_coverage_pct": 91.32,
+      "global_window_missing_pct": 8.68
+    },
+    "pm10": {
+      "observed_total": 1609219,
+      "active_period_coverage_pct": 88.89,
+      "active_period_missing_pct": 11.11,
+      "global_window_coverage_pct": 87.38,
+      "global_window_missing_pct": 12.62
+    },
+    "no2": {
+      "observed_total": 1625331,
+      "active_period_coverage_pct": 89.78,
+      "active_period_missing_pct": 10.22,
+      "global_window_coverage_pct": 88.26,
+      "global_window_missing_pct": 11.74
+    },
+    "so2": {
+      "observed_total": 1369041,
+      "active_period_coverage_pct": 75.62,
+      "active_period_missing_pct": 24.38,
+      "global_window_coverage_pct": 74.34,
+      "global_window_missing_pct": 25.66
+    },
+    "co": {
+      "observed_total": 1601008,
+      "active_period_coverage_pct": 88.43,
+      "active_period_missing_pct": 11.57,
+      "global_window_coverage_pct": 86.93,
+      "global_window_missing_pct": 13.07
+    },
+    "o3": {
+      "observed_total": 1625225,
+      "active_period_coverage_pct": 89.77,
+      "active_period_missing_pct": 10.23,
+      "global_window_coverage_pct": 88.25,
+      "global_window_missing_pct": 11.75
+    }
+  },
+  "station_coverage_audit": [
+    {
+      "station_id": "site_113",
+      "station_name": "Shadipur, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43636,
+      "active_period": {
+        "coverage_pct": 99.52,
+        "missing_pct": 0.48,
+        "missing_hours": 212
+      },
+      "global_window": {
+        "coverage_pct": 99.52,
+        "missing_pct": 0.48,
+        "missing_hours": 212
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42152,
+          "active_period_coverage_pct": 96.13,
+          "active_period_missing_pct": 3.87,
+          "global_window_coverage_pct": 96.13,
+          "global_window_missing_pct": 3.87
+        },
+        "pm10": {
+          "observed_count": 37300,
+          "active_period_coverage_pct": 85.07,
+          "active_period_missing_pct": 14.93,
+          "global_window_coverage_pct": 85.07,
+          "global_window_missing_pct": 14.93
+        },
+        "no2": {
+          "observed_count": 43218,
+          "active_period_coverage_pct": 98.56,
+          "active_period_missing_pct": 1.44,
+          "global_window_coverage_pct": 98.56,
+          "global_window_missing_pct": 1.44
+        },
+        "so2": {
+          "observed_count": 43072,
+          "active_period_coverage_pct": 98.23,
+          "active_period_missing_pct": 1.77,
+          "global_window_coverage_pct": 98.23,
+          "global_window_missing_pct": 1.77
+        },
+        "co": {
+          "observed_count": 43021,
+          "active_period_coverage_pct": 98.11,
+          "active_period_missing_pct": 1.89,
+          "global_window_coverage_pct": 98.11,
+          "global_window_missing_pct": 1.89
+        },
+        "o3": {
+          "observed_count": 43160,
+          "active_period_coverage_pct": 98.43,
+          "active_period_missing_pct": 1.57,
+          "global_window_coverage_pct": 98.43,
+          "global_window_missing_pct": 1.57
+        }
+      }
+    },
+    {
+      "station_id": "site_115",
+      "station_name": "NSIT Dwarka, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43617,
+      "active_period": {
+        "coverage_pct": 99.47,
+        "missing_pct": 0.53,
+        "missing_hours": 231
+      },
+      "global_window": {
+        "coverage_pct": 99.47,
+        "missing_pct": 0.53,
+        "missing_hours": 231
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42150,
+          "active_period_coverage_pct": 96.13,
+          "active_period_missing_pct": 3.87,
+          "global_window_coverage_pct": 96.13,
+          "global_window_missing_pct": 3.87
+        },
+        "pm10": {
+          "observed_count": 37451,
+          "active_period_coverage_pct": 85.41,
+          "active_period_missing_pct": 14.59,
+          "global_window_coverage_pct": 85.41,
+          "global_window_missing_pct": 14.59
+        },
+        "no2": {
+          "observed_count": 43389,
+          "active_period_coverage_pct": 98.95,
+          "active_period_missing_pct": 1.05,
+          "global_window_coverage_pct": 98.95,
+          "global_window_missing_pct": 1.05
+        },
+        "so2": {
+          "observed_count": 42997,
+          "active_period_coverage_pct": 98.06,
+          "active_period_missing_pct": 1.94,
+          "global_window_coverage_pct": 98.06,
+          "global_window_missing_pct": 1.94
+        },
+        "co": {
+          "observed_count": 43153,
+          "active_period_coverage_pct": 98.41,
+          "active_period_missing_pct": 1.59,
+          "global_window_coverage_pct": 98.41,
+          "global_window_missing_pct": 1.59
+        },
+        "o3": {
+          "observed_count": 43403,
+          "active_period_coverage_pct": 98.99,
+          "active_period_missing_pct": 1.01,
+          "global_window_coverage_pct": 98.99,
+          "global_window_missing_pct": 1.01
+        }
+      }
+    },
+    {
+      "station_id": "site_1430",
+      "station_name": "Rohini, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43490,
+      "active_period": {
+        "coverage_pct": 99.18,
+        "missing_pct": 0.82,
+        "missing_hours": 358
+      },
+      "global_window": {
+        "coverage_pct": 99.18,
+        "missing_pct": 0.82,
+        "missing_hours": 358
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42817,
+          "active_period_coverage_pct": 97.65,
+          "active_period_missing_pct": 2.35,
+          "global_window_coverage_pct": 97.65,
+          "global_window_missing_pct": 2.35
+        },
+        "pm10": {
+          "observed_count": 43049,
+          "active_period_coverage_pct": 98.18,
+          "active_period_missing_pct": 1.82,
+          "global_window_coverage_pct": 98.18,
+          "global_window_missing_pct": 1.82
+        },
+        "no2": {
+          "observed_count": 42876,
+          "active_period_coverage_pct": 97.78,
+          "active_period_missing_pct": 2.22,
+          "global_window_coverage_pct": 97.78,
+          "global_window_missing_pct": 2.22
+        },
+        "so2": {
+          "observed_count": 42256,
+          "active_period_coverage_pct": 96.37,
+          "active_period_missing_pct": 3.63,
+          "global_window_coverage_pct": 96.37,
+          "global_window_missing_pct": 3.63
+        },
+        "co": {
+          "observed_count": 42225,
+          "active_period_coverage_pct": 96.3,
+          "active_period_missing_pct": 3.7,
+          "global_window_coverage_pct": 96.3,
+          "global_window_missing_pct": 3.7
+        },
+        "o3": {
+          "observed_count": 41817,
+          "active_period_coverage_pct": 95.37,
+          "active_period_missing_pct": 4.63,
+          "global_window_coverage_pct": 95.37,
+          "global_window_missing_pct": 4.63
+        }
+      }
+    },
+    {
+      "station_id": "site_1429",
+      "station_name": "Nehru Nagar, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43469,
+      "active_period": {
+        "coverage_pct": 99.14,
+        "missing_pct": 0.86,
+        "missing_hours": 379
+      },
+      "global_window": {
+        "coverage_pct": 99.14,
+        "missing_pct": 0.86,
+        "missing_hours": 379
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42589,
+          "active_period_coverage_pct": 97.13,
+          "active_period_missing_pct": 2.87,
+          "global_window_coverage_pct": 97.13,
+          "global_window_missing_pct": 2.87
+        },
+        "pm10": {
+          "observed_count": 42922,
+          "active_period_coverage_pct": 97.89,
+          "active_period_missing_pct": 2.11,
+          "global_window_coverage_pct": 97.89,
+          "global_window_missing_pct": 2.11
+        },
+        "no2": {
+          "observed_count": 40642,
+          "active_period_coverage_pct": 92.69,
+          "active_period_missing_pct": 7.31,
+          "global_window_coverage_pct": 92.69,
+          "global_window_missing_pct": 7.31
+        },
+        "so2": {
+          "observed_count": 42712,
+          "active_period_coverage_pct": 97.41,
+          "active_period_missing_pct": 2.59,
+          "global_window_coverage_pct": 97.41,
+          "global_window_missing_pct": 2.59
+        },
+        "co": {
+          "observed_count": 41580,
+          "active_period_coverage_pct": 94.83,
+          "active_period_missing_pct": 5.17,
+          "global_window_coverage_pct": 94.83,
+          "global_window_missing_pct": 5.17
+        },
+        "o3": {
+          "observed_count": 42090,
+          "active_period_coverage_pct": 95.99,
+          "active_period_missing_pct": 4.01,
+          "global_window_coverage_pct": 95.99,
+          "global_window_missing_pct": 4.01
+        }
+      }
+    },
+    {
+      "station_id": "site_1421",
+      "station_name": "Dr. Karni Singh Shooting Range, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43407,
+      "active_period": {
+        "coverage_pct": 98.99,
+        "missing_pct": 1.01,
+        "missing_hours": 441
+      },
+      "global_window": {
+        "coverage_pct": 98.99,
+        "missing_pct": 1.01,
+        "missing_hours": 441
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41820,
+          "active_period_coverage_pct": 95.37,
+          "active_period_missing_pct": 4.63,
+          "global_window_coverage_pct": 95.37,
+          "global_window_missing_pct": 4.63
+        },
+        "pm10": {
+          "observed_count": 42976,
+          "active_period_coverage_pct": 98.01,
+          "active_period_missing_pct": 1.99,
+          "global_window_coverage_pct": 98.01,
+          "global_window_missing_pct": 1.99
+        },
+        "no2": {
+          "observed_count": 41752,
+          "active_period_coverage_pct": 95.22,
+          "active_period_missing_pct": 4.78,
+          "global_window_coverage_pct": 95.22,
+          "global_window_missing_pct": 4.78
+        },
+        "so2": {
+          "observed_count": 41707,
+          "active_period_coverage_pct": 95.12,
+          "active_period_missing_pct": 4.88,
+          "global_window_coverage_pct": 95.12,
+          "global_window_missing_pct": 4.88
+        },
+        "co": {
+          "observed_count": 41534,
+          "active_period_coverage_pct": 94.72,
+          "active_period_missing_pct": 5.28,
+          "global_window_coverage_pct": 94.72,
+          "global_window_missing_pct": 5.28
+        },
+        "o3": {
+          "observed_count": 41845,
+          "active_period_coverage_pct": 95.43,
+          "active_period_missing_pct": 4.57,
+          "global_window_coverage_pct": 95.43,
+          "global_window_missing_pct": 4.57
+        }
+      }
+    },
+    {
+      "station_id": "site_1562",
+      "station_name": "Sri Aurobindo Marg, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43368,
+      "active_period": {
+        "coverage_pct": 98.91,
+        "missing_pct": 1.09,
+        "missing_hours": 480
+      },
+      "global_window": {
+        "coverage_pct": 98.91,
+        "missing_pct": 1.09,
+        "missing_hours": 480
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42832,
+          "active_period_coverage_pct": 97.68,
+          "active_period_missing_pct": 2.32,
+          "global_window_coverage_pct": 97.68,
+          "global_window_missing_pct": 2.32
+        },
+        "pm10": {
+          "observed_count": 42660,
+          "active_period_coverage_pct": 97.29,
+          "active_period_missing_pct": 2.71,
+          "global_window_coverage_pct": 97.29,
+          "global_window_missing_pct": 2.71
+        },
+        "no2": {
+          "observed_count": 43085,
+          "active_period_coverage_pct": 98.26,
+          "active_period_missing_pct": 1.74,
+          "global_window_coverage_pct": 98.26,
+          "global_window_missing_pct": 1.74
+        },
+        "so2": {
+          "observed_count": 42746,
+          "active_period_coverage_pct": 97.49,
+          "active_period_missing_pct": 2.51,
+          "global_window_coverage_pct": 97.49,
+          "global_window_missing_pct": 2.51
+        },
+        "co": {
+          "observed_count": 41661,
+          "active_period_coverage_pct": 95.01,
+          "active_period_missing_pct": 4.99,
+          "global_window_coverage_pct": 95.01,
+          "global_window_missing_pct": 4.99
+        },
+        "o3": {
+          "observed_count": 42820,
+          "active_period_coverage_pct": 97.66,
+          "active_period_missing_pct": 2.34,
+          "global_window_coverage_pct": 97.66,
+          "global_window_missing_pct": 2.34
+        }
+      }
+    },
+    {
+      "station_id": "site_1422",
+      "station_name": "Dwarka-Sector 8, Delhi - DPCC ",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43357,
+      "active_period": {
+        "coverage_pct": 98.88,
+        "missing_pct": 1.12,
+        "missing_hours": 491
+      },
+      "global_window": {
+        "coverage_pct": 98.88,
+        "missing_pct": 1.12,
+        "missing_hours": 491
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 43014,
+          "active_period_coverage_pct": 98.1,
+          "active_period_missing_pct": 1.9,
+          "global_window_coverage_pct": 98.1,
+          "global_window_missing_pct": 1.9
+        },
+        "pm10": {
+          "observed_count": 42659,
+          "active_period_coverage_pct": 97.29,
+          "active_period_missing_pct": 2.71,
+          "global_window_coverage_pct": 97.29,
+          "global_window_missing_pct": 2.71
+        },
+        "no2": {
+          "observed_count": 42813,
+          "active_period_coverage_pct": 97.64,
+          "active_period_missing_pct": 2.36,
+          "global_window_coverage_pct": 97.64,
+          "global_window_missing_pct": 2.36
+        },
+        "so2": {
+          "observed_count": 41823,
+          "active_period_coverage_pct": 95.38,
+          "active_period_missing_pct": 4.62,
+          "global_window_coverage_pct": 95.38,
+          "global_window_missing_pct": 4.62
+        },
+        "co": {
+          "observed_count": 42062,
+          "active_period_coverage_pct": 95.93,
+          "active_period_missing_pct": 4.07,
+          "global_window_coverage_pct": 95.93,
+          "global_window_missing_pct": 4.07
+        },
+        "o3": {
+          "observed_count": 42764,
+          "active_period_coverage_pct": 97.53,
+          "active_period_missing_pct": 2.47,
+          "global_window_coverage_pct": 97.53,
+          "global_window_missing_pct": 2.47
+        }
+      }
+    },
+    {
+      "station_id": "site_1428",
+      "station_name": "Okhla Phase-2, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43334,
+      "active_period": {
+        "coverage_pct": 98.83,
+        "missing_pct": 1.17,
+        "missing_hours": 514
+      },
+      "global_window": {
+        "coverage_pct": 98.83,
+        "missing_pct": 1.17,
+        "missing_hours": 514
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 43063,
+          "active_period_coverage_pct": 98.21,
+          "active_period_missing_pct": 1.79,
+          "global_window_coverage_pct": 98.21,
+          "global_window_missing_pct": 1.79
+        },
+        "pm10": {
+          "observed_count": 42707,
+          "active_period_coverage_pct": 97.4,
+          "active_period_missing_pct": 2.6,
+          "global_window_coverage_pct": 97.4,
+          "global_window_missing_pct": 2.6
+        },
+        "no2": {
+          "observed_count": 42956,
+          "active_period_coverage_pct": 97.97,
+          "active_period_missing_pct": 2.03,
+          "global_window_coverage_pct": 97.97,
+          "global_window_missing_pct": 2.03
+        },
+        "so2": {
+          "observed_count": 42992,
+          "active_period_coverage_pct": 98.05,
+          "active_period_missing_pct": 1.95,
+          "global_window_coverage_pct": 98.05,
+          "global_window_missing_pct": 1.95
+        },
+        "co": {
+          "observed_count": 42205,
+          "active_period_coverage_pct": 96.25,
+          "active_period_missing_pct": 3.75,
+          "global_window_coverage_pct": 96.25,
+          "global_window_missing_pct": 3.75
+        },
+        "o3": {
+          "observed_count": 41521,
+          "active_period_coverage_pct": 94.69,
+          "active_period_missing_pct": 5.31,
+          "global_window_coverage_pct": 94.69,
+          "global_window_missing_pct": 5.31
+        }
+      }
+    },
+    {
+      "station_id": "site_1560",
+      "station_name": "Bawana, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43299,
+      "active_period": {
+        "coverage_pct": 98.75,
+        "missing_pct": 1.25,
+        "missing_hours": 549
+      },
+      "global_window": {
+        "coverage_pct": 98.75,
+        "missing_pct": 1.25,
+        "missing_hours": 549
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42341,
+          "active_period_coverage_pct": 96.56,
+          "active_period_missing_pct": 3.44,
+          "global_window_coverage_pct": 96.56,
+          "global_window_missing_pct": 3.44
+        },
+        "pm10": {
+          "observed_count": 42566,
+          "active_period_coverage_pct": 97.08,
+          "active_period_missing_pct": 2.92,
+          "global_window_coverage_pct": 97.08,
+          "global_window_missing_pct": 2.92
+        },
+        "no2": {
+          "observed_count": 42338,
+          "active_period_coverage_pct": 96.56,
+          "active_period_missing_pct": 3.44,
+          "global_window_coverage_pct": 96.56,
+          "global_window_missing_pct": 3.44
+        },
+        "so2": {
+          "observed_count": 41419,
+          "active_period_coverage_pct": 94.46,
+          "active_period_missing_pct": 5.54,
+          "global_window_coverage_pct": 94.46,
+          "global_window_missing_pct": 5.54
+        },
+        "co": {
+          "observed_count": 41453,
+          "active_period_coverage_pct": 94.54,
+          "active_period_missing_pct": 5.46,
+          "global_window_coverage_pct": 94.54,
+          "global_window_missing_pct": 5.46
+        },
+        "o3": {
+          "observed_count": 42451,
+          "active_period_coverage_pct": 96.81,
+          "active_period_missing_pct": 3.19,
+          "global_window_coverage_pct": 96.81,
+          "global_window_missing_pct": 3.19
+        }
+      }
+    },
+    {
+      "station_id": "site_1425",
+      "station_name": "Major Dhyan Chand National Stadium, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43200,
+      "active_period": {
+        "coverage_pct": 98.52,
+        "missing_pct": 1.48,
+        "missing_hours": 648
+      },
+      "global_window": {
+        "coverage_pct": 98.52,
+        "missing_pct": 1.48,
+        "missing_hours": 648
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42634,
+          "active_period_coverage_pct": 97.23,
+          "active_period_missing_pct": 2.77,
+          "global_window_coverage_pct": 97.23,
+          "global_window_missing_pct": 2.77
+        },
+        "pm10": {
+          "observed_count": 42522,
+          "active_period_coverage_pct": 96.98,
+          "active_period_missing_pct": 3.02,
+          "global_window_coverage_pct": 96.98,
+          "global_window_missing_pct": 3.02
+        },
+        "no2": {
+          "observed_count": 42721,
+          "active_period_coverage_pct": 97.43,
+          "active_period_missing_pct": 2.57,
+          "global_window_coverage_pct": 97.43,
+          "global_window_missing_pct": 2.57
+        },
+        "so2": {
+          "observed_count": 42912,
+          "active_period_coverage_pct": 97.87,
+          "active_period_missing_pct": 2.13,
+          "global_window_coverage_pct": 97.87,
+          "global_window_missing_pct": 2.13
+        },
+        "co": {
+          "observed_count": 41287,
+          "active_period_coverage_pct": 94.16,
+          "active_period_missing_pct": 5.84,
+          "global_window_coverage_pct": 94.16,
+          "global_window_missing_pct": 5.84
+        },
+        "o3": {
+          "observed_count": 41846,
+          "active_period_coverage_pct": 95.43,
+          "active_period_missing_pct": 4.57,
+          "global_window_coverage_pct": 95.43,
+          "global_window_missing_pct": 4.57
+        }
+      }
+    },
+    {
+      "station_id": "site_1431",
+      "station_name": "Patparganj, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43200,
+      "active_period": {
+        "coverage_pct": 98.52,
+        "missing_pct": 1.48,
+        "missing_hours": 648
+      },
+      "global_window": {
+        "coverage_pct": 98.52,
+        "missing_pct": 1.48,
+        "missing_hours": 648
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42280,
+          "active_period_coverage_pct": 96.42,
+          "active_period_missing_pct": 3.58,
+          "global_window_coverage_pct": 96.42,
+          "global_window_missing_pct": 3.58
+        },
+        "pm10": {
+          "observed_count": 42233,
+          "active_period_coverage_pct": 96.32,
+          "active_period_missing_pct": 3.68,
+          "global_window_coverage_pct": 96.32,
+          "global_window_missing_pct": 3.68
+        },
+        "no2": {
+          "observed_count": 42304,
+          "active_period_coverage_pct": 96.48,
+          "active_period_missing_pct": 3.52,
+          "global_window_coverage_pct": 96.48,
+          "global_window_missing_pct": 3.52
+        },
+        "so2": {
+          "observed_count": 41351,
+          "active_period_coverage_pct": 94.31,
+          "active_period_missing_pct": 5.69,
+          "global_window_coverage_pct": 94.31,
+          "global_window_missing_pct": 5.69
+        },
+        "co": {
+          "observed_count": 42283,
+          "active_period_coverage_pct": 96.43,
+          "active_period_missing_pct": 3.57,
+          "global_window_coverage_pct": 96.43,
+          "global_window_missing_pct": 3.57
+        },
+        "o3": {
+          "observed_count": 40377,
+          "active_period_coverage_pct": 92.08,
+          "active_period_missing_pct": 7.92,
+          "global_window_coverage_pct": 92.08,
+          "global_window_missing_pct": 7.92
+        }
+      }
+    },
+    {
+      "station_id": "site_1420",
+      "station_name": "Ashok Vihar, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43139,
+      "active_period": {
+        "coverage_pct": 98.38,
+        "missing_pct": 1.62,
+        "missing_hours": 709
+      },
+      "global_window": {
+        "coverage_pct": 98.38,
+        "missing_pct": 1.62,
+        "missing_hours": 709
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41138,
+          "active_period_coverage_pct": 93.82,
+          "active_period_missing_pct": 6.18,
+          "global_window_coverage_pct": 93.82,
+          "global_window_missing_pct": 6.18
+        },
+        "pm10": {
+          "observed_count": 41679,
+          "active_period_coverage_pct": 95.05,
+          "active_period_missing_pct": 4.95,
+          "global_window_coverage_pct": 95.05,
+          "global_window_missing_pct": 4.95
+        },
+        "no2": {
+          "observed_count": 42504,
+          "active_period_coverage_pct": 96.93,
+          "active_period_missing_pct": 3.07,
+          "global_window_coverage_pct": 96.93,
+          "global_window_missing_pct": 3.07
+        },
+        "so2": {
+          "observed_count": 42297,
+          "active_period_coverage_pct": 96.46,
+          "active_period_missing_pct": 3.54,
+          "global_window_coverage_pct": 96.46,
+          "global_window_missing_pct": 3.54
+        },
+        "co": {
+          "observed_count": 41235,
+          "active_period_coverage_pct": 94.04,
+          "active_period_missing_pct": 5.96,
+          "global_window_coverage_pct": 94.04,
+          "global_window_missing_pct": 5.96
+        },
+        "o3": {
+          "observed_count": 42126,
+          "active_period_coverage_pct": 96.07,
+          "active_period_missing_pct": 3.93,
+          "global_window_coverage_pct": 96.07,
+          "global_window_missing_pct": 3.93
+        }
+      }
+    },
+    {
+      "station_id": "site_276",
+      "station_name": "Nehru Nagar, Kanpur - UPPCB",
+      "agency": "Other",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43071,
+      "active_period": {
+        "coverage_pct": 98.23,
+        "missing_pct": 1.77,
+        "missing_hours": 777
+      },
+      "global_window": {
+        "coverage_pct": 98.23,
+        "missing_pct": 1.77,
+        "missing_hours": 777
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42610,
+          "active_period_coverage_pct": 97.18,
+          "active_period_missing_pct": 2.82,
+          "global_window_coverage_pct": 97.18,
+          "global_window_missing_pct": 2.82
+        },
+        "pm10": {
+          "observed_count": 27937,
+          "active_period_coverage_pct": 63.71,
+          "active_period_missing_pct": 36.29,
+          "global_window_coverage_pct": 63.71,
+          "global_window_missing_pct": 36.29
+        },
+        "no2": {
+          "observed_count": 30854,
+          "active_period_coverage_pct": 70.37,
+          "active_period_missing_pct": 29.63,
+          "global_window_coverage_pct": 70.37,
+          "global_window_missing_pct": 29.63
+        },
+        "so2": {
+          "observed_count": 40898,
+          "active_period_coverage_pct": 93.27,
+          "active_period_missing_pct": 6.73,
+          "global_window_coverage_pct": 93.27,
+          "global_window_missing_pct": 6.73
+        },
+        "co": {
+          "observed_count": 27730,
+          "active_period_coverage_pct": 63.24,
+          "active_period_missing_pct": 36.76,
+          "global_window_coverage_pct": 63.24,
+          "global_window_missing_pct": 36.76
+        },
+        "o3": {
+          "observed_count": 42668,
+          "active_period_coverage_pct": 97.31,
+          "active_period_missing_pct": 2.69,
+          "global_window_coverage_pct": 97.31,
+          "global_window_missing_pct": 2.69
+        }
+      }
+    },
+    {
+      "station_id": "DS1010001",
+      "station_name": "US Embassy - New Delhi",
+      "agency": "US Embassy",
+      "station_active_start_ist": "2020-01-01 00:30:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:30:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 43002,
+      "active_period": {
+        "coverage_pct": 98.07,
+        "missing_pct": 1.93,
+        "missing_hours": 846
+      },
+      "global_window": {
+        "coverage_pct": 98.07,
+        "missing_pct": 1.93,
+        "missing_hours": 846
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 43002,
+          "active_period_coverage_pct": 98.07,
+          "active_period_missing_pct": 1.93,
+          "global_window_coverage_pct": 98.07,
+          "global_window_missing_pct": 1.93
+        },
+        "pm10": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "no2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "o3": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        }
+      }
+    },
+    {
+      "station_id": "site_124",
+      "station_name": "R K Puram, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42978,
+      "active_period": {
+        "coverage_pct": 98.02,
+        "missing_pct": 1.98,
+        "missing_hours": 870
+      },
+      "global_window": {
+        "coverage_pct": 98.02,
+        "missing_pct": 1.98,
+        "missing_hours": 870
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41438,
+          "active_period_coverage_pct": 94.5,
+          "active_period_missing_pct": 5.5,
+          "global_window_coverage_pct": 94.5,
+          "global_window_missing_pct": 5.5
+        },
+        "pm10": {
+          "observed_count": 41726,
+          "active_period_coverage_pct": 95.16,
+          "active_period_missing_pct": 4.84,
+          "global_window_coverage_pct": 95.16,
+          "global_window_missing_pct": 4.84
+        },
+        "no2": {
+          "observed_count": 42023,
+          "active_period_coverage_pct": 95.84,
+          "active_period_missing_pct": 4.16,
+          "global_window_coverage_pct": 95.84,
+          "global_window_missing_pct": 4.16
+        },
+        "so2": {
+          "observed_count": 40180,
+          "active_period_coverage_pct": 91.63,
+          "active_period_missing_pct": 8.37,
+          "global_window_coverage_pct": 91.63,
+          "global_window_missing_pct": 8.37
+        },
+        "co": {
+          "observed_count": 39397,
+          "active_period_coverage_pct": 89.85,
+          "active_period_missing_pct": 10.15,
+          "global_window_coverage_pct": 89.85,
+          "global_window_missing_pct": 10.15
+        },
+        "o3": {
+          "observed_count": 41553,
+          "active_period_coverage_pct": 94.77,
+          "active_period_missing_pct": 5.23,
+          "global_window_coverage_pct": 94.77,
+          "global_window_missing_pct": 5.23
+        }
+      }
+    },
+    {
+      "station_id": "site_118",
+      "station_name": "DTU, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42968,
+      "active_period": {
+        "coverage_pct": 97.99,
+        "missing_pct": 2.01,
+        "missing_hours": 880
+      },
+      "global_window": {
+        "coverage_pct": 97.99,
+        "missing_pct": 2.01,
+        "missing_hours": 880
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 39346,
+          "active_period_coverage_pct": 89.73,
+          "active_period_missing_pct": 10.27,
+          "global_window_coverage_pct": 89.73,
+          "global_window_missing_pct": 10.27
+        },
+        "pm10": {
+          "observed_count": 40912,
+          "active_period_coverage_pct": 93.3,
+          "active_period_missing_pct": 6.7,
+          "global_window_coverage_pct": 93.3,
+          "global_window_missing_pct": 6.7
+        },
+        "no2": {
+          "observed_count": 38517,
+          "active_period_coverage_pct": 87.84,
+          "active_period_missing_pct": 12.16,
+          "global_window_coverage_pct": 87.84,
+          "global_window_missing_pct": 12.16
+        },
+        "so2": {
+          "observed_count": 42167,
+          "active_period_coverage_pct": 96.17,
+          "active_period_missing_pct": 3.83,
+          "global_window_coverage_pct": 96.17,
+          "global_window_missing_pct": 3.83
+        },
+        "co": {
+          "observed_count": 42610,
+          "active_period_coverage_pct": 97.18,
+          "active_period_missing_pct": 2.82,
+          "global_window_coverage_pct": 97.18,
+          "global_window_missing_pct": 2.82
+        },
+        "o3": {
+          "observed_count": 42249,
+          "active_period_coverage_pct": 96.35,
+          "active_period_missing_pct": 3.65,
+          "global_window_coverage_pct": 96.35,
+          "global_window_missing_pct": 3.65
+        }
+      }
+    },
+    {
+      "station_id": "site_117",
+      "station_name": "ITO, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42934,
+      "active_period": {
+        "coverage_pct": 97.92,
+        "missing_pct": 2.08,
+        "missing_hours": 914
+      },
+      "global_window": {
+        "coverage_pct": 97.92,
+        "missing_pct": 2.08,
+        "missing_hours": 914
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40248,
+          "active_period_coverage_pct": 91.79,
+          "active_period_missing_pct": 8.21,
+          "global_window_coverage_pct": 91.79,
+          "global_window_missing_pct": 8.21
+        },
+        "pm10": {
+          "observed_count": 37003,
+          "active_period_coverage_pct": 84.39,
+          "active_period_missing_pct": 15.61,
+          "global_window_coverage_pct": 84.39,
+          "global_window_missing_pct": 15.61
+        },
+        "no2": {
+          "observed_count": 41543,
+          "active_period_coverage_pct": 94.74,
+          "active_period_missing_pct": 5.26,
+          "global_window_coverage_pct": 94.74,
+          "global_window_missing_pct": 5.26
+        },
+        "so2": {
+          "observed_count": 41829,
+          "active_period_coverage_pct": 95.4,
+          "active_period_missing_pct": 4.6,
+          "global_window_coverage_pct": 95.4,
+          "global_window_missing_pct": 4.6
+        },
+        "co": {
+          "observed_count": 42522,
+          "active_period_coverage_pct": 96.98,
+          "active_period_missing_pct": 3.02,
+          "global_window_coverage_pct": 96.98,
+          "global_window_missing_pct": 3.02
+        },
+        "o3": {
+          "observed_count": 41906,
+          "active_period_coverage_pct": 95.57,
+          "active_period_missing_pct": 4.43,
+          "global_window_coverage_pct": 95.57,
+          "global_window_missing_pct": 4.43
+        }
+      }
+    },
+    {
+      "station_id": "site_125",
+      "station_name": "Punjabi Bagh, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42931,
+      "active_period": {
+        "coverage_pct": 97.91,
+        "missing_pct": 2.09,
+        "missing_hours": 917
+      },
+      "global_window": {
+        "coverage_pct": 97.91,
+        "missing_pct": 2.09,
+        "missing_hours": 917
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42000,
+          "active_period_coverage_pct": 95.79,
+          "active_period_missing_pct": 4.21,
+          "global_window_coverage_pct": 95.79,
+          "global_window_missing_pct": 4.21
+        },
+        "pm10": {
+          "observed_count": 41844,
+          "active_period_coverage_pct": 95.43,
+          "active_period_missing_pct": 4.57,
+          "global_window_coverage_pct": 95.43,
+          "global_window_missing_pct": 4.57
+        },
+        "no2": {
+          "observed_count": 42013,
+          "active_period_coverage_pct": 95.82,
+          "active_period_missing_pct": 4.18,
+          "global_window_coverage_pct": 95.82,
+          "global_window_missing_pct": 4.18
+        },
+        "so2": {
+          "observed_count": 39564,
+          "active_period_coverage_pct": 90.23,
+          "active_period_missing_pct": 9.77,
+          "global_window_coverage_pct": 90.23,
+          "global_window_missing_pct": 9.77
+        },
+        "co": {
+          "observed_count": 40607,
+          "active_period_coverage_pct": 92.61,
+          "active_period_missing_pct": 7.39,
+          "global_window_coverage_pct": 92.61,
+          "global_window_missing_pct": 7.39
+        },
+        "o3": {
+          "observed_count": 41622,
+          "active_period_coverage_pct": 94.92,
+          "active_period_missing_pct": 5.08,
+          "global_window_coverage_pct": 94.92,
+          "global_window_missing_pct": 5.08
+        }
+      }
+    },
+    {
+      "station_id": "site_1423",
+      "station_name": "Jahangirpuri, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 16:00:00+05:30",
+      "active_span_hours": 43841,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42920,
+      "active_period": {
+        "coverage_pct": 97.9,
+        "missing_pct": 2.1,
+        "missing_hours": 921
+      },
+      "global_window": {
+        "coverage_pct": 97.88,
+        "missing_pct": 2.12,
+        "missing_hours": 928
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42052,
+          "active_period_coverage_pct": 95.92,
+          "active_period_missing_pct": 4.08,
+          "global_window_coverage_pct": 95.9,
+          "global_window_missing_pct": 4.1
+        },
+        "pm10": {
+          "observed_count": 41933,
+          "active_period_coverage_pct": 95.65,
+          "active_period_missing_pct": 4.35,
+          "global_window_coverage_pct": 95.63,
+          "global_window_missing_pct": 4.37
+        },
+        "no2": {
+          "observed_count": 42160,
+          "active_period_coverage_pct": 96.17,
+          "active_period_missing_pct": 3.83,
+          "global_window_coverage_pct": 96.15,
+          "global_window_missing_pct": 3.85
+        },
+        "so2": {
+          "observed_count": 41080,
+          "active_period_coverage_pct": 93.7,
+          "active_period_missing_pct": 6.3,
+          "global_window_coverage_pct": 93.69,
+          "global_window_missing_pct": 6.31
+        },
+        "co": {
+          "observed_count": 41729,
+          "active_period_coverage_pct": 95.18,
+          "active_period_missing_pct": 4.82,
+          "global_window_coverage_pct": 95.17,
+          "global_window_missing_pct": 4.83
+        },
+        "o3": {
+          "observed_count": 41690,
+          "active_period_coverage_pct": 95.09,
+          "active_period_missing_pct": 4.91,
+          "global_window_coverage_pct": 95.08,
+          "global_window_missing_pct": 4.92
+        }
+      }
+    },
+    {
+      "station_id": "site_1434",
+      "station_name": "Wazirpur, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42908,
+      "active_period": {
+        "coverage_pct": 97.86,
+        "missing_pct": 2.14,
+        "missing_hours": 940
+      },
+      "global_window": {
+        "coverage_pct": 97.86,
+        "missing_pct": 2.14,
+        "missing_hours": 940
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41878,
+          "active_period_coverage_pct": 95.51,
+          "active_period_missing_pct": 4.49,
+          "global_window_coverage_pct": 95.51,
+          "global_window_missing_pct": 4.49
+        },
+        "pm10": {
+          "observed_count": 40280,
+          "active_period_coverage_pct": 91.86,
+          "active_period_missing_pct": 8.14,
+          "global_window_coverage_pct": 91.86,
+          "global_window_missing_pct": 8.14
+        },
+        "no2": {
+          "observed_count": 42428,
+          "active_period_coverage_pct": 96.76,
+          "active_period_missing_pct": 3.24,
+          "global_window_coverage_pct": 96.76,
+          "global_window_missing_pct": 3.24
+        },
+        "so2": {
+          "observed_count": 41812,
+          "active_period_coverage_pct": 95.36,
+          "active_period_missing_pct": 4.64,
+          "global_window_coverage_pct": 95.36,
+          "global_window_missing_pct": 4.64
+        },
+        "co": {
+          "observed_count": 40165,
+          "active_period_coverage_pct": 91.6,
+          "active_period_missing_pct": 8.4,
+          "global_window_coverage_pct": 91.6,
+          "global_window_missing_pct": 8.4
+        },
+        "o3": {
+          "observed_count": 40854,
+          "active_period_coverage_pct": 93.17,
+          "active_period_missing_pct": 6.83,
+          "global_window_coverage_pct": 93.17,
+          "global_window_missing_pct": 6.83
+        }
+      }
+    },
+    {
+      "station_id": "site_1435",
+      "station_name": "Vivek Vihar, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42883,
+      "active_period": {
+        "coverage_pct": 97.8,
+        "missing_pct": 2.2,
+        "missing_hours": 965
+      },
+      "global_window": {
+        "coverage_pct": 97.8,
+        "missing_pct": 2.2,
+        "missing_hours": 965
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41693,
+          "active_period_coverage_pct": 95.09,
+          "active_period_missing_pct": 4.91,
+          "global_window_coverage_pct": 95.09,
+          "global_window_missing_pct": 4.91
+        },
+        "pm10": {
+          "observed_count": 41138,
+          "active_period_coverage_pct": 93.82,
+          "active_period_missing_pct": 6.18,
+          "global_window_coverage_pct": 93.82,
+          "global_window_missing_pct": 6.18
+        },
+        "no2": {
+          "observed_count": 42269,
+          "active_period_coverage_pct": 96.4,
+          "active_period_missing_pct": 3.6,
+          "global_window_coverage_pct": 96.4,
+          "global_window_missing_pct": 3.6
+        },
+        "so2": {
+          "observed_count": 42550,
+          "active_period_coverage_pct": 97.04,
+          "active_period_missing_pct": 2.96,
+          "global_window_coverage_pct": 97.04,
+          "global_window_missing_pct": 2.96
+        },
+        "co": {
+          "observed_count": 42004,
+          "active_period_coverage_pct": 95.79,
+          "active_period_missing_pct": 4.21,
+          "global_window_coverage_pct": 95.79,
+          "global_window_missing_pct": 4.21
+        },
+        "o3": {
+          "observed_count": 40318,
+          "active_period_coverage_pct": 91.95,
+          "active_period_missing_pct": 8.05,
+          "global_window_coverage_pct": 91.95,
+          "global_window_missing_pct": 8.05
+        }
+      }
+    },
+    {
+      "station_id": "site_109",
+      "station_name": "Lodhi Road, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42864,
+      "active_period": {
+        "coverage_pct": 97.76,
+        "missing_pct": 2.24,
+        "missing_hours": 984
+      },
+      "global_window": {
+        "coverage_pct": 97.76,
+        "missing_pct": 2.24,
+        "missing_hours": 984
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42144,
+          "active_period_coverage_pct": 96.11,
+          "active_period_missing_pct": 3.89,
+          "global_window_coverage_pct": 96.11,
+          "global_window_missing_pct": 3.89
+        },
+        "pm10": {
+          "observed_count": 42340,
+          "active_period_coverage_pct": 96.56,
+          "active_period_missing_pct": 3.44,
+          "global_window_coverage_pct": 96.56,
+          "global_window_missing_pct": 3.44
+        },
+        "no2": {
+          "observed_count": 42372,
+          "active_period_coverage_pct": 96.63,
+          "active_period_missing_pct": 3.37,
+          "global_window_coverage_pct": 96.63,
+          "global_window_missing_pct": 3.37
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 42591,
+          "active_period_coverage_pct": 97.13,
+          "active_period_missing_pct": 2.87,
+          "global_window_coverage_pct": 97.13,
+          "global_window_missing_pct": 2.87
+        },
+        "o3": {
+          "observed_count": 42278,
+          "active_period_coverage_pct": 96.42,
+          "active_period_missing_pct": 3.58,
+          "global_window_coverage_pct": 96.42,
+          "global_window_missing_pct": 3.58
+        }
+      }
+    },
+    {
+      "station_id": "site_1561",
+      "station_name": "Mundka, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42818,
+      "active_period": {
+        "coverage_pct": 97.65,
+        "missing_pct": 2.35,
+        "missing_hours": 1030
+      },
+      "global_window": {
+        "coverage_pct": 97.65,
+        "missing_pct": 2.35,
+        "missing_hours": 1030
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42238,
+          "active_period_coverage_pct": 96.33,
+          "active_period_missing_pct": 3.67,
+          "global_window_coverage_pct": 96.33,
+          "global_window_missing_pct": 3.67
+        },
+        "pm10": {
+          "observed_count": 41831,
+          "active_period_coverage_pct": 95.4,
+          "active_period_missing_pct": 4.6,
+          "global_window_coverage_pct": 95.4,
+          "global_window_missing_pct": 4.6
+        },
+        "no2": {
+          "observed_count": 42027,
+          "active_period_coverage_pct": 95.85,
+          "active_period_missing_pct": 4.15,
+          "global_window_coverage_pct": 95.85,
+          "global_window_missing_pct": 4.15
+        },
+        "so2": {
+          "observed_count": 41538,
+          "active_period_coverage_pct": 94.73,
+          "active_period_missing_pct": 5.27,
+          "global_window_coverage_pct": 94.73,
+          "global_window_missing_pct": 5.27
+        },
+        "co": {
+          "observed_count": 41044,
+          "active_period_coverage_pct": 93.61,
+          "active_period_missing_pct": 6.39,
+          "global_window_coverage_pct": 93.61,
+          "global_window_missing_pct": 6.39
+        },
+        "o3": {
+          "observed_count": 39925,
+          "active_period_coverage_pct": 91.05,
+          "active_period_missing_pct": 8.95,
+          "global_window_coverage_pct": 91.05,
+          "global_window_missing_pct": 8.95
+        }
+      }
+    },
+    {
+      "station_id": "site_1426",
+      "station_name": "Narela, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42746,
+      "active_period": {
+        "coverage_pct": 97.49,
+        "missing_pct": 2.51,
+        "missing_hours": 1102
+      },
+      "global_window": {
+        "coverage_pct": 97.49,
+        "missing_pct": 2.51,
+        "missing_hours": 1102
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42438,
+          "active_period_coverage_pct": 96.78,
+          "active_period_missing_pct": 3.22,
+          "global_window_coverage_pct": 96.78,
+          "global_window_missing_pct": 3.22
+        },
+        "pm10": {
+          "observed_count": 42241,
+          "active_period_coverage_pct": 96.34,
+          "active_period_missing_pct": 3.66,
+          "global_window_coverage_pct": 96.34,
+          "global_window_missing_pct": 3.66
+        },
+        "no2": {
+          "observed_count": 42497,
+          "active_period_coverage_pct": 96.92,
+          "active_period_missing_pct": 3.08,
+          "global_window_coverage_pct": 96.92,
+          "global_window_missing_pct": 3.08
+        },
+        "so2": {
+          "observed_count": 41156,
+          "active_period_coverage_pct": 93.86,
+          "active_period_missing_pct": 6.14,
+          "global_window_coverage_pct": 93.86,
+          "global_window_missing_pct": 6.14
+        },
+        "co": {
+          "observed_count": 40850,
+          "active_period_coverage_pct": 93.16,
+          "active_period_missing_pct": 6.84,
+          "global_window_coverage_pct": 93.16,
+          "global_window_missing_pct": 6.84
+        },
+        "o3": {
+          "observed_count": 42522,
+          "active_period_coverage_pct": 96.98,
+          "active_period_missing_pct": 3.02,
+          "global_window_coverage_pct": 96.98,
+          "global_window_missing_pct": 3.02
+        }
+      }
+    },
+    {
+      "station_id": "site_5024",
+      "station_name": "Alipur, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42742,
+      "active_period": {
+        "coverage_pct": 97.48,
+        "missing_pct": 2.52,
+        "missing_hours": 1106
+      },
+      "global_window": {
+        "coverage_pct": 97.48,
+        "missing_pct": 2.52,
+        "missing_hours": 1106
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42080,
+          "active_period_coverage_pct": 95.97,
+          "active_period_missing_pct": 4.03,
+          "global_window_coverage_pct": 95.97,
+          "global_window_missing_pct": 4.03
+        },
+        "pm10": {
+          "observed_count": 41961,
+          "active_period_coverage_pct": 95.7,
+          "active_period_missing_pct": 4.3,
+          "global_window_coverage_pct": 95.7,
+          "global_window_missing_pct": 4.3
+        },
+        "no2": {
+          "observed_count": 42141,
+          "active_period_coverage_pct": 96.11,
+          "active_period_missing_pct": 3.89,
+          "global_window_coverage_pct": 96.11,
+          "global_window_missing_pct": 3.89
+        },
+        "so2": {
+          "observed_count": 41844,
+          "active_period_coverage_pct": 95.43,
+          "active_period_missing_pct": 4.57,
+          "global_window_coverage_pct": 95.43,
+          "global_window_missing_pct": 4.57
+        },
+        "co": {
+          "observed_count": 41186,
+          "active_period_coverage_pct": 93.93,
+          "active_period_missing_pct": 6.07,
+          "global_window_coverage_pct": 93.93,
+          "global_window_missing_pct": 6.07
+        },
+        "o3": {
+          "observed_count": 39957,
+          "active_period_coverage_pct": 91.13,
+          "active_period_missing_pct": 8.87,
+          "global_window_coverage_pct": 91.13,
+          "global_window_missing_pct": 8.87
+        }
+      }
+    },
+    {
+      "station_id": "site_1424",
+      "station_name": "Jawaharlal Nehru Stadium, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42726,
+      "active_period": {
+        "coverage_pct": 97.44,
+        "missing_pct": 2.56,
+        "missing_hours": 1122
+      },
+      "global_window": {
+        "coverage_pct": 97.44,
+        "missing_pct": 2.56,
+        "missing_hours": 1122
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42164,
+          "active_period_coverage_pct": 96.16,
+          "active_period_missing_pct": 3.84,
+          "global_window_coverage_pct": 96.16,
+          "global_window_missing_pct": 3.84
+        },
+        "pm10": {
+          "observed_count": 41289,
+          "active_period_coverage_pct": 94.16,
+          "active_period_missing_pct": 5.84,
+          "global_window_coverage_pct": 94.16,
+          "global_window_missing_pct": 5.84
+        },
+        "no2": {
+          "observed_count": 42025,
+          "active_period_coverage_pct": 95.84,
+          "active_period_missing_pct": 4.16,
+          "global_window_coverage_pct": 95.84,
+          "global_window_missing_pct": 4.16
+        },
+        "so2": {
+          "observed_count": 41838,
+          "active_period_coverage_pct": 95.42,
+          "active_period_missing_pct": 4.58,
+          "global_window_coverage_pct": 95.42,
+          "global_window_missing_pct": 4.58
+        },
+        "co": {
+          "observed_count": 41160,
+          "active_period_coverage_pct": 93.87,
+          "active_period_missing_pct": 6.13,
+          "global_window_coverage_pct": 93.87,
+          "global_window_missing_pct": 6.13
+        },
+        "o3": {
+          "observed_count": 41273,
+          "active_period_coverage_pct": 94.13,
+          "active_period_missing_pct": 5.87,
+          "global_window_coverage_pct": 94.13,
+          "global_window_missing_pct": 5.87
+        }
+      }
+    },
+    {
+      "station_id": "site_1432",
+      "station_name": "Sonia Vihar, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42679,
+      "active_period": {
+        "coverage_pct": 97.33,
+        "missing_pct": 2.67,
+        "missing_hours": 1169
+      },
+      "global_window": {
+        "coverage_pct": 97.33,
+        "missing_pct": 2.67,
+        "missing_hours": 1169
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 42059,
+          "active_period_coverage_pct": 95.92,
+          "active_period_missing_pct": 4.08,
+          "global_window_coverage_pct": 95.92,
+          "global_window_missing_pct": 4.08
+        },
+        "pm10": {
+          "observed_count": 41929,
+          "active_period_coverage_pct": 95.62,
+          "active_period_missing_pct": 4.38,
+          "global_window_coverage_pct": 95.62,
+          "global_window_missing_pct": 4.38
+        },
+        "no2": {
+          "observed_count": 41575,
+          "active_period_coverage_pct": 94.82,
+          "active_period_missing_pct": 5.18,
+          "global_window_coverage_pct": 94.82,
+          "global_window_missing_pct": 5.18
+        },
+        "so2": {
+          "observed_count": 41377,
+          "active_period_coverage_pct": 94.36,
+          "active_period_missing_pct": 5.64,
+          "global_window_coverage_pct": 94.36,
+          "global_window_missing_pct": 5.64
+        },
+        "co": {
+          "observed_count": 40898,
+          "active_period_coverage_pct": 93.27,
+          "active_period_missing_pct": 6.73,
+          "global_window_coverage_pct": 93.27,
+          "global_window_missing_pct": 6.73
+        },
+        "o3": {
+          "observed_count": 40821,
+          "active_period_coverage_pct": 93.1,
+          "active_period_missing_pct": 6.9,
+          "global_window_coverage_pct": 93.1,
+          "global_window_missing_pct": 6.9
+        }
+      }
+    },
+    {
+      "station_id": "site_119",
+      "station_name": "Sirifort, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42615,
+      "active_period": {
+        "coverage_pct": 97.19,
+        "missing_pct": 2.81,
+        "missing_hours": 1233
+      },
+      "global_window": {
+        "coverage_pct": 97.19,
+        "missing_pct": 2.81,
+        "missing_hours": 1233
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 38891,
+          "active_period_coverage_pct": 88.7,
+          "active_period_missing_pct": 11.3,
+          "global_window_coverage_pct": 88.7,
+          "global_window_missing_pct": 11.3
+        },
+        "pm10": {
+          "observed_count": 41187,
+          "active_period_coverage_pct": 93.93,
+          "active_period_missing_pct": 6.07,
+          "global_window_coverage_pct": 93.93,
+          "global_window_missing_pct": 6.07
+        },
+        "no2": {
+          "observed_count": 37170,
+          "active_period_coverage_pct": 84.77,
+          "active_period_missing_pct": 15.23,
+          "global_window_coverage_pct": 84.77,
+          "global_window_missing_pct": 15.23
+        },
+        "so2": {
+          "observed_count": 41105,
+          "active_period_coverage_pct": 93.74,
+          "active_period_missing_pct": 6.26,
+          "global_window_coverage_pct": 93.74,
+          "global_window_missing_pct": 6.26
+        },
+        "co": {
+          "observed_count": 41971,
+          "active_period_coverage_pct": 95.72,
+          "active_period_missing_pct": 4.28,
+          "global_window_coverage_pct": 95.72,
+          "global_window_missing_pct": 4.28
+        },
+        "o3": {
+          "observed_count": 39808,
+          "active_period_coverage_pct": 90.79,
+          "active_period_missing_pct": 9.21,
+          "global_window_coverage_pct": 90.79,
+          "global_window_missing_pct": 9.21
+        }
+      }
+    },
+    {
+      "station_id": "site_5023",
+      "station_name": "Anand Vihar, Hapur - UPPCB",
+      "agency": "Other",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 16:00:00+05:30",
+      "active_span_hours": 43841,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42491,
+      "active_period": {
+        "coverage_pct": 96.92,
+        "missing_pct": 3.08,
+        "missing_hours": 1350
+      },
+      "global_window": {
+        "coverage_pct": 96.91,
+        "missing_pct": 3.09,
+        "missing_hours": 1357
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41553,
+          "active_period_coverage_pct": 94.78,
+          "active_period_missing_pct": 5.22,
+          "global_window_coverage_pct": 94.77,
+          "global_window_missing_pct": 5.23
+        },
+        "pm10": {
+          "observed_count": 40154,
+          "active_period_coverage_pct": 91.59,
+          "active_period_missing_pct": 8.41,
+          "global_window_coverage_pct": 91.58,
+          "global_window_missing_pct": 8.42
+        },
+        "no2": {
+          "observed_count": 38904,
+          "active_period_coverage_pct": 88.74,
+          "active_period_missing_pct": 11.26,
+          "global_window_coverage_pct": 88.72,
+          "global_window_missing_pct": 11.28
+        },
+        "so2": {
+          "observed_count": 40368,
+          "active_period_coverage_pct": 92.08,
+          "active_period_missing_pct": 7.92,
+          "global_window_coverage_pct": 92.06,
+          "global_window_missing_pct": 7.94
+        },
+        "co": {
+          "observed_count": 29686,
+          "active_period_coverage_pct": 67.71,
+          "active_period_missing_pct": 32.29,
+          "global_window_coverage_pct": 67.7,
+          "global_window_missing_pct": 32.3
+        },
+        "o3": {
+          "observed_count": 39683,
+          "active_period_coverage_pct": 90.52,
+          "active_period_missing_pct": 9.48,
+          "global_window_coverage_pct": 90.5,
+          "global_window_missing_pct": 9.5
+        }
+      }
+    },
+    {
+      "station_id": "site_108",
+      "station_name": "Aya Nagar, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42413,
+      "active_period": {
+        "coverage_pct": 96.73,
+        "missing_pct": 3.27,
+        "missing_hours": 1435
+      },
+      "global_window": {
+        "coverage_pct": 96.73,
+        "missing_pct": 3.27,
+        "missing_hours": 1435
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40887,
+          "active_period_coverage_pct": 93.25,
+          "active_period_missing_pct": 6.75,
+          "global_window_coverage_pct": 93.25,
+          "global_window_missing_pct": 6.75
+        },
+        "pm10": {
+          "observed_count": 42090,
+          "active_period_coverage_pct": 95.99,
+          "active_period_missing_pct": 4.01,
+          "global_window_coverage_pct": 95.99,
+          "global_window_missing_pct": 4.01
+        },
+        "no2": {
+          "observed_count": 42071,
+          "active_period_coverage_pct": 95.95,
+          "active_period_missing_pct": 4.05,
+          "global_window_coverage_pct": 95.95,
+          "global_window_missing_pct": 4.05
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 42312,
+          "active_period_coverage_pct": 96.5,
+          "active_period_missing_pct": 3.5,
+          "global_window_coverage_pct": 96.5,
+          "global_window_missing_pct": 3.5
+        },
+        "o3": {
+          "observed_count": 41315,
+          "active_period_coverage_pct": 94.22,
+          "active_period_missing_pct": 5.78,
+          "global_window_coverage_pct": 94.22,
+          "global_window_missing_pct": 5.78
+        }
+      }
+    },
+    {
+      "station_id": "site_114",
+      "station_name": "IHBAS, Dilshad Garden, Delhi - CPCB",
+      "agency": "CPCB",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42110,
+      "active_period": {
+        "coverage_pct": 96.04,
+        "missing_pct": 3.96,
+        "missing_hours": 1738
+      },
+      "global_window": {
+        "coverage_pct": 96.04,
+        "missing_pct": 3.96,
+        "missing_hours": 1738
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40921,
+          "active_period_coverage_pct": 93.32,
+          "active_period_missing_pct": 6.68,
+          "global_window_coverage_pct": 93.32,
+          "global_window_missing_pct": 6.68
+        },
+        "pm10": {
+          "observed_count": 35992,
+          "active_period_coverage_pct": 82.08,
+          "active_period_missing_pct": 17.92,
+          "global_window_coverage_pct": 82.08,
+          "global_window_missing_pct": 17.92
+        },
+        "no2": {
+          "observed_count": 40902,
+          "active_period_coverage_pct": 93.28,
+          "active_period_missing_pct": 6.72,
+          "global_window_coverage_pct": 93.28,
+          "global_window_missing_pct": 6.72
+        },
+        "so2": {
+          "observed_count": 41223,
+          "active_period_coverage_pct": 94.01,
+          "active_period_missing_pct": 5.99,
+          "global_window_coverage_pct": 94.01,
+          "global_window_missing_pct": 5.99
+        },
+        "co": {
+          "observed_count": 40974,
+          "active_period_coverage_pct": 93.45,
+          "active_period_missing_pct": 6.55,
+          "global_window_coverage_pct": 93.45,
+          "global_window_missing_pct": 6.55
+        },
+        "o3": {
+          "observed_count": 37013,
+          "active_period_coverage_pct": 84.41,
+          "active_period_missing_pct": 15.59,
+          "global_window_coverage_pct": 84.41,
+          "global_window_missing_pct": 15.59
+        }
+      }
+    },
+    {
+      "station_id": "site_1427",
+      "station_name": "Najafgarh, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42033,
+      "active_period": {
+        "coverage_pct": 95.86,
+        "missing_pct": 4.14,
+        "missing_hours": 1815
+      },
+      "global_window": {
+        "coverage_pct": 95.86,
+        "missing_pct": 4.14,
+        "missing_hours": 1815
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40816,
+          "active_period_coverage_pct": 93.09,
+          "active_period_missing_pct": 6.91,
+          "global_window_coverage_pct": 93.09,
+          "global_window_missing_pct": 6.91
+        },
+        "pm10": {
+          "observed_count": 40910,
+          "active_period_coverage_pct": 93.3,
+          "active_period_missing_pct": 6.7,
+          "global_window_coverage_pct": 93.3,
+          "global_window_missing_pct": 6.7
+        },
+        "no2": {
+          "observed_count": 41030,
+          "active_period_coverage_pct": 93.57,
+          "active_period_missing_pct": 6.43,
+          "global_window_coverage_pct": 93.57,
+          "global_window_missing_pct": 6.43
+        },
+        "so2": {
+          "observed_count": 40423,
+          "active_period_coverage_pct": 92.19,
+          "active_period_missing_pct": 7.81,
+          "global_window_coverage_pct": 92.19,
+          "global_window_missing_pct": 7.81
+        },
+        "co": {
+          "observed_count": 41131,
+          "active_period_coverage_pct": 93.8,
+          "active_period_missing_pct": 6.2,
+          "global_window_coverage_pct": 93.8,
+          "global_window_missing_pct": 6.2
+        },
+        "o3": {
+          "observed_count": 40943,
+          "active_period_coverage_pct": 93.37,
+          "active_period_missing_pct": 6.63,
+          "global_window_coverage_pct": 93.37,
+          "global_window_missing_pct": 6.63
+        }
+      }
+    },
+    {
+      "station_id": "site_122",
+      "station_name": "Mandir Marg, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 42017,
+      "active_period": {
+        "coverage_pct": 95.82,
+        "missing_pct": 4.18,
+        "missing_hours": 1831
+      },
+      "global_window": {
+        "coverage_pct": 95.82,
+        "missing_pct": 4.18,
+        "missing_hours": 1831
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40514,
+          "active_period_coverage_pct": 92.4,
+          "active_period_missing_pct": 7.6,
+          "global_window_coverage_pct": 92.4,
+          "global_window_missing_pct": 7.6
+        },
+        "pm10": {
+          "observed_count": 41005,
+          "active_period_coverage_pct": 93.52,
+          "active_period_missing_pct": 6.48,
+          "global_window_coverage_pct": 93.52,
+          "global_window_missing_pct": 6.48
+        },
+        "no2": {
+          "observed_count": 41211,
+          "active_period_coverage_pct": 93.99,
+          "active_period_missing_pct": 6.01,
+          "global_window_coverage_pct": 93.99,
+          "global_window_missing_pct": 6.01
+        },
+        "so2": {
+          "observed_count": 39659,
+          "active_period_coverage_pct": 90.45,
+          "active_period_missing_pct": 9.55,
+          "global_window_coverage_pct": 90.45,
+          "global_window_missing_pct": 9.55
+        },
+        "co": {
+          "observed_count": 39672,
+          "active_period_coverage_pct": 90.48,
+          "active_period_missing_pct": 9.52,
+          "global_window_coverage_pct": 90.48,
+          "global_window_missing_pct": 9.52
+        },
+        "o3": {
+          "observed_count": 40731,
+          "active_period_coverage_pct": 92.89,
+          "active_period_missing_pct": 7.11,
+          "global_window_coverage_pct": 92.89,
+          "global_window_missing_pct": 7.11
+        }
+      }
+    },
+    {
+      "station_id": "site_1563",
+      "station_name": "Pusa, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 41850,
+      "active_period": {
+        "coverage_pct": 95.44,
+        "missing_pct": 4.56,
+        "missing_hours": 1998
+      },
+      "global_window": {
+        "coverage_pct": 95.44,
+        "missing_pct": 4.56,
+        "missing_hours": 1998
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 41402,
+          "active_period_coverage_pct": 94.42,
+          "active_period_missing_pct": 5.58,
+          "global_window_coverage_pct": 94.42,
+          "global_window_missing_pct": 5.58
+        },
+        "pm10": {
+          "observed_count": 41217,
+          "active_period_coverage_pct": 94.0,
+          "active_period_missing_pct": 6.0,
+          "global_window_coverage_pct": 94.0,
+          "global_window_missing_pct": 6.0
+        },
+        "no2": {
+          "observed_count": 40965,
+          "active_period_coverage_pct": 93.43,
+          "active_period_missing_pct": 6.57,
+          "global_window_coverage_pct": 93.43,
+          "global_window_missing_pct": 6.57
+        },
+        "so2": {
+          "observed_count": 40220,
+          "active_period_coverage_pct": 91.73,
+          "active_period_missing_pct": 8.27,
+          "global_window_coverage_pct": 91.73,
+          "global_window_missing_pct": 8.27
+        },
+        "co": {
+          "observed_count": 39496,
+          "active_period_coverage_pct": 90.07,
+          "active_period_missing_pct": 9.93,
+          "global_window_coverage_pct": 90.07,
+          "global_window_missing_pct": 9.93
+        },
+        "o3": {
+          "observed_count": 41075,
+          "active_period_coverage_pct": 93.68,
+          "active_period_missing_pct": 6.32,
+          "global_window_coverage_pct": 93.68,
+          "global_window_missing_pct": 6.32
+        }
+      }
+    },
+    {
+      "station_id": "site_105",
+      "station_name": "North Campus, DU, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 41635,
+      "active_period": {
+        "coverage_pct": 94.95,
+        "missing_pct": 5.05,
+        "missing_hours": 2213
+      },
+      "global_window": {
+        "coverage_pct": 94.95,
+        "missing_pct": 5.05,
+        "missing_hours": 2213
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40967,
+          "active_period_coverage_pct": 93.43,
+          "active_period_missing_pct": 6.57,
+          "global_window_coverage_pct": 93.43,
+          "global_window_missing_pct": 6.57
+        },
+        "pm10": {
+          "observed_count": 40700,
+          "active_period_coverage_pct": 92.82,
+          "active_period_missing_pct": 7.18,
+          "global_window_coverage_pct": 92.82,
+          "global_window_missing_pct": 7.18
+        },
+        "no2": {
+          "observed_count": 41080,
+          "active_period_coverage_pct": 93.69,
+          "active_period_missing_pct": 6.31,
+          "global_window_coverage_pct": 93.69,
+          "global_window_missing_pct": 6.31
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 41392,
+          "active_period_coverage_pct": 94.4,
+          "active_period_missing_pct": 5.6,
+          "global_window_coverage_pct": 94.4,
+          "global_window_missing_pct": 5.6
+        },
+        "o3": {
+          "observed_count": 41192,
+          "active_period_coverage_pct": 93.94,
+          "active_period_missing_pct": 6.06,
+          "global_window_coverage_pct": 93.94,
+          "global_window_missing_pct": 6.06
+        }
+      }
+    },
+    {
+      "station_id": "site_103",
+      "station_name": "CRRI Mathura Road, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 41239,
+      "active_period": {
+        "coverage_pct": 94.05,
+        "missing_pct": 5.95,
+        "missing_hours": 2609
+      },
+      "global_window": {
+        "coverage_pct": 94.05,
+        "missing_pct": 5.95,
+        "missing_hours": 2609
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40814,
+          "active_period_coverage_pct": 93.08,
+          "active_period_missing_pct": 6.92,
+          "global_window_coverage_pct": 93.08,
+          "global_window_missing_pct": 6.92
+        },
+        "pm10": {
+          "observed_count": 39267,
+          "active_period_coverage_pct": 89.55,
+          "active_period_missing_pct": 10.45,
+          "global_window_coverage_pct": 89.55,
+          "global_window_missing_pct": 10.45
+        },
+        "no2": {
+          "observed_count": 40444,
+          "active_period_coverage_pct": 92.24,
+          "active_period_missing_pct": 7.76,
+          "global_window_coverage_pct": 92.24,
+          "global_window_missing_pct": 7.76
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 40832,
+          "active_period_coverage_pct": 93.12,
+          "active_period_missing_pct": 6.88,
+          "global_window_coverage_pct": 93.12,
+          "global_window_missing_pct": 6.88
+        },
+        "o3": {
+          "observed_count": 40946,
+          "active_period_coverage_pct": 93.38,
+          "active_period_missing_pct": 6.62,
+          "global_window_coverage_pct": 93.38,
+          "global_window_missing_pct": 6.62
+        }
+      }
+    },
+    {
+      "station_id": "site_301",
+      "station_name": "Anand Vihar, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 40673,
+      "active_period": {
+        "coverage_pct": 92.76,
+        "missing_pct": 7.24,
+        "missing_hours": 3175
+      },
+      "global_window": {
+        "coverage_pct": 92.76,
+        "missing_pct": 7.24,
+        "missing_hours": 3175
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 39339,
+          "active_period_coverage_pct": 89.72,
+          "active_period_missing_pct": 10.28,
+          "global_window_coverage_pct": 89.72,
+          "global_window_missing_pct": 10.28
+        },
+        "pm10": {
+          "observed_count": 39029,
+          "active_period_coverage_pct": 89.01,
+          "active_period_missing_pct": 10.99,
+          "global_window_coverage_pct": 89.01,
+          "global_window_missing_pct": 10.99
+        },
+        "no2": {
+          "observed_count": 38532,
+          "active_period_coverage_pct": 87.88,
+          "active_period_missing_pct": 12.12,
+          "global_window_coverage_pct": 87.88,
+          "global_window_missing_pct": 12.12
+        },
+        "so2": {
+          "observed_count": 37849,
+          "active_period_coverage_pct": 86.32,
+          "active_period_missing_pct": 13.68,
+          "global_window_coverage_pct": 86.32,
+          "global_window_missing_pct": 13.68
+        },
+        "co": {
+          "observed_count": 35646,
+          "active_period_coverage_pct": 81.29,
+          "active_period_missing_pct": 18.71,
+          "global_window_coverage_pct": 81.29,
+          "global_window_missing_pct": 18.71
+        },
+        "o3": {
+          "observed_count": 39287,
+          "active_period_coverage_pct": 89.6,
+          "active_period_missing_pct": 10.4,
+          "global_window_coverage_pct": 89.6,
+          "global_window_missing_pct": 10.4
+        }
+      }
+    },
+    {
+      "station_id": "site_106",
+      "station_name": "IGI Airport (T3), Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 40451,
+      "active_period": {
+        "coverage_pct": 92.25,
+        "missing_pct": 7.75,
+        "missing_hours": 3397
+      },
+      "global_window": {
+        "coverage_pct": 92.25,
+        "missing_pct": 7.75,
+        "missing_hours": 3397
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 40035,
+          "active_period_coverage_pct": 91.3,
+          "active_period_missing_pct": 8.7,
+          "global_window_coverage_pct": 91.3,
+          "global_window_missing_pct": 8.7
+        },
+        "pm10": {
+          "observed_count": 40143,
+          "active_period_coverage_pct": 91.55,
+          "active_period_missing_pct": 8.45,
+          "global_window_coverage_pct": 91.55,
+          "global_window_missing_pct": 8.45
+        },
+        "no2": {
+          "observed_count": 39028,
+          "active_period_coverage_pct": 89.01,
+          "active_period_missing_pct": 10.99,
+          "global_window_coverage_pct": 89.01,
+          "global_window_missing_pct": 10.99
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 39950,
+          "active_period_coverage_pct": 91.11,
+          "active_period_missing_pct": 8.89,
+          "global_window_coverage_pct": 91.11,
+          "global_window_missing_pct": 8.89
+        },
+        "o3": {
+          "observed_count": 40404,
+          "active_period_coverage_pct": 92.15,
+          "active_period_missing_pct": 7.85,
+          "global_window_coverage_pct": 92.15,
+          "global_window_missing_pct": 7.85
+        }
+      }
+    },
+    {
+      "station_id": "site_107",
+      "station_name": "Pusa, Delhi - DPCC",
+      "agency": "DPCC",
+      "station_active_start_ist": "2020-01-01 00:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 43848,
+      "global_window_hours": 43848,
+      "observed_station_hours": 39362,
+      "active_period": {
+        "coverage_pct": 89.77,
+        "missing_pct": 10.23,
+        "missing_hours": 4486
+      },
+      "global_window": {
+        "coverage_pct": 89.77,
+        "missing_pct": 10.23,
+        "missing_hours": 4486
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 37861,
+          "active_period_coverage_pct": 86.35,
+          "active_period_missing_pct": 13.65,
+          "global_window_coverage_pct": 86.35,
+          "global_window_missing_pct": 13.65
+        },
+        "pm10": {
+          "observed_count": 38578,
+          "active_period_coverage_pct": 87.98,
+          "active_period_missing_pct": 12.02,
+          "global_window_coverage_pct": 87.98,
+          "global_window_missing_pct": 12.02
+        },
+        "no2": {
+          "observed_count": 39153,
+          "active_period_coverage_pct": 89.29,
+          "active_period_missing_pct": 10.71,
+          "global_window_coverage_pct": 89.29,
+          "global_window_missing_pct": 10.71
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 39268,
+          "active_period_coverage_pct": 89.55,
+          "active_period_missing_pct": 10.45,
+          "global_window_coverage_pct": 89.55,
+          "global_window_missing_pct": 10.45
+        },
+        "o3": {
+          "observed_count": 38810,
+          "active_period_coverage_pct": 88.51,
+          "active_period_missing_pct": 11.49,
+          "global_window_coverage_pct": 88.51,
+          "global_window_missing_pct": 11.49
+        }
+      }
+    },
+    {
+      "station_id": "site_104",
+      "station_name": "Burari Crossing, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2021-10-26 15:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 23:00:00+05:30",
+      "active_span_hours": 27897,
+      "global_window_hours": 43848,
+      "observed_station_hours": 25878,
+      "active_period": {
+        "coverage_pct": 92.76,
+        "missing_pct": 7.24,
+        "missing_hours": 2019
+      },
+      "global_window": {
+        "coverage_pct": 59.02,
+        "missing_pct": 40.98,
+        "missing_hours": 17970
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 23643,
+          "active_period_coverage_pct": 84.75,
+          "active_period_missing_pct": 15.25,
+          "global_window_coverage_pct": 53.92,
+          "global_window_missing_pct": 46.08
+        },
+        "pm10": {
+          "observed_count": 23527,
+          "active_period_coverage_pct": 84.34,
+          "active_period_missing_pct": 15.66,
+          "global_window_coverage_pct": 53.66,
+          "global_window_missing_pct": 46.34
+        },
+        "no2": {
+          "observed_count": 18852,
+          "active_period_coverage_pct": 67.58,
+          "active_period_missing_pct": 32.42,
+          "global_window_coverage_pct": 42.99,
+          "global_window_missing_pct": 57.01
+        },
+        "so2": {
+          "observed_count": 0,
+          "active_period_coverage_pct": 0.0,
+          "active_period_missing_pct": 100.0,
+          "global_window_coverage_pct": 0.0,
+          "global_window_missing_pct": 100.0
+        },
+        "co": {
+          "observed_count": 25815,
+          "active_period_coverage_pct": 92.54,
+          "active_period_missing_pct": 7.46,
+          "global_window_coverage_pct": 58.87,
+          "global_window_missing_pct": 41.13
+        },
+        "o3": {
+          "observed_count": 22840,
+          "active_period_coverage_pct": 81.87,
+          "active_period_missing_pct": 18.13,
+          "global_window_coverage_pct": 52.09,
+          "global_window_missing_pct": 47.91
+        }
+      }
+    },
+    {
+      "station_id": "site_5393",
+      "station_name": "Chandni Chowk, Delhi - IITM",
+      "agency": "Other",
+      "station_active_start_ist": "2020-11-13 14:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 15:00:00+05:30",
+      "active_span_hours": 36218,
+      "global_window_hours": 43848,
+      "observed_station_hours": 23247,
+      "active_period": {
+        "coverage_pct": 64.19,
+        "missing_pct": 35.81,
+        "missing_hours": 12971
+      },
+      "global_window": {
+        "coverage_pct": 53.02,
+        "missing_pct": 46.98,
+        "missing_hours": 20601
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 19180,
+          "active_period_coverage_pct": 52.96,
+          "active_period_missing_pct": 47.04,
+          "global_window_coverage_pct": 43.74,
+          "global_window_missing_pct": 56.26
+        },
+        "pm10": {
+          "observed_count": 22255,
+          "active_period_coverage_pct": 61.45,
+          "active_period_missing_pct": 38.55,
+          "global_window_coverage_pct": 50.75,
+          "global_window_missing_pct": 49.25
+        },
+        "no2": {
+          "observed_count": 21202,
+          "active_period_coverage_pct": 58.54,
+          "active_period_missing_pct": 41.46,
+          "global_window_coverage_pct": 48.35,
+          "global_window_missing_pct": 51.65
+        },
+        "so2": {
+          "observed_count": 22618,
+          "active_period_coverage_pct": 62.45,
+          "active_period_missing_pct": 37.55,
+          "global_window_coverage_pct": 51.58,
+          "global_window_missing_pct": 48.42
+        },
+        "co": {
+          "observed_count": 21871,
+          "active_period_coverage_pct": 60.39,
+          "active_period_missing_pct": 39.61,
+          "global_window_coverage_pct": 49.88,
+          "global_window_missing_pct": 50.12
+        },
+        "o3": {
+          "observed_count": 22513,
+          "active_period_coverage_pct": 62.16,
+          "active_period_missing_pct": 37.84,
+          "global_window_coverage_pct": 51.34,
+          "global_window_missing_pct": 48.66
+        }
+      }
+    },
+    {
+      "station_id": "site_5395",
+      "station_name": "Lodhi Road, Delhi - IMD",
+      "agency": "IMD",
+      "station_active_start_ist": "2020-11-13 14:00:00+05:30",
+      "station_active_end_ist": "2024-12-31 16:00:00+05:30",
+      "active_span_hours": 36219,
+      "global_window_hours": 43848,
+      "observed_station_hours": 20702,
+      "active_period": {
+        "coverage_pct": 57.16,
+        "missing_pct": 42.84,
+        "missing_hours": 15517
+      },
+      "global_window": {
+        "coverage_pct": 47.21,
+        "missing_pct": 52.79,
+        "missing_hours": 23146
+      },
+      "pollutant_metrics": {
+        "pm25": {
+          "observed_count": 18693,
+          "active_period_coverage_pct": 51.61,
+          "active_period_missing_pct": 48.39,
+          "global_window_coverage_pct": 42.63,
+          "global_window_missing_pct": 57.37
+        },
+        "pm10": {
+          "observed_count": 18077,
+          "active_period_coverage_pct": 49.91,
+          "active_period_missing_pct": 50.09,
+          "global_window_coverage_pct": 41.23,
+          "global_window_missing_pct": 58.77
+        },
+        "no2": {
+          "observed_count": 19745,
+          "active_period_coverage_pct": 54.52,
+          "active_period_missing_pct": 45.48,
+          "global_window_coverage_pct": 45.03,
+          "global_window_missing_pct": 54.97
+        },
+        "so2": {
+          "observed_count": 19459,
+          "active_period_coverage_pct": 53.73,
+          "active_period_missing_pct": 46.27,
+          "global_window_coverage_pct": 44.38,
+          "global_window_missing_pct": 55.62
+        },
+        "co": {
+          "observed_count": 12800,
+          "active_period_coverage_pct": 35.34,
+          "active_period_missing_pct": 64.66,
+          "global_window_coverage_pct": 29.19,
+          "global_window_missing_pct": 70.81
+        },
+        "o3": {
+          "observed_count": 12809,
+          "active_period_coverage_pct": 35.37,
+          "active_period_missing_pct": 64.63,
+          "global_window_coverage_pct": 29.21,
+          "global_window_missing_pct": 70.79
+        }
+      }
+    }
+  ]
+}

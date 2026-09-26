@@ -46,9 +46,9 @@ const DEFAULT_SETTINGS = {
   dataSource: 'ML Model (Local)',
   fallbackToML: true,
   cacheDuration: '15 min',
-  openaqApiKey: 'openaq_live_key',
+  openaqApiKey: '',
   iqairApiKey: '',
-  apiBaseUrl: 'http://localhost:8000',
+  apiBaseUrl: import.meta.env.VITE_API_URL || '/api',
   requestTimeout: '30s',
 
   // ML Model

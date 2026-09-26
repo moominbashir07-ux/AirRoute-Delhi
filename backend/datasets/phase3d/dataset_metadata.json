@@ -1,0 +1,33 @@
+{
+  "dataset_name": "Phase 3D Multi-Horizon PM2.5 Forecasting Dataset",
+  "observational_source": "Phase 3B XKDR Delhi/NCR Parquet Dataset",
+  "meteorological_source": "Open-Meteo ERA5 Reanalysis Archive",
+  "total_records": 1732402,
+  "total_stations": 42,
+  "split_summary": {
+    "train_period": {
+      "start": "2020-01-01",
+      "end": "2023-12-31"
+    },
+    "validation_period": {
+      "start": "2024-01-01",
+      "end": "2024-06-30"
+    },
+    "test_period": {
+      "start": "2024-07-01",
+      "end": "2024-12-31"
+    },
+    "global_rows": 1732402,
+    "train_rows_total": 1376081,
+    "val_rows_total": 176951,
+    "test_rows_total": 179370
+  },
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
+}

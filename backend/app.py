@@ -9,19 +9,31 @@ import pickle
 import logging
 import random
 import math
+import uuid
+import time
+from collections import defaultdict
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Any
 from contextlib import asynccontextmanager
 
 import numpy as np
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Header
+import re
+import secrets
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Header, Request, Response
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
-# Add ml_model to path
+# Add ml_model and root backend to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "ml_model"))
+sys.path.insert(0, os.path.dirname(__file__))
 from train import train, FEATURES, MODEL_PATH, SCALER_PATH, METRICS_PATH
-from database import init_db, create_user, get_user_by_email, save_otp, verify_otp, verify_password
+from database import (
+    init_db, create_user, get_user_by_email, save_otp, verify_otp,
+    verify_password, can_request_otp, delete_otp, create_or_get_user
+)
+from email_service import send_otp_email
+from model_integrity import verify_artifact_integrity
 
 # ─── Logging ────────────────────────────────────────────────────────────────
 os.makedirs("logs", exist_ok=True)
@@ -40,6 +52,14 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     load_artifacts()
     try:
+        integrity_report = verify_artifact_integrity()
+        if integrity_report["status"] != "valid":
+            logger.warning(f"Model integrity check warning: {integrity_report['errors']}")
+        else:
+            logger.info("Model artifacts integrity successfully verified against manifest.")
+    except Exception as e:
+        logger.warning(f"Could not complete startup integrity verification: {e}")
+    try:
         init_db()
     except Exception as e:
         logger.error(f"Failed to initialize SQLite database: {e}")
@@ -51,7 +71,7 @@ async def lifespan(app: FastAPI):
 # ─── App ─────────────────────────────────────────────────────────────────────
 app = FastAPI(
     title="AQI Predictor API",
-    description="Air Quality Index prediction using Machine Learning",
+    description="Air Quality Index prediction and commuter exposure minimization using Machine Learning",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
@@ -60,20 +80,111 @@ app = FastAPI(
 
 # ─── Environment Configuration ──────────────────────────────────────────────
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
-ALLOW_DEV_OTP = os.getenv("ALLOW_DEV_OTP", "false").lower() in ("true", "1")
 ENABLE_MODEL_RETRAINING = os.getenv("ENABLE_MODEL_RETRAINING", "false").lower() in ("true", "1")
 ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
 
-cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173")
 cors_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+frontend_origin = os.getenv("FRONTEND_ORIGIN", "").strip()
+if frontend_origin and frontend_origin not in cors_origins:
+    cors_origins.append(frontend_origin)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# ─── Rate Limiting & Traceability Middleware ─────────────────────────────────
+RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+_rate_limit_records = defaultdict(list)
+RATE_LIMITED_PATHS = {
+    "/predict", "/forecast", "/commute/optimize", "/api/commute/optimize", "/train",
+    "/auth/send-otp", "/auth/verify-otp"
+}
+
+def is_rate_limited(client_ip: str, path: str) -> bool:
+    """In-memory sliding-window rate limiter per client IP."""
+    if path not in RATE_LIMITED_PATHS:
+        return False
+    now = time.time()
+    cutoff = now - 60.0
+    history = _rate_limit_records[client_ip]
+    _rate_limit_records[client_ip] = [ts for ts in history if ts > cutoff]
+    if len(_rate_limit_records[client_ip]) >= RATE_LIMIT_PER_MINUTE:
+        return True
+    _rate_limit_records[client_ip].append(now)
+    return False
+
+@app.middleware("http")
+async def production_hardening_middleware(request: Request, call_next):
+    req_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+    request.state.request_id = req_id
+
+    client_ip = request.client.host if request.client else "127.0.0.1"
+    if is_rate_limited(client_ip, request.url.path):
+        logger.warning(f"Rate limit exceeded for IP {client_ip} on {request.url.path} [ReqID: {req_id}]")
+        return JSONResponse(
+            status_code=429,
+            content={
+                "error": {
+                    "code": "RATE_LIMIT_EXCEEDED",
+                    "message": "Too many requests. Please wait before retrying.",
+                    "request_id": req_id
+                },
+                "detail": "Too many requests. Please retry in 60 seconds."
+            },
+            headers={"X-Request-ID": req_id, "Retry-After": "60"}
+        )
+
+    start_time = time.time()
+    try:
+        response = await call_next(request)
+        duration_ms = (time.time() - start_time) * 1000.0
+        response.headers["X-Request-ID"] = req_id
+        logger.info(
+            f"{request.method} {request.url.path} | Status: {response.status_code} | "
+            f"{duration_ms:.1f}ms | ReqID: {req_id}"
+        )
+        return response
+    except Exception as e:
+        duration_ms = (time.time() - start_time) * 1000.0
+        logger.error(
+            f"Unhandled exception on {request.method} {request.url.path} | "
+            f"{duration_ms:.1f}ms | ReqID: {req_id} | Error: {e}",
+            exc_info=True
+        )
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": {
+                    "code": "INTERNAL_SERVER_ERROR",
+                    "message": "An unexpected server error occurred. Please contact support.",
+                    "request_id": req_id
+                },
+                "detail": "Internal server error."
+            },
+            headers={"X-Request-ID": req_id}
+        )
+
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException):
+    req_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": {
+                "code": f"HTTP_{exc.status_code}",
+                "message": exc.detail,
+                "request_id": req_id
+            },
+            "detail": exc.detail
+        },
+        headers={"X-Request-ID": req_id}
+    )
+
 
 # ─── Models ──────────────────────────────────────────────────────────────────
 class AQIInput(BaseModel):
@@ -107,8 +218,29 @@ class TrainResponse(BaseModel):
     feature_importance: dict
 
 # ─── Auth Models ─────────────────────────────────────────────────────────────
+EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+
+def is_valid_email(email: str) -> bool:
+    """Validate RFC-compliant email length, structure, and domain format."""
+    if not email or len(email) > 254 or "@" not in email:
+        return False
+    parts = email.split("@")
+    if len(parts) != 2:
+        return False
+    local, domain = parts
+    if not local or not domain or len(local) > 64 or len(domain) > 255:
+        return False
+    if ".." in domain or domain.startswith(".") or domain.endswith("."):
+        return False
+    return bool(EMAIL_REGEX.match(email))
+
 class SendOTPRequest(BaseModel):
     email: str
+    name: Optional[str] = None
+
+class VerifyOTPRequest(BaseModel):
+    email: str
+    otp: str
     name: Optional[str] = None
 
 class SignupRequest(BaseModel):
@@ -172,23 +304,87 @@ def root():
 # ─── Authentication Routes ───────────────────────────────────────────────────
 @app.post("/auth/send-otp")
 def send_otp_endpoint(data: SendOTPRequest):
-    """Generates an OTP, stores it, logs it, and returns it for development verification."""
+    """
+    Generates a cryptographically secure 6-digit OTP, records its salted cryptographic hash,
+    and dispatches it via EmailJS REST API. Never returns plaintext OTP.
+    """
     email = data.email.strip().lower()
-    if not email or "@" not in email:
-        raise HTTPException(status_code=400, detail="Invalid email address.")
-    
-    otp = f"{random.randint(100000, 999999)}"
+    if not is_valid_email(email):
+        raise HTTPException(status_code=400, detail="Please enter a valid email address.")
+
+    # 1. Enforce cooldown and per-email rate limiting
+    allowed, reason, retry_after = can_request_otp(email, cooldown_seconds=60, max_requests_per_hour=5)
+    if not allowed:
+        return JSONResponse(
+            status_code=429,
+            content={
+                "error": {
+                    "code": "RATE_LIMIT_EXCEEDED",
+                    "message": reason
+                },
+                "detail": reason,
+                "retry_after": retry_after
+            },
+            headers={"Retry-After": str(retry_after)}
+        )
+
+    # 2. Cryptographically secure 6-digit OTP
+    otp = f"{secrets.randbelow(900000) + 100000}"
+
+    # 3. Store salted hash in SQLite database
     try:
-        save_otp(email, otp)
+        save_otp(email, otp, expires_in_seconds=300, max_attempts=5)
     except Exception as e:
-        logger.error(f"Failed to save OTP: {e}")
+        logger.error(f"Failed to record pending OTP in database: {e}")
         raise HTTPException(status_code=500, detail="Database error occurred.")
-    
-    # In development, optionally allow dev_otp bypass only if explicitly enabled via ALLOW_DEV_OTP=true
-    response = {"status": "success", "message": "OTP generated and dispatched."}
-    if ENVIRONMENT == "development" and ALLOW_DEV_OTP:
-        response["dev_otp"] = otp
-    return response
+
+    # 4. Dispatch via EmailJS REST API
+    success, email_msg = send_otp_email(to_email=email, otp=otp, to_name=data.name)
+    if not success:
+        # Invalidate pending OTP if dispatch failed so user is not stuck with an unreceived code
+        delete_otp(email)
+        logger.error(f"Failed to dispatch OTP email to {email}: {email_msg}")
+        raise HTTPException(
+            status_code=502,
+            detail="Failed to dispatch verification email via EmailJS provider. Please try again later."
+        )
+
+    # 5. Return success without exposing OTP
+    return {
+        "status": "success",
+        "message": "OTP sent to your email.",
+        "cooldown": 60
+    }
+
+@app.post("/auth/verify-otp")
+def verify_otp_endpoint(data: VerifyOTPRequest):
+    """
+    Verifies 6-digit OTP against stored cryptographic hash,
+    invalidates OTP immediately upon success, and authenticates the user.
+    """
+    email = data.email.strip().lower()
+    otp = data.otp.strip()
+
+    if not is_valid_email(email):
+        raise HTTPException(status_code=400, detail="Please enter a valid email address.")
+
+    if not otp or len(otp) != 6 or not otp.isdigit():
+        raise HTTPException(status_code=400, detail="Please enter a valid 6-digit numeric OTP.")
+
+    success, message = verify_otp(email, otp)
+    if not success:
+        raise HTTPException(status_code=400, detail=message)
+
+    user = create_or_get_user(email, data.name)
+    return {
+        "status": "success",
+        "message": "Authentication successful.",
+        "user": {
+            "id": user["id"],
+            "email": user["email"],
+            "name": user["name"]
+        }
+    }
 
 @app.post("/auth/signup")
 def signup_endpoint(data: SignupRequest):
@@ -197,24 +393,32 @@ def signup_endpoint(data: SignupRequest):
     name = data.name.strip()
     password = data.password
     otp = data.otp.strip()
-    
+
     if not email or not name or not password or not otp:
         raise HTTPException(status_code=400, detail="All fields are required.")
-    
+
+    if not is_valid_email(email):
+        raise HTTPException(status_code=400, detail="Please enter a valid email address.")
+
     if len(password) < 6:
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters.")
-    
-    if not verify_otp(email, otp):
-        raise HTTPException(status_code=400, detail="Invalid or expired OTP code.")
-    
-    success = create_user(email, password, name)
+
+    if len(otp) != 6 or not otp.isdigit():
+        raise HTTPException(status_code=400, detail="Please enter a valid 6-digit numeric OTP.")
+
+    success, message = verify_otp(email, otp)
     if not success:
+        raise HTTPException(status_code=400, detail=message)
+
+    created = create_user(email, password, name)
+    if not created:
         raise HTTPException(status_code=400, detail="A user with this email already exists.")
-        
+
+    user = get_user_by_email(email)
     return {
         "status": "success",
         "message": "User registered successfully.",
-        "user": {"email": email, "name": name}
+        "user": {"id": user["id"] if user else 0, "email": email, "name": name}
     }
 
 @app.post("/auth/login")
@@ -245,9 +449,45 @@ def login_endpoint(data: LoginRequest):
 
 
 @app.get("/health")
+@app.get("/api/health")
 def health():
+    """Liveness probe: verifies application is running and model artifacts are loaded."""
     model_loaded = bool(_model_cache)
-    return {"status": "healthy", "model_loaded": model_loaded, "model": _model_cache.get("name", "none")}
+    return {
+        "status": "healthy",
+        "service": "weather-final",
+        "version": "1.0.0",
+        "environment": ENVIRONMENT,
+        "model_loaded": model_loaded,
+        "model": _model_cache.get("name", "none")
+    }
+
+@app.get("/ready")
+@app.get("/api/ready")
+def readiness():
+    """Readiness probe: verifies all model artifacts and station catalog integrity."""
+    from ml_model.model_integrity import verify_artifact_integrity
+    report = verify_artifact_integrity()
+    is_ready = report["status"] == "valid"
+    if not is_ready:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "not_ready",
+                "service": "weather-final",
+                "errors": report["errors"],
+                "total_artifacts": report["total_artifacts"],
+                "verified_artifacts": report["verified_artifacts"]
+            }
+        )
+    return {
+        "status": "ready",
+        "service": "weather-final",
+        "artifacts_verified": True,
+        "total_artifacts": report["total_artifacts"],
+        "verified_artifacts": report["verified_artifacts"]
+    }
+
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict(data: AQIInput):
@@ -390,6 +630,125 @@ def get_metrics():
             "predicted": m.get("best_predictions", [])[:50],
         },
     }
+
+# ─── Phase 4: Production Commuter Decision & Stations API ───────────────────
+_commute_engine = None
+_station_catalog_cache = None
+
+def get_commute_engine() -> Any:
+    global _commute_engine
+    if _commute_engine is None:
+        try:
+            from ml_model.exposure_engine import CommuteExposureEngine
+            _commute_engine = CommuteExposureEngine()
+            logger.info("Initialized CommuteExposureEngine.")
+        except Exception as e:
+            logger.error(f"Failed to initialize CommuteExposureEngine: {e}")
+            raise HTTPException(status_code=503, detail=f"Forecasting & exposure engine unavailable: {e}")
+    return _commute_engine
+
+class GeoCoordinate(BaseModel):
+    latitude: float = Field(..., ge=-90.0, le=90.0)
+    longitude: float = Field(..., ge=-180.0, le=180.0)
+
+class DepartureWindowInput(BaseModel):
+    start: str = Field(..., description="ISO 8601 start timestamp, e.g. 2026-09-25T08:00:00+05:30")
+    end: str = Field(..., description="ISO 8601 end timestamp, e.g. 2026-09-25T10:00:00+05:30")
+    interval_minutes: int = Field(15, ge=1, le=120)
+
+class CommuteOptimizeRequest(BaseModel):
+    origin: GeoCoordinate
+    destination: GeoCoordinate
+    mode: str = Field("cycling", description="Transit mode: walking, cycling, motorized")
+    departure_window: DepartureWindowInput
+
+def _handle_commute_optimize(payload: CommuteOptimizeRequest):
+    """Shared execution logic for commute optimization."""
+    engine = get_commute_engine()
+
+    # Parse timestamps
+    try:
+        t_start = datetime.fromisoformat(payload.departure_window.start)
+        t_end = datetime.fromisoformat(payload.departure_window.end)
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid ISO 8601 timestamp in departure_window: {e}"
+        )
+
+    # Ensure timezone awareness (default to IST if naive)
+    if t_start.tzinfo is None:
+        from datetime import timezone, timedelta
+        t_start = t_start.replace(tzinfo=timezone(timedelta(hours=5, minutes=30)))
+    if t_end.tzinfo is None:
+        from datetime import timezone, timedelta
+        t_end = t_end.replace(tzinfo=timezone(timedelta(hours=5, minutes=30)))
+
+    try:
+        result = engine.optimize_commute(
+            origin_lat=payload.origin.latitude,
+            origin_lon=payload.origin.longitude,
+            dest_lat=payload.destination.latitude,
+            dest_lon=payload.destination.longitude,
+            mode=payload.mode,
+            departure_window_start=t_start,
+            departure_window_end=t_end,
+            interval_minutes=payload.departure_window.interval_minutes
+        )
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Commute optimization error: {e}")
+        raise HTTPException(status_code=500, detail=f"Commute optimization engine failure: {str(e)}")
+
+@app.post("/commute/optimize")
+def commute_optimize_endpoint(payload: CommuteOptimizeRequest):
+    """Production endpoint for commuter corridor PM2.5 exposure minimization."""
+    return _handle_commute_optimize(payload)
+
+@app.post("/api/commute/optimize")
+def api_commute_optimize_endpoint(payload: CommuteOptimizeRequest):
+    """Aliased production endpoint matching /api route convention."""
+    return _handle_commute_optimize(payload)
+
+def _get_delhi_stations():
+    """Retrieve Delhi/NCR monitoring stations metadata from authoritative catalog."""
+    global _station_catalog_cache
+    if _station_catalog_cache is None:
+        catalog_path = os.path.join(os.path.dirname(__file__), "datasets", "xkdr", "station_catalog.csv")
+        if not os.path.exists(catalog_path):
+            raise HTTPException(status_code=503, detail="Station catalog unavailable.")
+        import pandas as pd
+        df = pd.read_csv(catalog_path)
+        stations = []
+        for _, row in df.iterrows():
+            pollutants = str(row.get("available_pollutants", "")).split(";") if pd.notna(row.get("available_pollutants")) else []
+            stations.append({
+                "station_id": str(row["station_id"]),
+                "station_name": str(row["station_name"]),
+                "latitude": float(row["latitude"]),
+                "longitude": float(row["longitude"]),
+                "city": str(row.get("city", "Delhi")),
+                "source": str(row.get("source", "cpcb_caaqm")),
+                "available_pollutants": pollutants
+            })
+        _station_catalog_cache = stations
+    return {
+        "status": "success",
+        "total_stations": len(_station_catalog_cache),
+        "stations": _station_catalog_cache
+    }
+
+@app.get("/stations/delhi")
+def stations_delhi_endpoint():
+    """Returns official Delhi/NCR monitoring stations catalog."""
+    return _get_delhi_stations()
+
+@app.get("/api/stations/delhi")
+def api_stations_delhi_endpoint():
+    """Aliased official Delhi/NCR monitoring stations catalog."""
+    return _get_delhi_stations()
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,0 +1,18 @@
+{
+  "train_period": {
+    "start": "2020-01-01",
+    "end": "2023-12-31"
+  },
+  "validation_period": {
+    "start": "2024-01-01",
+    "end": "2024-06-30"
+  },
+  "test_period": {
+    "start": "2024-07-01",
+    "end": "2024-12-31"
+  },
+  "global_rows": 1732402,
+  "train_rows_total": 1376081,
+  "val_rows_total": 176951,
+  "test_rows_total": 179370
+}

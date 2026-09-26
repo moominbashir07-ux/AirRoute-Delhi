@@ -1,0 +1,271 @@
+"""Generate feature metadata catalog for Phase 3D."""
+
+import json
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+PHASE3D_DATA_DIR = BASE_DIR / "datasets" / "phase3d"
+PHASE3D_MODEL_DIR = BASE_DIR / "ml_model" / "phase3d"
+
+feature_catalog = {
+    "pm25_t0": {
+        "name": "pm25_t0",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Observed PM2.5 concentration at prediction reference cutoff timestamp t."
+    },
+    "pm25_lag_1h": {
+        "name": "pm25_lag_1h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 1h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 1 hour prior to prediction reference timestamp."
+    },
+    "pm25_lag_2h": {
+        "name": "pm25_lag_2h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 2h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 2 hours prior to prediction reference timestamp."
+    },
+    "pm25_lag_3h": {
+        "name": "pm25_lag_3h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 3h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 3 hours prior to prediction reference timestamp."
+    },
+    "pm25_lag_6h": {
+        "name": "pm25_lag_6h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 6h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 6 hours prior to prediction reference timestamp."
+    },
+    "pm25_lag_12h": {
+        "name": "pm25_lag_12h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 12h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 12 hours prior to prediction reference timestamp."
+    },
+    "pm25_lag_24h": {
+        "name": "pm25_lag_24h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "XKDR observational monitoring data",
+        "formula": "PM2.5(t - 24h)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if unobserved)",
+        "description": "Observed PM2.5 concentration exactly 24 hours prior to prediction reference timestamp."
+    },
+    "pm25_rolling_mean_3h": {
+        "name": "pm25_rolling_mean_3h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "Derived from XKDR observations",
+        "formula": "mean(PM2.5(tau) for tau in [t - 2h, t])",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if < 2 observations)",
+        "description": "Causal 3-hour backward rolling mean of PM2.5."
+    },
+    "pm25_rolling_mean_6h": {
+        "name": "pm25_rolling_mean_6h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "Derived from XKDR observations",
+        "formula": "mean(PM2.5(tau) for tau in [t - 5h, t])",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if < 3 observations)",
+        "description": "Causal 6-hour backward rolling mean of PM2.5."
+    },
+    "pm25_rolling_mean_12h": {
+        "name": "pm25_rolling_mean_12h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "Derived from XKDR observations",
+        "formula": "mean(PM2.5(tau) for tau in [t - 11h, t])",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if < 6 observations)",
+        "description": "Causal 12-hour backward rolling mean of PM2.5."
+    },
+    "pm25_rolling_mean_24h": {
+        "name": "pm25_rolling_mean_24h",
+        "type": "float64",
+        "unit": "ug/m3",
+        "source": "Derived from XKDR observations",
+        "formula": "mean(PM2.5(tau) for tau in [t - 23h, t])",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN if < 12 observations)",
+        "description": "Causal 24-hour backward rolling mean of PM2.5."
+    },
+    "hour_of_day_sin": {
+        "name": "hour_of_day_sin",
+        "type": "float64",
+        "unit": "dimensionless",
+        "source": "Timestamp",
+        "formula": "sin(2 * pi * hour / 24)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Deterministic, never NaN",
+        "description": "Cyclical sine component of the observation hour."
+    },
+    "hour_of_day_cos": {
+        "name": "hour_of_day_cos",
+        "type": "float64",
+        "unit": "dimensionless",
+        "source": "Timestamp",
+        "formula": "cos(2 * pi * hour / 24)",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Deterministic, never NaN",
+        "description": "Cyclical cosine component of the observation hour."
+    },
+    "day_of_week": {
+        "name": "day_of_week",
+        "type": "int64",
+        "unit": "integer (0=Mon, 6=Sun)",
+        "source": "Timestamp",
+        "formula": "timestamp.dayofweek",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Deterministic, never NaN",
+        "description": "Day of week index."
+    },
+    "latitude": {
+        "name": "latitude",
+        "type": "float64",
+        "unit": "degrees North",
+        "source": "Station Catalog (CPCB/DPCC/IMD/US Embassy)",
+        "formula": "station.latitude",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Non-null constant per station",
+        "description": "Geodetic WGS84 latitude of the monitoring station."
+    },
+    "longitude": {
+        "name": "longitude",
+        "type": "float64",
+        "unit": "degrees East",
+        "source": "Station Catalog (CPCB/DPCC/IMD/US Embassy)",
+        "formula": "station.longitude",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Non-null constant per station",
+        "description": "Geodetic WGS84 longitude of the monitoring station."
+    },
+    "temperature_h{h}": {
+        "name": "temperature_h{h}",
+        "type": "float64",
+        "unit": "celsius",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "Temperature at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Forecasted ambient 2-meter air temperature at valid forecast lead time (t + h)."
+    },
+    "humidity_h{h}": {
+        "name": "humidity_h{h}",
+        "type": "float64",
+        "unit": "%",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "Relative humidity at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Forecasted relative humidity at valid forecast lead time (t + h)."
+    },
+    "wind_speed_h{h}": {
+        "name": "wind_speed_h{h}",
+        "type": "float64",
+        "unit": "km/h",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "10-meter wind speed at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Forecasted 10-meter wind speed at valid forecast lead time (t + h)."
+    },
+    "wind_direction_sin_h{h}": {
+        "name": "wind_direction_sin_h{h}",
+        "type": "float64",
+        "unit": "dimensionless",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "sin(radians(wind_direction_degrees)) at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Circular sine vector component of forecasted 10-meter wind direction."
+    },
+    "wind_direction_cos_h{h}": {
+        "name": "wind_direction_cos_h{h}",
+        "type": "float64",
+        "unit": "dimensionless",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "cos(radians(wind_direction_degrees)) at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Circular cosine vector component of forecasted 10-meter wind direction."
+    },
+    "boundary_layer_height_h{h}": {
+        "name": "boundary_layer_height_h{h}",
+        "type": "float64",
+        "unit": "meters",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "Planetary boundary layer height at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Forecasted planetary boundary layer height at valid forecast lead time (t + h). Crucial for surface pollutant dispersion/trapping dynamics."
+    },
+    "surface_pressure_h{h}": {
+        "name": "surface_pressure_h{h}",
+        "type": "float64",
+        "unit": "hPa",
+        "source": "Open-Meteo NWP Forecast (valid time: t + h)",
+        "formula": "Surface barometric pressure at t + h",
+        "available_at_prediction_time": True,
+        "future_leakage_risk": False,
+        "missingness_behavior": "Native tree branching (NaN supported)",
+        "description": "Forecasted surface atmospheric pressure at valid forecast lead time (t + h)."
+    }
+}
+
+for d in [PHASE3D_DATA_DIR, PHASE3D_MODEL_DIR]:
+    d.mkdir(parents=True, exist_ok=True)
+    out_file = d / "feature_metadata.json"
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(feature_catalog, f, indent=2)
+    print(f"Saved feature metadata to {out_file}")

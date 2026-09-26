@@ -1,0 +1,17 @@
+{
+  "dataset_name": "XKDR India Air Quality Observational Cache (Delhi NCR)",
+  "dataset_version": "xkdr_delhi_2020_2024_v1",
+  "retrieved_at_utc": "2026-09-24T19:22:21.694168+00:00",
+  "data_provider": "XKDR Forum (Cross-Disciplinary Knowledge Data Research)",
+  "source_network": "CPCB Continuous Ambient Air Quality Monitoring (CAAQM) & US Embassy",
+  "source_reference": "https://airquality.xkdr.org",
+  "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+  "geographic_boundary": "Delhi NCR, India (State=Delhi)",
+  "station_count": 42,
+  "temporal_window_ist": "2020-01-01 00:00:00 to 2024-12-31 23:00:00",
+  "unit_normalization": {
+    "CO": "Source units mg/m\u00b3 multiplied by 1000.0 to canonical \u00b5g/m\u00b3"
+  },
+  "imputation_policy": "STRICT ZERO IMPUTATION (No forward-fill, backward-fill, or interpolation applied)",
+  "output_format": "Apache Parquet (Snappy compression)"
+}

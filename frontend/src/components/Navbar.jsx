@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Wind, Activity, BarChart3, TrendingUp, Settings, LogOut } from 'lucide-react'
+import { Wind, Activity, BarChart3, TrendingUp, Settings, LogOut, Navigation } from 'lucide-react'
 import clsx from 'clsx'
 import { getHealth } from '../utils/api'
 import AuthModal from './AuthModal'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home', icon: Wind },
+  { to: '/commute', label: 'Commute', icon: Navigation },
   { to: '/predictor', label: 'Predictor', icon: Activity },
   { to: '/forecast', label: 'Forecast', icon: TrendingUp },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
@@ -69,7 +70,7 @@ export default function Navbar() {
               <Wind size={16} className="text-cyan-400" />
             </div>
             <span className="font-display font-bold text-white text-lg tracking-tight">
-              AQI<span className="text-cyan-400">Predictor</span>
+              AirRoute <span className="text-cyan-400">Delhi</span>
             </span>
           </Link>
 
@@ -109,7 +110,7 @@ export default function Navbar() {
             {/* User Profile / Login Button */}
             {user ? (
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
                   <div className="w-5 h-5 rounded-full bg-cyan-400 text-black flex items-center justify-center text-[10px] font-bold">
                     {user.name ? user.name[0].toUpperCase() : 'U'}
                   </div>
@@ -117,7 +118,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-red-400 border border-red-500/10 hover:border-red-500/30 hover:bg-red-500/10 transition-all duration-200"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-red-400 border border-red-500/20 hover:border-red-500/40 hover:bg-red-500/10 transition-all duration-200"
                 >
                   <LogOut size={12} />
                   Logout
@@ -126,9 +127,9 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={() => setIsAuthOpen(true)}
-                className="px-4 py-1.5 rounded-xl text-xs font-semibold text-cyan-400 border border-cyan-400/30 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all duration-200"
+                className="px-4 py-1.5 rounded-lg text-xs font-semibold text-cyan-400 border border-cyan-400/30 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all duration-200"
               >
-                Login
+                Sign In
               </button>
             )}
           </div>

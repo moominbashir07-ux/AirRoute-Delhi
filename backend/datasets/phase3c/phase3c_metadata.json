@@ -1,0 +1,77 @@
+{
+  "phase": "3C",
+  "phase_name": "Corridor Geometry & Exposure Feature Engineering",
+  "version": "1.0.0",
+  "generated_at_utc": "2026-09-24T19:36:46.405344+00:00",
+  "source_dataset": "backend/datasets/xkdr/station_observations_2020_2024.parquet",
+  "station_catalog": "backend/datasets/xkdr/station_catalog.csv",
+  "coordinate_system": "WGS84 (EPSG:4326)",
+  "distance_formula": "Haversine (Great-Circle Distance)",
+  "earth_radius_km": 6371.0,
+  "default_max_station_distance_km": 10.0,
+  "corridor_summary": {
+    "total_benchmark_corridors": 10,
+    "total_segments": 162,
+    "valid_station_matches": 147,
+    "no_valid_station_segments": 15,
+    "min_distance_km": 0.237,
+    "mean_distance_km": 2.331,
+    "median_distance_km": 1.958,
+    "max_distance_km": 9.763
+  },
+  "temporal_feature_summary": {
+    "total_rows": 1732402,
+    "total_stations": 42,
+    "feature_columns": [
+      "station_id",
+      "timestamp_utc",
+      "timestamp_ist",
+      "pm25",
+      "pm25_lag_1h",
+      "pm25_lag_2h",
+      "pm25_lag_3h",
+      "pm25_lag_6h",
+      "pm25_lag_12h",
+      "pm25_lag_24h",
+      "pm25_rolling_mean_3h",
+      "pm25_rolling_mean_6h",
+      "pm25_rolling_mean_12h",
+      "pm25_rolling_mean_24h",
+      "hour_of_day_sin",
+      "hour_of_day_cos",
+      "day_of_week",
+      "pm10",
+      "no2",
+      "so2",
+      "co",
+      "o3"
+    ],
+    "lag_features": [
+      "pm25_lag_1h",
+      "pm25_lag_2h",
+      "pm25_lag_3h",
+      "pm25_lag_6h",
+      "pm25_lag_12h",
+      "pm25_lag_24h"
+    ],
+    "rolling_features": [
+      "pm25_rolling_mean_3h",
+      "pm25_rolling_mean_6h",
+      "pm25_rolling_mean_12h",
+      "pm25_rolling_mean_24h"
+    ],
+    "calendar_features": [
+      "hour_of_day_sin",
+      "hour_of_day_cos",
+      "day_of_week"
+    ],
+    "leakage_boundary": "Closed-past causal features strictly using observations at or prior to prediction reference timestamp t."
+  },
+  "scientific_integrity_guarantees": {
+    "spatial_interpolation_performed": false,
+    "zero_imputation_performed": false,
+    "future_leakage_risk": false,
+    "nearest_time_substitution_permitted": false,
+    "exact_contiguous_lag_enforced": true
+  }
+}

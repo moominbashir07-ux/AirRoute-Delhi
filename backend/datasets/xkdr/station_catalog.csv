@@ -1,0 +1,43 @@
+station_id,station_name,latitude,longitude,city,state,source,first_observation,last_observation,available_pollutants,total_historical_rows
+DS1010001,US Embassy - New Delhi,28.63576,77.22445,New Delhi,Delhi,us_embassy,2019-07-01T03:30:00,2026-03-27T23:30:00,PM2.5,57994
+site_103,"CRRI Mathura Road, Delhi - IMD",28.5512005,77.2735737,Delhi,Delhi,cpcb_caaqm,2017-01-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;NO;NO2;NOx;Ozone;PM10;PM2.5;Toluene;Xylene,467463
+site_104,"Burari Crossing, Delhi - IMD",28.7256504,77.2011573,Delhi,Delhi,cpcb_caaqm,2017-01-01T00:00:00,2025-09-01T19:00:00,Benzene;CO;NO;NO2;NOx;Ozone;PM10;PM2.5,272903
+site_105,"North Campus, DU, Delhi - IMD",28.6573814,77.1585447,Delhi,Delhi,cpcb_caaqm,2017-01-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;NO;NO2;NOx;Ozone;PM10;PM2.5;Toluene;Xylene,588225
+site_106,"IGI Airport (T3), Delhi - IMD",28.5627763,77.1180053,Delhi,Delhi,cpcb_caaqm,2017-08-31T00:00:00,2025-09-01T23:00:00,CO;NO;NO2;NOx;Ozone;PM10;PM2.5,411089
+site_107,"Pusa, Delhi - DPCC",28.639652,77.146275,Delhi,Delhi,cpcb_caaqm,2017-09-06T13:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;NO;NO2;NOx;Ozone;PM10;PM2.5;Toluene;Xylene,523396
+site_108,"Aya Nagar, Delhi - IMD",28.4706914,77.1099364,Delhi,Delhi,cpcb_caaqm,2017-09-06T14:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;NO;NO2;NOx;Ozone;PM10;PM2.5;Toluene;Xylene,439782
+site_109,"Lodhi Road, Delhi - IMD",28.5918245,77.2273074,Delhi,Delhi,cpcb_caaqm,2017-09-07T10:00:00,2025-07-27T19:00:00,Benzene;CO;Eth-Benzene;NO;NO2;NOx;Ozone;PM10;PM2.5;Toluene;Xylene,618612
+site_113,"Shadipur, Delhi - CPCB",28.6514781,77.1473105,Delhi,Delhi,cpcb_caaqm,2009-01-01T01:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;O_Xylene;Ozone;PM10;PM2.5;SO2;Toluene,1270865
+site_114,"IHBAS, Dilshad Garden, Delhi - CPCB",28.6811736,77.3025234,Delhi,Delhi,cpcb_caaqm,2009-01-01T01:00:00,2025-09-01T22:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,972146
+site_115,"NSIT Dwarka, Delhi - CPCB",28.60909,77.0325413,Delhi,Delhi,cpcb_caaqm,2009-01-01T01:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;O_Xylene;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,1239145
+site_117,"ITO, Delhi - CPCB",28.628624,77.24106,Delhi,Delhi,cpcb_caaqm,2009-01-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2,858900
+site_118,"DTU, Delhi - CPCB",28.7500499,77.1112615,Delhi,Delhi,cpcb_caaqm,2009-01-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;O_Xylene;Ozone;PM10;PM2.5;SO2;Toluene,809902
+site_119,"Sirifort, Delhi - CPCB",28.5504249,77.2159377,Delhi,Delhi,cpcb_caaqm,2009-01-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;O_Xylene;Ozone;PM10;PM2.5;SO2;Toluene,781382
+site_122,"Mandir Marg, Delhi - DPCC",28.636429,77.201067,Delhi,Delhi,cpcb_caaqm,2011-05-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,965962
+site_124,"R K Puram, Delhi - DPCC",28.563262,77.186937,Delhi,Delhi,cpcb_caaqm,2011-05-02T07:00:00,2025-09-01T17:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,875613
+site_125,"Punjabi Bagh, Delhi - DPCC",28.674045,77.131023,Delhi,Delhi,cpcb_caaqm,2011-05-01T00:00:00,2025-09-01T21:00:00,Benzene;CO;MP-Xylene;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,910707
+site_1420,"Ashok Vihar, Delhi - DPCC",28.695381,77.181665,Delhi,Delhi,cpcb_caaqm,2018-02-01T08:00:00,2025-09-01T21:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,648806
+site_1421,"Dr. Karni Singh Shooting Range, Delhi - DPCC",28.498571,77.26484,Delhi,Delhi,cpcb_caaqm,2018-02-01T08:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,640860
+site_1422,"Dwarka-Sector 8, Delhi - DPCC ",28.5710274,77.0719006,Delhi,Delhi,cpcb_caaqm,2018-02-01T07:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,654101
+site_1423,"Jahangirpuri, Delhi - DPCC",28.73282,77.170633,Delhi,Delhi,cpcb_caaqm,2018-02-01T08:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,609814
+site_1424,"Jawaharlal Nehru Stadium, Delhi - DPCC",28.58028,77.233829,Delhi,Delhi,cpcb_caaqm,2018-02-01T08:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,634665
+site_1425,"Major Dhyan Chand National Stadium, Delhi - DPCC",28.611281,77.237738,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T22:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,650119
+site_1426,"Narela, Delhi - DPCC",28.822836,77.101981,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T22:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,646857
+site_1427,"Najafgarh, Delhi - DPCC",28.570173,76.933762,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,633056
+site_1428,"Okhla Phase-2, Delhi - DPCC",28.530785,77.271255,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,653872
+site_1429,"Nehru Nagar, Delhi - DPCC",28.56789,77.250515,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,645070
+site_1430,"Rohini, Delhi - DPCC",28.732528,77.11992,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,592493
+site_1431,"Patparganj, Delhi - DPCC",28.623763,77.287209,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,649760
+site_1432,"Sonia Vihar, Delhi - DPCC",28.710508,77.249485,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,621401
+site_1434,"Wazirpur, Delhi - DPCC",28.699793,77.165453,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,633052
+site_1435,"Vivek Vihar, Delhi - DPCC",28.672342,77.31526,Delhi,Delhi,cpcb_caaqm,2018-02-01T10:00:00,2025-09-01T22:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,638903
+site_1560,"Bawana, Delhi - DPCC",28.7762,77.051074,Delhi,Delhi,cpcb_caaqm,2018-07-04T18:00:00,2025-09-01T19:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,524345
+site_1561,"Mundka, Delhi - DPCC",28.684678,77.076574,Delhi,Delhi,cpcb_caaqm,2018-07-03T18:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,597881
+site_1562,"Sri Aurobindo Marg, Delhi - DPCC",28.531346,77.190156,Delhi,Delhi,cpcb_caaqm,2018-07-03T18:00:00,2025-07-31T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,615345
+site_1563,"Pusa, Delhi - DPCC",28.639652,77.146275,Delhi,Delhi,cpcb_caaqm,2018-07-03T18:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,597188
+site_276,"Nehru Nagar, Kanpur - UPPCB",28.56789,77.250515,Delhi,Delhi,cpcb_caaqm,2010-11-01T00:00:00,2025-08-29T12:00:00,Benzene;CO;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,937395
+site_301,"Anand Vihar, Delhi - DPCC",28.647622,77.315809,Delhi,Delhi,cpcb_caaqm,2012-09-01T00:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene,797517
+site_5023,"Anand Vihar, Hapur - UPPCB",28.647622,77.315809,Delhi,Delhi,cpcb_caaqm,2018-10-05T15:00:00,2024-12-31T16:00:00,Benzene;CO;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,510006
+site_5024,"Alipur, Delhi - DPCC",28.815329,77.15301,Delhi,Delhi,cpcb_caaqm,2018-11-11T14:00:00,2025-09-01T17:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,618096
+site_5393,"Chandni Chowk, Delhi - IITM",28.656756,77.227234,Delhi,Delhi,cpcb_caaqm,2020-11-13T14:00:00,2025-09-01T23:00:00,Benzene;CO;Eth-Benzene;MP-Xylene;NH3;NO;NO2;NOx;Ozone;PM10;PM2.5;SO2;Toluene;Xylene,309649
+site_5395,"Lodhi Road, Delhi - IMD",28.5918245,77.2273074,Delhi,Delhi,cpcb_caaqm,2020-11-13T14:00:00,2025-09-01T23:00:00,Benzene;CO;NH3;NO2;Ozone;PM10;PM2.5;SO2,135722

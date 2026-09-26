@@ -1,108 +1,91 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Mail, Lock, User, RefreshCw, AlertCircle, CheckCircle, Bell } from 'lucide-react'
-import { sendOTP, signupUser, loginUser } from '../utils/api'
+import { X, Mail, Lock, User, RefreshCw, AlertCircle, CheckCircle, ShieldCheck } from 'lucide-react'
+import { sendOTP, verifyOTP, loginUser } from '../utils/api'
 import clsx from 'clsx'
 
 export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
-  const [mode, setMode] = useState('login') // 'login' | 'signup' | 'otp'
+  // Modes: 'otp_request' (Step 1) | 'otp_verify' (Step 2) | 'password' (Alternative login)
+  const [mode, setMode] = useState('otp_request')
   
-  // Sign in / Sign up fields
+  // Input fields
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [otpInput, setOtpInput] = useState('')
   
-  // Captcha
+  // Anti-automation visual captcha
   const [captchaText, setCaptchaText] = useState('')
   const [captchaInput, setCaptchaInput] = useState('')
   const canvasRef = useRef(null)
   
-  // OTP
-  const [otpInput, setOtpInput] = useState('')
-  const [devOtp, setDevOtp] = useState('') // Stored OTP for display in development banner
+  // Cooldown & Status
   const [resendTimer, setResendTimer] = useState(0)
-  
-  // Status UI
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [successMsg, setSuccessMsg] = useState(null)
 
-  // Generate visual captcha
+  // Generate visual captcha (alphanumeric excluding ambiguous characters)
   const generateCaptcha = () => {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // Removed ambiguous characters like I, O, 0, 1
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
     let result = ''
     for (let i = 0; i < 6; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length))
     }
     setCaptchaText(result)
     setCaptchaInput('')
-    window.__test_captcha = result // Store for automated browser tests
   }
 
-  // Draw Captcha on Canvas
+  // Draw Captcha on Canvas (Clean Cyan & Slate aesthetic - no purple gradients)
   useEffect(() => {
-    if ((mode === 'login' || mode === 'signup') && canvasRef.current && captchaText) {
+    if ((mode === 'otp_request' || mode === 'password') && canvasRef.current && captchaText) {
       const ctx = canvasRef.current.getContext('2d')
-      ctx.clearRect(0, 0, 150, 48)
+      ctx.clearRect(0, 0, 150, 44)
       
-      // Draw background noise
-      ctx.fillStyle = '#1e293b' // Slate-800
-      ctx.fillRect(0, 0, 150, 48)
+      // Background
+      ctx.fillStyle = '#0f172a' // Slate-900
+      ctx.fillRect(0, 0, 150, 44)
       
-      // Random lines
-      for (let i = 0; i < 5; i++) {
-        ctx.strokeStyle = `rgba(34, 211, 238, ${Math.random() * 0.4 + 0.1})` // Cyan-400 with random opacity
-        ctx.lineWidth = Math.random() * 2 + 1
+      // Subtle background grid
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)'
+      ctx.lineWidth = 1
+      for (let i = 0; i < 4; i++) {
         ctx.beginPath()
-        ctx.moveTo(Math.random() * 150, Math.random() * 48)
-        ctx.lineTo(Math.random() * 150, Math.random() * 48)
+        ctx.moveTo(Math.random() * 150, Math.random() * 44)
+        ctx.lineTo(Math.random() * 150, Math.random() * 44)
         ctx.stroke()
       }
       
-      // Random dots
-      for (let i = 0; i < 40; i++) {
-        ctx.fillStyle = `rgba(34, 211, 238, ${Math.random() * 0.5})`
-        ctx.beginPath()
-        ctx.arc(Math.random() * 150, Math.random() * 48, Math.random() * 1.5, 0, Math.PI * 2)
-        ctx.fill()
-      }
-
-      // Draw captcha characters
-      ctx.font = 'bold 22px "JetBrains Mono", Courier, monospace'
+      // Captcha characters
+      ctx.font = 'bold 20px "JetBrains Mono", monospace'
       ctx.textBaseline = 'middle'
       
       for (let i = 0; i < captchaText.length; i++) {
         const char = captchaText[i]
-        ctx.fillStyle = i % 2 === 0 ? '#22d3ee' : '#a78bfa' // Alternating Cyan & Purple
+        ctx.fillStyle = '#38bdf8' // Cyan-400
         
         ctx.save()
-        // Translation for spacing
-        const x = 15 + i * 20 + Math.random() * 5
-        const y = 24 + (Math.random() * 8 - 4)
+        const x = 14 + i * 21 + Math.random() * 3
+        const y = 22 + (Math.random() * 6 - 3)
         ctx.translate(x, y)
-        
-        // Random slight rotation
-        const angle = (Math.random() * 40 - 20) * Math.PI / 180
+        const angle = (Math.random() * 26 - 13) * (Math.PI / 180)
         ctx.rotate(angle)
-        
         ctx.fillText(char, 0, 0)
         ctx.restore()
       }
     }
   }, [captchaText, mode, isOpen])
 
-  // Initial captcha load
+  // Reset states upon opening modal
   useEffect(() => {
     if (isOpen) {
       generateCaptcha()
       setError(null)
       setSuccessMsg(null)
-      setDevOtp('')
     }
   }, [isOpen, mode])
 
-  // OTP resend timer countdown
+  // Resend countdown timer
   useEffect(() => {
     if (resendTimer > 0) {
       const interval = setInterval(() => {
@@ -114,28 +97,110 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
 
   if (!isOpen) return null
 
-  // Sign In Handler
-  const handleLoginSubmit = async (e) => {
+  // Step 1 -> 2: Request OTP
+  const handleRequestOTP = async (e) => {
     e.preventDefault()
     setError(null)
-    
-    // Captcha Validation
-    if (captchaInput.toUpperCase() !== captchaText) {
-      setError('Incorrect Captcha code. Please try again.')
+
+    const cleanEmail = email.trim().toLowerCase()
+    if (!cleanEmail || !cleanEmail.includes('@')) {
+      setError('Please enter a valid email address.')
+      return
+    }
+
+    // Validate visual captcha
+    if (captchaInput.trim().toUpperCase() !== captchaText) {
+      setError('Incorrect verification text. Please try again.')
       generateCaptcha()
       return
     }
 
     setLoading(true)
     try {
-      const res = await loginUser(email, password)
+      const res = await sendOTP(cleanEmail, name.trim())
       if (res.status === 'success') {
+        setMode('otp_verify')
+        setResendTimer(res.cooldown || 60)
+        setSuccessMsg('OTP sent to your email.')
+        setOtpInput('')
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to dispatch verification email. Please try again.')
+      generateCaptcha()
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Step 5 -> 7: Verify OTP and Authenticate
+  const handleVerifyOTP = async (e) => {
+    e.preventDefault()
+    setError(null)
+
+    const cleanOtp = otpInput.replace(/[^0-9]/g, '')
+    if (cleanOtp.length !== 6) {
+      setError('Please enter a valid 6-digit numeric code.')
+      return
+    }
+
+    setLoading(true)
+    try {
+      const res = await verifyOTP(email.trim().toLowerCase(), cleanOtp, name.trim())
+      if (res.status === 'success' && res.user) {
+        localStorage.setItem('aqi_logged_in_user', JSON.stringify(res.user))
+        setSuccessMsg(`Welcome, ${res.user.name || 'User'}! Authentication successful.`)
+        setTimeout(() => {
+          onLoginSuccess(res.user)
+          onClose()
+        }, 1200)
+      }
+    } catch (err) {
+      setError(err.message || 'Verification failed. Please check the code and try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Resend OTP handler with cooldown protection
+  const handleResendOTP = async () => {
+    if (resendTimer > 0) return
+    setError(null)
+    setLoading(true)
+    try {
+      const res = await sendOTP(email.trim().toLowerCase(), name.trim())
+      if (res.status === 'success') {
+        setResendTimer(res.cooldown || 60)
+        setSuccessMsg('A new verification code has been dispatched to your email.')
+        setTimeout(() => setSuccessMsg(null), 4000)
+      }
+    } catch (err) {
+      setError(err.message || 'Could not resend verification code. Please wait before retrying.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Password Sign In Handler
+  const handlePasswordLogin = async (e) => {
+    e.preventDefault()
+    setError(null)
+
+    if (captchaInput.trim().toUpperCase() !== captchaText) {
+      setError('Incorrect verification text. Please try again.')
+      generateCaptcha()
+      return
+    }
+
+    setLoading(true)
+    try {
+      const res = await loginUser(email.trim().toLowerCase(), password)
+      if (res.status === 'success' && res.user) {
         localStorage.setItem('aqi_logged_in_user', JSON.stringify(res.user))
         setSuccessMsg(`Welcome back, ${res.user.name}!`)
         setTimeout(() => {
           onLoginSuccess(res.user)
           onClose()
-        }, 1500)
+        }, 1200)
       }
     } catch (err) {
       setError(err.message || 'Login failed. Please verify credentials.')
@@ -145,455 +210,329 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }) {
     }
   }
 
-  // Request OTP for Signup
-  const handleSignupNext = async (e) => {
-    e.preventDefault()
-    setError(null)
-    
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.')
-      return
-    }
-    
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters.')
-      return
-    }
-
-    // Captcha Validation
-    if (captchaInput.toUpperCase() !== captchaText) {
-      setError('Incorrect Captcha code. Please try again.')
-      generateCaptcha()
-      return
-    }
-
-    setLoading(true)
-    try {
-      const res = await sendOTP(email, name)
-      if (res.status === 'success') {
-        setMode('otp')
-        setResendTimer(30)
-        if (res.dev_otp) {
-          setDevOtp(res.dev_otp) // Capture backend dev_otp code for UI display
-          
-          // Send real email via EmailJS if configured in environment
-          const emailJsKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-          if (window.emailjs && emailJsKey) {
-            try {
-              window.emailjs.init({ publicKey: emailJsKey })
-              
-              const templateParams = {
-                to_name: name,
-                to_email: email,
-                otp_code: res.dev_otp,
-                message: `Your verification OTP is ${res.dev_otp}. It is valid for 5 minutes.`
-              }
-              
-              await window.emailjs.send(
-                "default_service", 
-                "template_default", 
-                templateParams
-              )
-              console.log("[EmailJS SUCCESS] Dispatched OTP code to user email:", email)
-            } catch (emailErr) {
-              console.warn("[EmailJS ERROR] Could not deliver OTP email via API template. Using simulation helper:", emailErr)
-            }
-          }
-        }
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to send verification email.')
-      generateCaptcha()
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Complete Signup with OTP
-  const handleOTPSubmit = async (e) => {
-    e.preventDefault()
-    setError(null)
-    
-    if (otpInput.length !== 6) {
-      setError('Please enter a valid 6-digit OTP.')
-      return
-    }
-
-    setLoading(true)
-    try {
-      const res = await signupUser(name, email, password, otpInput)
-      if (res.status === 'success') {
-        // Auto log in after success
-        const loginRes = await loginUser(email, password)
-        localStorage.setItem('aqi_logged_in_user', JSON.stringify(loginRes.user))
-        setSuccessMsg(`Account created! Welcome, ${name}.`)
-        setTimeout(() => {
-          onLoginSuccess(loginRes.user)
-          onClose()
-        }, 1800)
-      }
-    } catch (err) {
-      setError(err.message || 'Verification failed. Invalid OTP.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Resend OTP
-  const handleResendOTP = async () => {
-    if (resendTimer > 0) return
-    setError(null)
-    setLoading(true)
-    try {
-      const res = await sendOTP(email, name)
-      if (res.status === 'success') {
-        setResendTimer(30)
-        if (res.dev_otp) {
-          setDevOtp(res.dev_otp)
-          
-          // Send real email via EmailJS if configured in environment
-          const emailJsKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-          if (window.emailjs && emailJsKey) {
-            try {
-              window.emailjs.init({ publicKey: emailJsKey })
-              
-              const templateParams = {
-                to_name: name,
-                to_email: email,
-                otp_code: res.dev_otp,
-                message: `Your verification OTP is ${res.dev_otp}. It is valid for 5 minutes.`
-              }
-              
-              await window.emailjs.send(
-                "default_service", 
-                "template_default", 
-                templateParams
-              )
-              console.log("[EmailJS SUCCESS] Resent OTP code to user email:", email)
-            } catch (emailErr) {
-              console.warn("[EmailJS ERROR] Could not deliver OTP email via API template. Using simulation helper:", emailErr)
-            }
-          }
-        }
-        setSuccessMsg('A new verification code has been shared.')
-        setTimeout(() => setSuccessMsg(null), 3000)
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to resend code.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-        {/* Overlay */}
+        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/75 backdrop-blur-md"
+          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         />
 
-        {/* Modal Window */}
+        {/* Modal Dialog */}
         <motion.div
-          initial={{ scale: 0.95, y: 15, opacity: 0 }}
+          initial={{ scale: 0.96, y: 10, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
-          exit={{ scale: 0.95, y: 15, opacity: 0 }}
-          transition={{ type: 'spring', duration: 0.5 }}
-          className="relative w-full max-w-md bg-[#0d1529]/95 border border-[rgba(34,211,238,0.18)] rounded-3xl p-8 max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(34,211,238,0.12)] z-10"
+          exit={{ scale: 0.96, y: 10, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="relative w-full max-w-md bg-[#0b1324] border border-cyan-500/20 rounded-2xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto shadow-2xl z-10"
         >
-          {/* Radial lights */}
-          <div className="absolute -top-20 -left-20 w-44 h-44 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-44 h-44 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none" />
-
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors"
+            aria-label="Close authentication modal"
+            className="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors p-1"
           >
             <X size={18} />
           </button>
 
-          {/* Icon Header */}
+          {/* Header */}
           <div className="flex flex-col items-center mb-6">
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3" style={{
-              background: 'linear-gradient(135deg, rgba(34,211,238,0.2), rgba(34,211,238,0.05))',
-              border: '1px solid rgba(34,211,238,0.3)',
-            }}>
-              <Bell size={20} className="text-cyan-400" />
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3 bg-cyan-950/60 border border-cyan-500/30 text-cyan-400">
+              <ShieldCheck size={22} />
             </div>
             <h2 className="font-display text-xl font-bold text-white tracking-tight">
-              {mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Get AQI Notifications' : 'Verify Your Email'}
+              {mode === 'otp_verify' ? 'Verify Code' : 'AirRoute Delhi Access'}
             </h2>
-            <p className="text-xs text-slate-400 mt-1 text-center max-w-[280px]">
-              {mode === 'login' 
-                ? 'Sign in to access personalized threshold alerts and daily digests.'
-                : mode === 'signup'
-                ? 'Sign up to receive automated real-time local AQI hazard updates.'
-                : `We shared a 6-digit verification code to ${email}.`}
+            <p className="text-xs text-slate-400 mt-1 text-center max-w-[300px]">
+              {mode === 'otp_verify'
+                ? `Enter the 6-digit verification code dispatched to ${email}.`
+                : 'Sign in using a one-time verification code sent directly to your email.'}
             </p>
           </div>
 
-          {/* Developer Toast for OTP */}
-          {devOtp && mode === 'otp' && (
-            <div className="mb-4 p-3 bg-cyan-950/40 border border-cyan-500/30 rounded-2xl text-xs text-cyan-300 font-mono flex flex-col gap-1 items-start">
-              <span className="font-semibold text-cyan-400">🛠️ Developer OTP Tool:</span>
-              <span>Your code is: <strong className="text-white text-sm select-all">{devOtp}</strong></span>
-              <span className="text-[10px] text-cyan-500/80">Copy this to bypass actual email verification in local testing.</span>
-            </div>
-          )}
-
-          {/* Error and Success Banners */}
+          {/* Error and Success Notices */}
           {error && (
-            <div className="mb-4 flex items-start gap-2 p-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-xs text-red-400 animate-pulse">
-              <AlertCircle size={14} className="shrink-0 mt-0.5" />
+            <div className="mb-4 flex items-start gap-2 p-3 rounded-lg bg-red-950/40 border border-red-500/30 text-xs text-red-300">
+              <AlertCircle size={15} className="shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
-            <div className="mb-4 flex items-start gap-2 p-3 rounded-2xl bg-green-500/10 border border-green-500/20 text-xs text-green-400">
-              <CheckCircle size={14} className="shrink-0 mt-0.5" />
+            <div className="mb-4 flex items-start gap-2 p-3 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-xs text-cyan-300">
+              <CheckCircle size={15} className="shrink-0 mt-0.5" />
               <span>{successMsg}</span>
             </div>
           )}
 
-          {/* TABS - Sign In / Sign Up */}
-          {mode !== 'otp' && (
-            <div className="flex border-b border-white/5 mb-6">
+          {/* Mode Switcher Tabs (Only when not in active OTP verification step) */}
+          {mode !== 'otp_verify' && (
+            <div className="flex border-b border-slate-800 mb-6">
               <button
-                onClick={() => { setMode('login'); setError(null); }}
+                type="button"
+                onClick={() => { setMode('otp_request'); setError(null); }}
                 className={clsx(
-                  'flex-1 pb-3 text-sm font-semibold transition-all border-b-2 text-center',
-                  mode === 'login' ? 'text-cyan-400 border-cyan-400' : 'text-slate-500 border-transparent hover:text-slate-300'
+                  'flex-1 pb-2.5 text-xs font-semibold tracking-wide transition-all border-b-2 text-center',
+                  mode === 'otp_request'
+                    ? 'text-cyan-400 border-cyan-400'
+                    : 'text-slate-400 border-transparent hover:text-slate-200'
                 )}
               >
-                Sign In
+                Email Code (OTP)
               </button>
               <button
-                onClick={() => { setMode('signup'); setError(null); }}
+                type="button"
+                onClick={() => { setMode('password'); setError(null); }}
                 className={clsx(
-                  'flex-1 pb-3 text-sm font-semibold transition-all border-b-2 text-center',
-                  mode === 'signup' ? 'text-cyan-400 border-cyan-400' : 'text-slate-500 border-transparent hover:text-slate-300'
+                  'flex-1 pb-2.5 text-xs font-semibold tracking-wide transition-all border-b-2 text-center',
+                  mode === 'password'
+                    ? 'text-cyan-400 border-cyan-400'
+                    : 'text-slate-400 border-transparent hover:text-slate-200'
                 )}
               >
-                Sign Up
+                Password Sign In
               </button>
             </div>
           )}
 
-          {/* Sign In Form */}
-          {mode === 'login' && (
-            <form onSubmit={handleLoginSubmit} className="space-y-4">
-              {/* Email */}
-              <div className="relative">
-                <Mail size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email..."
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
+          {/* STEP 1: Enter Email & Request OTP */}
+          {mode === 'otp_request' && (
+            <form onSubmit={handleRequestOTP} className="space-y-4">
+              <div>
+                <label htmlFor="auth-email-input" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Email Address <span className="text-cyan-400">*</span>
+                </label>
+                <div className="relative">
+                  <Mail size={16} className="absolute left-3.5 top-3.5 text-slate-500" />
+                  <input
+                    id="auth-email-input"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg pl-10 pr-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-sans"
+                  />
+                </div>
               </div>
 
-              {/* Password */}
-              <div className="relative">
-                <Lock size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="password"
-                  required
-                  placeholder="Enter your password..."
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
+              <div>
+                <label htmlFor="auth-name-input" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Full Name <span className="text-slate-500">(Optional)</span>
+                </label>
+                <div className="relative">
+                  <User size={16} className="absolute left-3.5 top-3.5 text-slate-500" />
+                  <input
+                    id="auth-name-input"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg pl-10 pr-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-sans"
+                  />
+                </div>
               </div>
 
-              {/* Captcha Section */}
-              <div className="space-y-2">
+              {/* Bot Protection Visual Captcha */}
+              <div className="space-y-1.5 pt-1">
+                <label htmlFor="auth-captcha-input" className="block text-xs font-medium text-slate-300">
+                  Verification Code <span className="text-cyan-400">*</span>
+                </label>
                 <div className="flex gap-2 items-center">
                   <canvas
                     ref={canvasRef}
                     width={150}
-                    height={48}
-                    className="rounded-2xl border border-white/5 bg-[#1e293b] select-none"
+                    height={44}
+                    aria-label="Anti-bot captcha text"
+                    className="rounded-lg border border-slate-700 bg-slate-900 select-none shrink-0"
                   />
                   <button
                     type="button"
                     onClick={generateCaptcha}
-                    className="p-3 bg-white/[0.04] border border-white/10 rounded-2xl text-slate-400 hover:text-white transition-all hover:scale-105"
-                    title="Refresh Captcha"
+                    className="p-2.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors"
+                    title="Generate new verification text"
                   >
-                    <RefreshCw size={16} />
+                    <RefreshCw size={15} />
                   </button>
+                  <input
+                    id="auth-captcha-input"
+                    type="text"
+                    required
+                    maxLength={6}
+                    placeholder="Enter code"
+                    value={captchaInput}
+                    onChange={e => setCaptchaInput(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 font-mono uppercase tracking-wider focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                  />
                 </div>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter Captcha (case-insensitive)"
-                  value={captchaInput}
-                  onChange={e => setCaptchaInput(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl px-4 py-2.5 text-xs text-white placeholder-slate-500 font-mono uppercase tracking-wider focus:outline-none focus:border-cyan-400"
-                />
               </div>
 
-              {/* Submit Button */}
+              {/* Primary Action Button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 rounded-2xl font-display font-semibold text-black text-sm flex items-center justify-center gap-2 hover:scale-[1.01] hover:shadow-lg transition-all disabled:opacity-50"
-                style={{ background: 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: '0 4px 20px rgba(34,211,238,0.15)' }}
+                className="w-full mt-2 py-3 rounded-lg font-semibold text-slate-950 text-sm bg-cyan-400 hover:bg-cyan-300 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Sign In'}
+                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Send OTP'}
               </button>
             </form>
           )}
 
-          {/* Sign Up Form */}
-          {mode === 'signup' && (
-            <form onSubmit={handleSignupNext} className="space-y-4">
-              {/* Display Name */}
-              <div className="relative">
-                <User size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter your name..."
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
+          {/* STEP 4 & 5: Enter 6-digit OTP & Verify */}
+          {mode === 'otp_verify' && (
+            <form onSubmit={handleVerifyOTP} className="space-y-5">
+              <div className="p-3.5 bg-slate-900/80 border border-slate-800 rounded-lg text-xs text-slate-300">
+                <p className="font-semibold text-cyan-400 mb-0.5">OTP sent to your email.</p>
+                <p className="text-slate-400">
+                  Please check your inbox at <span className="text-slate-200 font-mono">{email}</span>. The code is valid for 5 minutes.
+                </p>
               </div>
 
-              {/* Email */}
-              <div className="relative">
-                <Mail size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email..."
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
-              </div>
-
-              {/* Password */}
-              <div className="relative">
-                <Lock size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="password"
-                  required
-                  placeholder="Create password (min 6 chars)..."
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
-              </div>
-
-              {/* Confirm Password */}
-              <div className="relative">
-                <Lock size={16} className="absolute left-4 top-3.5 text-slate-500" />
-                <input
-                  type="password"
-                  required
-                  placeholder="Confirm password..."
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-all font-sans"
-                />
-              </div>
-
-              {/* Captcha Section */}
-              <div className="space-y-2">
-                <div className="flex gap-2 items-center">
-                  <canvas
-                    ref={canvasRef}
-                    width={150}
-                    height={48}
-                    className="rounded-2xl border border-white/5 bg-[#1e293b] select-none"
+              <div>
+                <label htmlFor="auth-otp-input" className="block text-center text-xs font-medium text-slate-300 mb-2">
+                  Enter 6-Digit Verification Code
+                </label>
+                <div className="flex justify-center">
+                  <input
+                    id="auth-otp-input"
+                    type="text"
+                    required
+                    autoFocus
+                    maxLength={6}
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    placeholder="000000"
+                    value={otpInput}
+                    onChange={e => setOtpInput(e.target.value.replace(/[^0-9]/g, ''))}
+                    className="w-44 bg-slate-900 border border-cyan-500/40 rounded-lg py-2.5 text-center text-2xl font-bold font-mono tracking-widest text-cyan-400 placeholder-slate-700 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
                   />
+                </div>
+              </div>
+
+              {/* Cooldown & Resend Option */}
+              <div className="text-center text-xs">
+                {resendTimer > 0 ? (
+                  <span className="text-slate-400">
+                    Resend code in <strong className="text-cyan-400 font-mono">{resendTimer}s</strong>
+                  </span>
+                ) : (
                   <button
                     type="button"
-                    onClick={generateCaptcha}
-                    className="p-3 bg-white/[0.04] border border-white/10 rounded-2xl text-slate-400 hover:text-white transition-all hover:scale-105"
-                    title="Refresh Captcha"
+                    onClick={handleResendOTP}
+                    disabled={loading}
+                    className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-4 transition-colors disabled:opacity-50"
                   >
-                    <RefreshCw size={16} />
+                    Resend OTP
                   </button>
-                </div>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter Captcha (case-insensitive)"
-                  value={captchaInput}
-                  onChange={e => setCaptchaInput(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/10 rounded-2xl px-4 py-2.5 text-xs text-white placeholder-slate-500 font-mono uppercase tracking-wider focus:outline-none focus:border-cyan-400"
-                />
+                )}
               </div>
 
-              {/* Submit Button */}
+              {/* Verify Button */}
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full py-3.5 rounded-2xl font-display font-semibold text-black text-sm flex items-center justify-center gap-2 hover:scale-[1.01] hover:shadow-lg transition-all disabled:opacity-50"
-                style={{ background: 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: '0 4px 20px rgba(34,211,238,0.15)' }}
+                disabled={loading || otpInput.length !== 6}
+                className="w-full py-3 rounded-lg font-semibold text-slate-950 text-sm bg-cyan-400 hover:bg-cyan-300 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Get OTP & Verify'}
-              </button>
-            </form>
-          )}
-
-          {/* OTP Verification Form */}
-          {mode === 'otp' && (
-            <form onSubmit={handleOTPSubmit} className="space-y-6">
-              <div className="flex flex-col items-center gap-4">
-                <input
-                  type="text"
-                  required
-                  maxLength={6}
-                  placeholder="000000"
-                  value={otpInput}
-                  onChange={e => setOtpInput(e.target.value.replace(/[^0-9]/g, ''))}
-                  className="w-36 bg-white/[0.04] border border-white/10 rounded-2xl py-3 text-center text-xl font-bold font-mono tracking-widest text-cyan-400 placeholder-slate-700 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
-                />
-                
-                <div className="text-center text-xs">
-                  {resendTimer > 0 ? (
-                    <span className="text-slate-500">Resend code in <strong className="text-cyan-400">{resendTimer}s</strong></span>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={handleResendOTP}
-                      className="text-cyan-400 hover:text-cyan-300 font-semibold underline transition-colors"
-                    >
-                      Resend Verification OTP
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3.5 rounded-2xl font-display font-semibold text-black text-sm flex items-center justify-center gap-2 hover:scale-[1.01] hover:shadow-lg transition-all disabled:opacity-50"
-                style={{ background: 'linear-gradient(135deg, #22d3ee, #0891b2)', boxShadow: '0 4px 20px rgba(34,211,238,0.15)' }}
-              >
-                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Verify & Sign Up'}
+                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Verify OTP'}
               </button>
 
               <button
                 type="button"
-                onClick={() => setMode('signup')}
-                className="w-full text-center text-xs text-slate-500 hover:text-slate-300 transition-colors"
+                onClick={() => { setMode('otp_request'); setError(null); }}
+                className="w-full text-center text-xs text-slate-400 hover:text-slate-200 transition-colors pt-1"
               >
-                ← Back to registration details
+                ← Change email address
+              </button>
+            </form>
+          )}
+
+          {/* Alternative: Password Login */}
+          {mode === 'password' && (
+            <form onSubmit={handlePasswordLogin} className="space-y-4">
+              <div>
+                <label htmlFor="auth-pwd-email" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <Mail size={16} className="absolute left-3.5 top-3.5 text-slate-500" />
+                  <input
+                    id="auth-pwd-email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg pl-10 pr-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-sans"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="auth-pwd-password" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock size={16} className="absolute left-3.5 top-3.5 text-slate-500" />
+                  <input
+                    id="auth-pwd-password"
+                    type="password"
+                    required
+                    autoComplete="current-password"
+                    placeholder="Enter your account password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg pl-10 pr-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all font-sans"
+                  />
+                </div>
+              </div>
+
+              {/* Bot Protection Captcha */}
+              <div className="space-y-1.5 pt-1">
+                <label htmlFor="auth-pwd-captcha" className="block text-xs font-medium text-slate-300">
+                  Verification Code
+                </label>
+                <div className="flex gap-2 items-center">
+                  <canvas
+                    ref={canvasRef}
+                    width={150}
+                    height={44}
+                    aria-label="Anti-bot captcha text"
+                    className="rounded-lg border border-slate-700 bg-slate-900 select-none shrink-0"
+                  />
+                  <button
+                    type="button"
+                    onClick={generateCaptcha}
+                    className="p-2.5 bg-slate-800 border border-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors"
+                    title="Generate new verification text"
+                  >
+                    <RefreshCw size={15} />
+                  </button>
+                  <input
+                    id="auth-pwd-captcha"
+                    type="text"
+                    required
+                    maxLength={6}
+                    placeholder="Enter code"
+                    value={captchaInput}
+                    onChange={e => setCaptchaInput(e.target.value)}
+                    className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 font-mono uppercase tracking-wider focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full mt-2 py-3 rounded-lg font-semibold text-slate-950 text-sm bg-cyan-400 hover:bg-cyan-300 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {loading ? <RefreshCw size={16} className="animate-spin" /> : 'Sign In'}
               </button>
             </form>
           )}

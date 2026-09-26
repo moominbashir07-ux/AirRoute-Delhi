@@ -1,0 +1,189 @@
+{
+  "pm25_lag_1h": {
+    "name": "pm25_lag_1h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 1h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 1h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 1 hour prior to prediction reference timestamp."
+  },
+  "pm25_lag_2h": {
+    "name": "pm25_lag_2h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 2h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 2h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 2 hours prior to prediction reference timestamp."
+  },
+  "pm25_lag_3h": {
+    "name": "pm25_lag_3h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 3h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 3h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 3 hours prior to prediction reference timestamp."
+  },
+  "pm25_lag_6h": {
+    "name": "pm25_lag_6h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 6h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 6h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 6 hours prior to prediction reference timestamp."
+  },
+  "pm25_lag_12h": {
+    "name": "pm25_lag_12h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 12h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 12h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 12 hours prior to prediction reference timestamp."
+  },
+  "pm25_lag_24h": {
+    "name": "pm25_lag_24h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "XKDR observational data",
+    "formula": "PM2.5(t - 24h)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if exact (t - 24h) timestamp is unobserved in hourly grid",
+    "description": "Observed PM2.5 concentration exactly 24 hours prior to prediction reference timestamp."
+  },
+  "pm25_rolling_mean_3h": {
+    "name": "pm25_rolling_mean_3h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "Derived from XKDR observations",
+    "formula": "mean(PM2.5(tau) for tau in [t - 2h, t])",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if < 2 valid observations in the 3-hour backward window",
+    "description": "Causal 3-hour backward rolling mean of PM2.5."
+  },
+  "pm25_rolling_mean_6h": {
+    "name": "pm25_rolling_mean_6h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "Derived from XKDR observations",
+    "formula": "mean(PM2.5(tau) for tau in [t - 5h, t])",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if < 3 valid observations in the 6-hour backward window",
+    "description": "Causal 6-hour backward rolling mean of PM2.5."
+  },
+  "pm25_rolling_mean_12h": {
+    "name": "pm25_rolling_mean_12h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "Derived from XKDR observations",
+    "formula": "mean(PM2.5(tau) for tau in [t - 11h, t])",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if < 6 valid observations in the 12-hour backward window",
+    "description": "Causal 12-hour backward rolling mean of PM2.5."
+  },
+  "pm25_rolling_mean_24h": {
+    "name": "pm25_rolling_mean_24h",
+    "type": "float64",
+    "unit": "ug/m3",
+    "source": "Derived from XKDR observations",
+    "formula": "mean(PM2.5(tau) for tau in [t - 23h, t])",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "NaN if < 12 valid observations in the 24-hour backward window",
+    "description": "Causal 24-hour backward rolling mean of PM2.5."
+  },
+  "hour_of_day_sin": {
+    "name": "hour_of_day_sin",
+    "type": "float64",
+    "unit": "dimensionless",
+    "source": "Timestamp",
+    "formula": "sin(2 * pi * hour / 24)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Deterministic, never NaN",
+    "description": "Cyclical sine component of the observation hour."
+  },
+  "hour_of_day_cos": {
+    "name": "hour_of_day_cos",
+    "type": "float64",
+    "unit": "dimensionless",
+    "source": "Timestamp",
+    "formula": "cos(2 * pi * hour / 24)",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Deterministic, never NaN",
+    "description": "Cyclical cosine component of the observation hour."
+  },
+  "day_of_week": {
+    "name": "day_of_week",
+    "type": "int64",
+    "unit": "integer (0=Mon, 6=Sun)",
+    "source": "Timestamp",
+    "formula": "timestamp.dayofweek",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Deterministic, never NaN",
+    "description": "Day of week index."
+  },
+  "temperature_t_plus_1h": {
+    "name": "temperature_t_plus_1h",
+    "type": "float64",
+    "unit": "celsius",
+    "source": "Open-Meteo NWP Forecast (Phase 3D)",
+    "formula": "Temperature at t + 1h",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Pending Phase 3D NWP fusion",
+    "description": "INTERFACE PLACEHOLDER: Numerical Weather Prediction temperature forecast for lead time +1h."
+  },
+  "wind_speed_t_plus_1h": {
+    "name": "wind_speed_t_plus_1h",
+    "type": "float64",
+    "unit": "km/h",
+    "source": "Open-Meteo NWP Forecast (Phase 3D)",
+    "formula": "Wind speed at t + 1h",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Pending Phase 3D NWP fusion",
+    "description": "INTERFACE PLACEHOLDER: Numerical Weather Prediction wind speed forecast for lead time +1h."
+  },
+  "wind_direction_t_plus_1h": {
+    "name": "wind_direction_t_plus_1h",
+    "type": "float64",
+    "unit": "degrees",
+    "source": "Open-Meteo NWP Forecast (Phase 3D)",
+    "formula": "Wind direction at t + 1h",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Pending Phase 3D NWP fusion",
+    "description": "INTERFACE PLACEHOLDER: Numerical Weather Prediction wind direction forecast for lead time +1h."
+  },
+  "boundary_layer_height_t_plus_1h": {
+    "name": "boundary_layer_height_t_plus_1h",
+    "type": "float64",
+    "unit": "meters",
+    "source": "Open-Meteo NWP Forecast (Phase 3D)",
+    "formula": "Planetary boundary layer height at t + 1h",
+    "available_at_prediction_time": true,
+    "future_leakage_risk": false,
+    "missingness_behavior": "Pending Phase 3D NWP fusion",
+    "description": "INTERFACE PLACEHOLDER: Numerical Weather Prediction planetary boundary layer height forecast."
+  }
+}

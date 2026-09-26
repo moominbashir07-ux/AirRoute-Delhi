@@ -1,0 +1,49 @@
+{
+  "raw_partitions": {
+    "partition_count": 60,
+    "date_range": "2020-01 to 2024-12",
+    "total_raw_rows": 9511574,
+    "invalid_negative_dropped": 14,
+    "retained_valid_measurements": 9511560
+  },
+  "canonical_wide_dataset": {
+    "file": "station_observations_2020_2024.parquet",
+    "total_wide_rows": 1732402,
+    "total_stations": 42,
+    "total_observed_pollutant_cells": 9511560,
+    "observed_breakdown": {
+      "pm25": 1681736,
+      "pm10": 1609219,
+      "no2": 1625331,
+      "so2": 1369041,
+      "co": 1601008,
+      "o3": 1625225
+    },
+    "null_breakdown": {
+      "pm25": 50666,
+      "pm10": 123183,
+      "no2": 107071,
+      "so2": 363361,
+      "co": 131394,
+      "o3": 107177
+    }
+  },
+  "reconciliation_balance": {
+    "sum_of_wide_observed_values": 9511560,
+    "raw_valid_measurements": 9511560,
+    "discrepancy": 0,
+    "reconciliation_status": "EXACT_MATCH_100_PERCENT"
+  },
+  "unit_conversion_reconciliation": {
+    "pollutant": "co",
+    "source_unit": "mg/m3",
+    "canonical_unit": "ug/m3",
+    "conversion_factor": 1000.0,
+    "converted_measurements": 1601008,
+    "unconverted_measurements": 0
+  },
+  "duplicate_reconciliation": {
+    "raw_duplicate_rows": 0,
+    "wide_duplicate_keys": 0
+  }
+}

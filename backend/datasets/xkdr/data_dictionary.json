@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Formal schema for Phase 3B observational Delhi air quality dataset.",
+  "fields": {
+    "timestamp_utc": {
+      "type": "datetime64[ns, UTC]",
+      "unit": "ISO-8601 UTC",
+      "nullable": false,
+      "description": "Normalized timestamp in Coordinated Universal Time (UTC).",
+      "validation": "timestamp_utc + 5h30m == timestamp_ist"
+    },
+    "timestamp_ist": {
+      "type": "datetime64[ns, Asia/Kolkata]",
+      "unit": "ISO-8601 IST (UTC+05:30)",
+      "nullable": false,
+      "description": "Native timestamp recorded in Indian Standard Time.",
+      "validation": "Valid datetime"
+    },
+    "station_id": {
+      "type": "string",
+      "unit": "Categorical ID",
+      "nullable": false,
+      "description": "Unique identifier for CAAQM station (e.g. site_5024).",
+      "validation": "Matches station_catalog.csv"
+    },
+    "station_name": {
+      "type": "string",
+      "unit": "Text",
+      "nullable": false,
+      "description": "Official station name and operating board (e.g. Alipur, Delhi - DPCC).",
+      "validation": "Non-empty"
+    },
+    "latitude": {
+      "type": "float",
+      "unit": "Degrees North",
+      "nullable": false,
+      "description": "WGS84 latitude coordinate of monitoring station intake.",
+      "validation": "28.0 <= lat <= 29.5"
+    },
+    "longitude": {
+      "type": "float",
+      "unit": "Degrees East",
+      "nullable": false,
+      "description": "WGS84 longitude coordinate of monitoring station intake.",
+      "validation": "76.5 <= lon <= 78.0"
+    },
+    "pm25": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed particulate matter <= 2.5 \u00b5m mass concentration.",
+      "validation": "value >= 0 or NaN"
+    },
+    "pm10": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed particulate matter <= 10 \u00b5m mass concentration.",
+      "validation": "value >= 0 or NaN"
+    },
+    "no2": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed nitrogen dioxide concentration.",
+      "validation": "value >= 0 or NaN"
+    },
+    "so2": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed sulfur dioxide concentration.",
+      "validation": "value >= 0 or NaN"
+    },
+    "co": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed carbon monoxide concentration (normalized from source mg/m\u00b3 via x1000).",
+      "validation": "value >= 0 or NaN"
+    },
+    "o3": {
+      "type": "float",
+      "unit": "\u00b5g/m\u00b3",
+      "nullable": true,
+      "description": "Observed ozone concentration.",
+      "validation": "value >= 0 or NaN"
+    }
+  }
+}

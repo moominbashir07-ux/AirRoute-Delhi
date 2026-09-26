@@ -1,0 +1,80 @@
+{
+  "dataset_name": "XKDR Delhi Observational Air Quality Cache",
+  "generated_at": "2026-09-24T19:22:21.021858+00:00",
+  "temporal_window": {
+    "start_utc": "2019-12-31 18:30:00+00:00",
+    "end_utc": "2024-12-31 18:00:00+00:00",
+    "total_span_hours": 43848
+  },
+  "station_count": 42,
+  "total_wide_rows": 1732402,
+  "total_observation_cells": 10394412,
+  "pollutant_summary": {
+    "pm25": {
+      "observed_count": 1681736,
+      "missing_count": 50666,
+      "missing_pct": 2.92,
+      "mean": 99.95,
+      "median": 67.0,
+      "max": 1000.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "pm10": {
+      "observed_count": 1609219,
+      "missing_count": 123183,
+      "missing_pct": 7.11,
+      "mean": 203.47,
+      "median": 167.7,
+      "max": 1000.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "no2": {
+      "observed_count": 1625331,
+      "missing_count": 107071,
+      "missing_pct": 6.18,
+      "mean": 38.86,
+      "median": 28.41,
+      "max": 499.4,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "so2": {
+      "observed_count": 1369041,
+      "missing_count": 363361,
+      "missing_pct": 20.97,
+      "mean": 12.18,
+      "median": 9.2,
+      "max": 200.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "co": {
+      "observed_count": 1601008,
+      "missing_count": 131394,
+      "missing_pct": 7.58,
+      "mean": 1317.51,
+      "median": 1030.0,
+      "max": 48280.0,
+      "unit": "\u00b5g/m\u00b3"
+    },
+    "o3": {
+      "observed_count": 1625225,
+      "missing_count": 107177,
+      "missing_pct": 6.19,
+      "mean": 30.67,
+      "median": 18.63,
+      "max": 489.4,
+      "unit": "\u00b5g/m\u00b3"
+    }
+  },
+  "ingestion_filtering_stats": {
+    "raw_rows": 9511574,
+    "negative_dropped": 14,
+    "null_dropped": 0,
+    "co_converted": 1601008,
+    "duplicates_dropped": 0
+  },
+  "freshness": {
+    "latest_record_utc": "2024-12-31 18:00:00+00:00",
+    "classification": "ARCHIVED_HISTORICAL"
+  },
+  "validation_status": "PASS"
+}
